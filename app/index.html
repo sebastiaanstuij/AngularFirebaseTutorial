@@ -22,19 +22,12 @@
 
     <!-- Add your site or application content here -->
     <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="#">Home</a></li>
-          <li><a ng-href="#/about">About</a></li>
-          <li><a ng-href="#">Contact</a></li>
-        </ul>
-        <h3 class="text-muted">angularFirebaseTutorial</h3>
-      </div>
+      <div ng-include="'views/navbar.html'"></div>
 
       <div ng-view=""></div>
 
       <div class="footer">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+        <!--<p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>-->
       </div>
     </div>
 
@@ -68,13 +61,23 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/firebase/firebase.js"></script>
+    <script src="bower_components/firebase-simple-login/firebase-simple-login.js"></script>
+    <script src="bower_components/mockfirebase/dist/mockfirebase.js"></script>
+    <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/posts.js"></script>
-    <script src="scripts/services/post.js"></script>
+    <script src="scripts/services/postService.js"></script>
+    <script src="scripts/services/authService.js"></script>
+    <script src="scripts/controllers/authCtrl.js"></script>
+    <script src="scripts/controllers/navbarCtrl.js"></script>
+    <script src="scripts/controllers/postsCtrl.js"></script>
+    <script src="scripts/controllers/postDetailCtrl.js"></script>
+    <script src="scripts/filters/urlFilter.js"></script>
     <!-- endbuild -->
+
 </body>
 </html>

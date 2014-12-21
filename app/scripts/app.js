@@ -16,7 +16,8 @@ var app = angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'firebase'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -24,8 +25,31 @@ var app = angular
         templateUrl: 'views/posts.html',
         controller: 'PostsCtrl'
       })
+      .when('/posts/:postId', {
+        templateUrl: '../views/post.html',
+        controller: 'PostViewCtrl'
+      })
+      .when('/register', {
+        templateUrl: 'views/register.html',
+        controller: 'AuthCtrl',
+        resolve: {
+          user: function(AuthService) {
+            return AuthService.resolveUser();
+          }
+        }
+      })
+      .when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'AuthCtrl',
+        resolve: {
+          user: function(AuthService) {
+            return AuthService.resolveUser();
+          }
+        }
+      })
       .otherwise({
         redirectTo: '/'
       });
-  });
+  })
+  .constant('FIREBASE_URL', 'https://resplendent-heat-2047.firebaseio.com/');
 
