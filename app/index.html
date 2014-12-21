@@ -9,6 +9,7 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/fullcalendar/fullcalendar.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -61,6 +62,10 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
+    <script src="bower_components/fullcalendar/fullcalendar.js"></script>
+    <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+    <script src="bower_components/angular-ui-date/src/date.js"></script>
     <script src="bower_components/firebase/firebase.js"></script>
     <script src="bower_components/firebase-simple-login/firebase-simple-login.js"></script>
     <script src="bower_components/mockfirebase/dist/mockfirebase.js"></script>
@@ -72,10 +77,12 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/services/postService.js"></script>
     <script src="scripts/services/authService.js"></script>
+    <script src="scripts/services/eventService.js"></script>
     <script src="scripts/controllers/authCtrl.js"></script>
     <script src="scripts/controllers/navbarCtrl.js"></script>
     <script src="scripts/controllers/postsCtrl.js"></script>
     <script src="scripts/controllers/postDetailCtrl.js"></script>
+    <script src="scripts/controllers/calendarCtrl.js"></script>
     <script src="scripts/filters/urlFilter.js"></script>
     <!-- endbuild -->
 

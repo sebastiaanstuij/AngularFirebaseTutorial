@@ -17,6 +17,8 @@ var app = angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
+    'ui.calendar',
+    'ui.date',
     'firebase'
   ])
   .config(function ($routeProvider) {
@@ -28,6 +30,10 @@ var app = angular
       .when('/posts/:postId', {
         templateUrl: '../views/post.html',
         controller: 'PostViewCtrl'
+      })
+      .when('/calendar', {
+        templateUrl: '/views/calendar.html',
+        controller: 'CalendarCtrl'
       })
       .when('/register', {
         templateUrl: 'views/register.html',
