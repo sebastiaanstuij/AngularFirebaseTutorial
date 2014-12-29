@@ -1,36 +1,56 @@
 'use strict';
 
-app.factory('AuthService', function ($firebaseSimpleLogin, FIREBASE_URL, $rootScope) {
+app.factory('AuthService', function ($firebaseAuth, FIREBASE_URL, $rootScope) {
   var ref = new Firebase(FIREBASE_URL);
-  var auth = $firebaseSimpleLogin(ref);
+  var auth = $firebaseAuth(ref);
 
   var Auth = {
     register: function (user) {
       return auth.$createUser(user.email, user.password);
     },
-    login: function (user) {
-      return auth.$login('password', user);
+    login: function(user){
+      return auth.$authWithPassword({
+        email: user.email,
+        password: user.password
+      })
     },
-    logout: function () {
-      auth.$logout();
+    logout: function() {
+      auth.$unauth()
     },
     resolveUser: function() {
-      return auth.$getCurrentUser();
+      return auth.$getAuth();
     },
     signedIn: function() {
       return !!Auth.user.provider;
     },
+    createProfile: function (user) {
+      console.log(user);
+      var profile = {
+        username: user.username,
+        md5_hash: user.md5_hash
+      };
+      var profileRef = $firebase(ref.child('profile'));
+      return profileRef.$set(user.uid, profile);
+    },
     user: {}
   };
 
-  $rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
-    console.log('logged in');
-    angular.copy(user, Auth.user);
+  auth.$onAuth(function(authData) {
+    if (authData) {
+      angular.copy(authData, Auth.user);
+      //Auth.user.profile = $firebase(ref.child('profile').child(Auth.user.uid)).$asObject();
+      console.log("Logged in as:", authData.uid);
+    } else {
+      angular.copy({}, Auth.user);
+      console.log("Logged out");
+    }
   });
-  $rootScope.$on('$firebaseSimpleLogin:logout', function() {
-    console.log('logged out');
-    angular.copy({}, Auth.user);
-  });
+
+  //$rootScope.$on('$routeChangeError', function(event, next, previous, error) {
+  //  if (error === 'AUTH_REQUIRED') {
+  //    $location.path('/');
+  //  }
+  //});
 
   return Auth;
 });

@@ -1,3 +1,10 @@
+Selected Date: {{ newEvent.date | date:'yyyy-MM-dd a' }}
+
+<datetimepicker ng-model="newEvent.date"
+                datetimepicker-config="{ startView:'day', minView:'day' }" />
+
+
+
 <div ui-calendar ng-model="events"></div>
 
 <form ng-submit="addEvent()">
@@ -5,3 +12,7 @@
   <input ui-date ui-date-format="DD, d MM, yy" ng-model="newEvent.start" placeholder="Begindatum">
   <input type="submit" value="Add">
 </form>
+
+
+
+

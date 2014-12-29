@@ -5,7 +5,7 @@ app.controller('CalendarCtrl', function ($scope, EventService) {
 
   $scope.newEvent = {
     title: '',
-    start: ''
+    date: ''
   };
 
   $scope.addEvent = function (){
@@ -13,7 +13,7 @@ app.controller('CalendarCtrl', function ($scope, EventService) {
 
     $scope.newEvent = {
       title: '',
-      start: ''
+      date: ''
     };
   };
 

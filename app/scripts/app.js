@@ -18,7 +18,7 @@ var app = angular
     'ngSanitize',
     'ngTouch',
     'ui.calendar',
-    'ui.date',
+    'ui.bootstrap.datetimepicker',
     'firebase'
   ])
   .config(function ($routeProvider) {
