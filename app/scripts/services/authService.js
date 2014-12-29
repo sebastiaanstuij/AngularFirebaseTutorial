@@ -1,21 +1,22 @@
 'use strict';
 
-app.factory('AuthService', function ($firebaseAuth, $firebase, FIREBASE_URL, $rootScope) {
+app.factory('AuthService', function ($firebaseAuth, $firebase, FIREBASE_URL) {
   var ref = new Firebase(FIREBASE_URL);
   var auth = $firebaseAuth(ref);
+  var isNewUser = false;
 
   var Auth = {
     register: function (user) {
-      return auth.$createUser(user.email, user.password);
+      return auth.$createUser(user.email, user.password).then(isNewUser = true);
     },
     login: function(user){
       return auth.$authWithPassword({
         email: user.email,
         password: user.password
-      })
+      });
     },
     logout: function() {
-      auth.$unauth()
+      auth.$unauth();
     },
     resolveUser: function() {
       return auth.$getAuth();
@@ -27,25 +28,32 @@ app.factory('AuthService', function ($firebaseAuth, $firebase, FIREBASE_URL, $ro
       console.log(user);
       var profile = {
         username: user.username,
-        md5_hash: user.md5_hash
+        //birthdate: user.birthdate
       };
-      var profileRef = $firebase(ref.child('profile'));
-      return profileRef.$set(user.uid, profile);
+
+      return ref.child('users').child(user.uid).update({profile: profile});
     },
     user: {}
   };
 
   auth.$onAuth(function(authData) {
     if (authData) {
-      angular.copy(authData, Auth.user);
-      console.log("Logged in as:", authData.uid);
+      //angular.copy(authData, Auth.user);
+      Auth.user = $firebase(ref.child('users').child(authData.uid)).$asObject();
+
+      //Auth.user.profile = $firebase(ref.child('users').child(authData.uid).child('profile')).$asObject();
+      console.log('Logged in as:', authData.uid);
+      //console.log('Logged in as:', Auth.user);
+
       if (isNewUser){
-        ref.child("users").child(authData.uid).set(authData);
-        //Auth.user.profile = $firebase(ref.child('profile').child(Auth.user.uid)).$asObject();
+        ref.child('users').child(authData.uid).set(authData);
       }
+
     } else {
       angular.copy({}, Auth.user);
-      console.log("Logged out");
+      Auth.user.$destroy();
+      console.log('Logged out');
+      console.log(Auth.user);
     }
   });
 
