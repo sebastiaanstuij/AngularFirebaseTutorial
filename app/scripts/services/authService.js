@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('AuthService', function ($firebaseAuth, FIREBASE_URL, $rootScope) {
+app.factory('AuthService', function ($firebaseAuth, $firebase, FIREBASE_URL, $rootScope) {
   var ref = new Firebase(FIREBASE_URL);
   var auth = $firebaseAuth(ref);
 
@@ -38,8 +38,11 @@ app.factory('AuthService', function ($firebaseAuth, FIREBASE_URL, $rootScope) {
   auth.$onAuth(function(authData) {
     if (authData) {
       angular.copy(authData, Auth.user);
-      //Auth.user.profile = $firebase(ref.child('profile').child(Auth.user.uid)).$asObject();
       console.log("Logged in as:", authData.uid);
+      if (isNewUser){
+        ref.child("users").child(authData.uid).set(authData);
+        //Auth.user.profile = $firebase(ref.child('profile').child(Auth.user.uid)).$asObject();
+      }
     } else {
       angular.copy({}, Auth.user);
       console.log("Logged out");

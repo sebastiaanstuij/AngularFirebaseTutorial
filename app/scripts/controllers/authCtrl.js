@@ -13,17 +13,20 @@ app.controller('AuthCtrl', function ($scope, $location, AuthService) {
     });
   };
 
+
   $scope.register = function () {
-    AuthService.register($scope.user).then(function(user) {
-      return AuthService.login($scope.user).then(function() {
-      user.username = $scope.user.username;
-      return AuthService.createProfile(user);
+    AuthService.register($scope.user).then(function() {
+      return AuthService.login($scope.user).then(function(user) {
+        user.username = $scope.user.username;
+        return AuthService.createProfile(user);
       }).then(function() {
-          $location.path('/');
-        }, function (error) {
-          $scope.error = error.toString();
-        });
+        $location.path('/');
+      });
+    }, function(error) {
+      $scope.error = error.toString();
     });
   };
 
 });
+
+
