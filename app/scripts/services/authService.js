@@ -51,7 +51,7 @@ app.factory('AuthService', function ($firebaseAuth, $firebase, FIREBASE_URL) {
 
     } else {
       angular.copy({}, Auth.user);
-      Auth.user.$destroy();
+      //Auth.user.$destroy();
       console.log('Logged out');
       console.log(Auth.user);
     }

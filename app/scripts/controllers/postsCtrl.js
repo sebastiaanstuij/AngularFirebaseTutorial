@@ -9,6 +9,9 @@ app.controller('PostsCtrl', function ($scope, $location, PostService) {
   };
 
   $scope.submitPost = function (){
+    $scope.post.creator = $scope.user.profile.username;
+    $scope.post.creatorUID = $scope.user.uid;
+
     PostService.create($scope.post).then(function (ref) {
       $location.path('/posts/' + ref.name());
     });
