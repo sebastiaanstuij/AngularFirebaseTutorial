@@ -1,0 +1,27 @@
+<div class="container profile">
+  <div class="row">
+    <!--<div class="col-sm-1">-->
+      <!--<img ng-src="http://www.gravatar.com/avatar/{{ profile.md5_hash }}" class="prof-img" />-->
+    <!--</div>-->
+
+    <div class="col-xs-12">
+      <span class="name">
+        {{ profile.username }}
+      </span>
+    </div>
+  </div>
+
+  <div class="post row" ng-repeat="(key,post) in posts">
+    <div class="col-xs-12">
+      <div class="info">
+        <a ng-href="{{ post.url }}">
+          {{ post.title }}
+          <span class="url">({{ post.url }})</span>
+        </a>
+      </div>
+      <div>
+        <a ng-href="#/posts/{{ post.$id }}">comments</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 
-<form ng-submit="submitPost()">
+<form ng-submit="addPost()" ng-show="signedIn()">
   <input type="text" ng-model="post.title" />
   <input type="text" ng-model="post.url" />
   <input type="submit" value="Add Post" />
@@ -21,7 +21,7 @@
         <span>submitted by <a ng-href="#/users/{{ post.creatorUID }}">{{ post.creator }}</a></span>
         &mdash;
         <a ng-href="#/posts/{{ post.$id }}">comments</a>
-        <a ng-click="deletePost(post)">delete</a>
+        <a href="" ng-click="deletePost(post)" ng-show="user.uid === post.creatorUID">delete</a>
       </div>
       <br>
     </div>

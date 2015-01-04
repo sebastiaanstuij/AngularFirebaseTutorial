@@ -31,7 +31,7 @@ app.factory('AuthService', function ($firebaseAuth, $firebase, FIREBASE_URL) {
         //birthdate: user.birthdate
       };
 
-      return ref.child('users').child(user.uid).update({profile: profile});
+      return $firebase(ref.child('users').child(user.uid)).update({profile: profile});
     },
     user: {}
   };
@@ -39,9 +39,12 @@ app.factory('AuthService', function ($firebaseAuth, $firebase, FIREBASE_URL) {
   auth.$onAuth(function(authData) {
     if (authData) {
       //angular.copy(authData, Auth.user);
-      Auth.user = $firebase(ref.child('users').child(authData.uid)).$asObject();
+      //console.log('angular copy', Auth.user);
 
+      Auth.user = $firebase(ref.child('users').child(authData.uid)).$asObject();
+      //console.log('firebase ref', Auth.user);
       //Auth.user.profile = $firebase(ref.child('users').child(authData.uid).child('profile')).$asObject();
+
       console.log('Logged in as:', authData.uid);
       //console.log('Logged in as:', Auth.user);
 
@@ -51,7 +54,6 @@ app.factory('AuthService', function ($firebaseAuth, $firebase, FIREBASE_URL) {
 
     } else {
       angular.copy({}, Auth.user);
-      //Auth.user.$destroy();
       console.log('Logged out');
       console.log(Auth.user);
     }

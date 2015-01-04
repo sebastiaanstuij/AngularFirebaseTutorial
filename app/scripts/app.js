@@ -28,8 +28,12 @@ var app = angular
         controller: 'PostsCtrl'
       })
       .when('/posts/:postId', {
-        templateUrl: '../views/post.html',
+        templateUrl: 'views/post.html',
         controller: 'PostViewCtrl'
+      })
+      .when('/users/:userId', {
+        templateUrl: 'views/profile.html',
+        controller: 'ProfileCtrl'
       })
       .when('/calendar', {
         templateUrl: '/views/calendar.html',
