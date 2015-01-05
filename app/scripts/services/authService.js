@@ -27,11 +27,11 @@ app.factory('AuthService', function ($firebaseAuth, $firebase, FIREBASE_URL) {
     createProfile: function (user) {
       console.log(user);
       var profile = {
-        username: user.username,
+        username: user.username
         //birthdate: user.birthdate
       };
 
-      return $firebase(ref.child('users').child(user.uid)).update({profile: profile});
+      return $firebase(ref.child('users').child(user.uid)).$set('profile',profile);
     },
     user: {}
   };
