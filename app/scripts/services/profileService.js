@@ -5,7 +5,7 @@ app.factory('ProfileService', function (FIREBASE_URL, $firebase, PostService, $q
 
   var profile = {
     get: function (userId) {
-      return $firebase(ref.child('users').child(userId).child('profile')).$asObject();
+      return $firebase(ref.child('profile').child(userId)).$asObject();
     },
     getPosts: function(userId) {
       var defer = $q.defer();

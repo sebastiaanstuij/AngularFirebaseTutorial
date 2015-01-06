@@ -20,8 +20,8 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li ng-show="signedIn()">
-        <a ng-href="#/users/{{ user.profile.uid }}">
-          <img ng-src="http://www.gravatar.com/avatar/{{ user.profile.md5_hash }}" class="nav-pic" />
+        <a ng-href="#/users/{{ user.uid }}">
+          <!--<img ng-src="http://www.gravatar.com/avatar/{{ user.profile.md5_hash }}" class="nav-pic" />-->
           {{ user.profile.username }}
         </a>
       </li>

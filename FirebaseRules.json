@@ -2,6 +2,11 @@
 {
   "rules": {
 
+  "users": {
+    ".read": true,
+    ".write": true
+  },
+
   "posts": {
     // anyone can view posts
     ".read": true,
@@ -62,6 +67,7 @@
       ".write": "auth.uid === $uid"
     }
   },
+
 
   // Don't let users post to other fields
   "$other": { ".validate": false }

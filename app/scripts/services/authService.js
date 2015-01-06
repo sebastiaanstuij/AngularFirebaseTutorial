@@ -31,25 +31,23 @@ app.factory('AuthService', function ($firebaseAuth, $firebase, FIREBASE_URL) {
         //birthdate: user.birthdate
       };
 
-      return $firebase(ref.child('users').child(user.uid)).$set('profile',profile);
+      return $firebase(ref.child('profile')).$set(user.uid, profile);
     },
     user: {}
   };
 
   auth.$onAuth(function(authData) {
     if (authData) {
-      //angular.copy(authData, Auth.user);
-      //console.log('angular copy', Auth.user);
-
-      Auth.user = $firebase(ref.child('users').child(authData.uid)).$asObject();
+      angular.copy(authData, Auth.user);
+      //Auth.user = $firebase(ref.child('users').child(authData.uid)).$asObject();
+      Auth.user.profile = $firebase(ref.child('profile').child(authData.uid)).$asObject();
       //console.log('firebase ref', Auth.user);
-      //Auth.user.profile = $firebase(ref.child('users').child(authData.uid).child('profile')).$asObject();
-
       console.log('Logged in as:', authData.uid);
       //console.log('Logged in as:', Auth.user);
 
       if (isNewUser){
-        ref.child('users').child(authData.uid).set(authData);
+        $firebase(ref.child('users').child(authData.uid)).$set(authData);
+        isNewUser = false;
       }
 
     } else {
