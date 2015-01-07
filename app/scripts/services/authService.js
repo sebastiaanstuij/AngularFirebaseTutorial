@@ -7,7 +7,10 @@ app.factory('AuthService', function ($firebaseAuth, $firebase, FIREBASE_URL) {
 
   var Auth = {
     register: function (user) {
-      return auth.$createUser(user.email, user.password).then(isNewUser = true);
+      return auth.$createUser(user.email, user.password).then(function() {
+        console.log("user created succesfully");
+        isNewUser = true;
+      });
     },
     login: function(user){
       return auth.$authWithPassword({
@@ -30,26 +33,20 @@ app.factory('AuthService', function ($firebaseAuth, $firebase, FIREBASE_URL) {
         username: user.username
         //birthdate: user.birthdate
       };
-
-      return $firebase(ref.child('profile')).$set(user.uid, profile);
+      //return $firebase(ref.child('profile')).$set(user.uid, profile);
+      return $firebase(ref.child('users').child(user.uid).child('profile')).$set(profile);
     },
     user: {}
   };
 
   auth.$onAuth(function(authData) {
     if (authData) {
-      angular.copy(authData, Auth.user);
-      //Auth.user = $firebase(ref.child('users').child(authData.uid)).$asObject();
-      Auth.user.profile = $firebase(ref.child('profile').child(authData.uid)).$asObject();
-      //console.log('firebase ref', Auth.user);
-      console.log('Logged in as:', authData.uid);
-      //console.log('Logged in as:', Auth.user);
-
       if (isNewUser){
         $firebase(ref.child('users').child(authData.uid)).$set(authData);
         isNewUser = false;
       }
-
+      Auth.user = $firebase(ref.child('users').child(authData.uid)).$asObject();
+      console.log('Logged in as:', authData.uid);
     } else {
       angular.copy({}, Auth.user);
       console.log('Logged out');

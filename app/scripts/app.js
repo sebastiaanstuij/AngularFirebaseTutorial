@@ -33,7 +33,15 @@ var app = angular
       })
       .when('/users/:userId', {
         templateUrl: 'views/profile.html',
-        controller: 'ProfileCtrl'
+        controller: 'ProfileCtrl',
+        resolve: {
+          profile: function($route, ProfileService) {
+            return ProfileService.get($route.current.params.userId);
+          },
+          posts: function($route, ProfileService) {
+            return ProfileService.getPosts($route.current.params.userId);
+          }
+        }
       })
       .when('/calendar', {
         templateUrl: '/views/calendar.html',

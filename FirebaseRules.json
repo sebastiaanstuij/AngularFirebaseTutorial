@@ -56,14 +56,6 @@
       }
     },
 
-    "profile": {
-      ".read": true,
-
-      "$uid": {
-        ".write": "!data.exists() && auth.uid === $uid"
-      }
-    },
-
     "user_posts": {
       ".read": true,
 
