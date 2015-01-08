@@ -27,6 +27,21 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: appConfig,
 
+    less: {
+      development: {
+        options: {
+          compress: true,
+          yuicompress: true,
+          optimization: 2
+        },
+        files: {
+          // target.css file: source.custom-less file
+          "<%= yeoman.app %>/styles/bootswatch.css": "<%= yeoman.app %>/styles/custom-bootstrap-less/custom-bootstrap.less"
+        }
+      }
+    },
+
+
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
@@ -45,8 +60,8 @@ module.exports = function (grunt) {
         tasks: ['newer:jshint:test', 'karma']
       },
       styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
+        files: ['<%= yeoman.app %>/styles/{,*/}*.css', '<%= yeoman.app %>/styles/custom-bootstrap-less/{,*/}*.less'],
+        tasks: ['newer:copy:styles', 'autoprefixer', 'less']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -165,6 +180,22 @@ module.exports = function (grunt) {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
         ignorePath:  /\.\.\//
+      },
+      test: {
+        devDependencies: true,
+        src: 'test/karma.conf.js',
+        ignorePath:  /\.\.\//,
+        fileTypes: {
+          js: {
+            block: /(([\s\t]*)\/\/\s*bower:*(\S*))(\n|\r|.)*?(\/\/\s*endbower)/gi,
+            detect: {
+              js: /'(.*\.js)'/gi
+            },
+            replace: {
+              js: '\'{{filePath}}\','
+            }
+          }
+        }
       }
     },
 
@@ -315,11 +346,6 @@ module.exports = function (grunt) {
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/images',
           src: ['generated/*']
-        }, {
-          expand: true,
-          cwd: 'bower_components/bootstrap/dist',
-          src: 'fonts/*',
-          dest: '<%= yeoman.dist %>'
         }]
       },
       styles: {
@@ -354,6 +380,13 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+
+
+  grunt.registerTask('compile-less', [
+    'less'
+  ]);
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -362,7 +395,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'wiredep',
+      'wiredep:app',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -377,6 +410,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
+    'wiredep:test',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
@@ -385,7 +419,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'wiredep',
+    'wiredep:app',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
@@ -400,7 +434,7 @@ module.exports = function (grunt) {
     'htmlmin'
   ]);
 
-  grunt.registerTask('default', [
+  grunt.registerTask('build-test', [
     'newer:jshint',
     'test',
     'build'

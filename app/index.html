@@ -8,17 +8,15 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/fullcalendar/fullcalendar.css" />
     <link rel="stylesheet" href="bower_components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/bootswatch.css">
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
 
-    <!--custom bootstrap-darkly-->
-    <link rel="stylesheet" href="styles/bootstrap-darkly.css">
 
   </head>
   <body ng-app="angularFirebaseTutorialApp">
@@ -61,7 +59,6 @@
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -80,6 +77,7 @@
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
+    <script src="scripts/thirdparty/bootstrap.js"></script>
     <script src="scripts/services/postService.js"></script>
     <script src="scripts/services/authService.js"></script>
     <script src="scripts/services/eventService.js"></script>
