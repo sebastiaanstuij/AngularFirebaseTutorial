@@ -18,7 +18,8 @@ This version contains several improvements:
 6. RUn 'grunt test' to run unit tests
 7. Run 'grunt build' to create a 'dist' folder for deploying to remote host.
 
-Optional (Firebase deploy to Firebase hosting service):
+Optional (deploy to Firebase hosting service):
+
 8. Install Firebase CLI: run 'npm install -g firebase-tools' in terminal.
 9. Run 'firebase login' in terminal to setup firebase hosting.
 10. Run 'firebase deploy' in terminal to deploy to firebase hosting.
