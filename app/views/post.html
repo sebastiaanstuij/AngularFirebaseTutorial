@@ -1,11 +1,9 @@
-<!--<div>-->
-  <!--<a ng-href="{{ post.url }}">{{ post.title }}</a>-->
-<!--</div>-->
+<div class="content posts-page">
 
-<!--<a ng-href="#/posts">Back to Posts</a>-->
+  <p>
+    <a ng-href="#/posts">Back to Posts</a>
+  </p>
 
-
-<div class="container posts-page">
 
   <div class="post row">
     <div class="col-xs-12">
@@ -28,9 +26,9 @@
     </div>
   </div>
 
-  <br>
-  <p>Comments:</p>
+  <br><br>
 
+  <p>Comments:</p>
   <div ng-repeat="comment in comments" class="row cmt">
     <div class="col-xs-12">
       <p>{{ comment.text }}</p>
