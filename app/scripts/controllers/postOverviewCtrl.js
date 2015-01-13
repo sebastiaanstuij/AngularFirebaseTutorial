@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('PostsCtrl', function ($scope, $location, PostService, AuthService) {
+app.controller('PostOverviewCtrl', function ($scope, $location, PostService, AuthService) {
   $scope.posts = PostService.all;
   $scope.user = AuthService.user;
   $scope.signedIn = AuthService.signedIn;

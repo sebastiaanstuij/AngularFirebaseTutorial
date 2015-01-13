@@ -1,22 +1,27 @@
 'use strict';
 
-describe('Controller: MainCtrl', function () {
+describe('Controller: PostOverviewCtrl', function () {
 
   // load the controller's module
   beforeEach(module('angularFirebaseTutorialApp'));
 
-  var MainCtrl,
-    scope;
+  var MainCtrl, scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    MainCtrl = $controller('MainCtrl', {
+    MainCtrl = $controller('PostOverviewCtrl', {
       $scope: scope
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+  it('should add a post to posts after calling addPost', function () {
+
+
   });
+
+  it('should delete a post to posts after calling deletePost', function () {
+
+  });
+
 });

@@ -29,7 +29,7 @@ var app = angular
       })
       .when('/posts/:postId', {
         templateUrl: 'views/post.html',
-        controller: 'PostViewCtrl'
+        controller: 'PostOverviewCtrl'
       })
       .when('/users/:userId', {
         templateUrl: 'views/profile.html',
