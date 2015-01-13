@@ -1,5 +1,5 @@
 # AngularFirebaseTutorial
-Angular app with Firebase backend base on this tutorial:
+This app is a Angular Reddit-clone with Firebase as a backend solution, based on the following tutorial:
 &amp; Firebase (https://thinkster.io/angulartutorial/learn-to-build-realtime-webapps/)
 
 This version contains several improvements:
