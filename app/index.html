@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="nl">
   <head>
     <meta charset="utf-8">
     <title></title>
@@ -19,14 +19,14 @@
 
 
   </head>
-  <body ng-app="angularFirebaseTutorialApp">
+  <body ng-cloak ng-app="angularFirebaseTutorialApp">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
 
-
+      <p ng-show="error" class="text-danger">{{ error }}</p>
       <div class="container" ng-include="'views/navbar.html'"></div>
 
       <div class="container" ng-view=""></div>
@@ -79,6 +79,7 @@
     <script src="scripts/services/authService.js"></script>
     <script src="scripts/services/eventService.js"></script>
     <script src="scripts/services/profileService.js"></script>
+    <script src="scripts/services/messageService.js"></script>
     <script src="scripts/controllers/authCtrl.js"></script>
     <script src="scripts/controllers/navbarCtrl.js"></script>
     <script src="scripts/controllers/postOverviewCtrl.js"></script>

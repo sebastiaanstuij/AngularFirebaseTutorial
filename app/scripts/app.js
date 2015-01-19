@@ -21,15 +21,26 @@ var app = angular
     'ui.bootstrap.datetimepicker',
     'firebase'
   ])
+
+  .constant('FIREBASE_URL', 'https://resplendent-heat-2047.firebaseio.com/')
+
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/posts.html',
-        controller: 'PostsCtrl'
+        controller: 'PostOverviewCtrl',
+        resolve: {
+          // controller will not be loaded until $waitForAuth resolves
+          // Auth refers to our $firebaseAuth wrapper in the example above
+          "currentAuth": ["AuthService", function(AuthService) {
+            // $waitForAuth returns a promise so the resolve waits for it to complete
+            return AuthService.waitForAuth();
+          }]
+        }
       })
       .when('/posts/:postId', {
         templateUrl: 'views/post.html',
-        controller: 'PostOverviewCtrl'
+        controller: 'PostDetailCtrl'
       })
       .when('/users/:userId', {
         templateUrl: 'views/profile.html',
@@ -45,7 +56,15 @@ var app = angular
       })
       .when('/calendar', {
         templateUrl: '/views/calendar.html',
-        controller: 'CalendarCtrl'
+        controller: 'CalendarCtrl',
+        resolve: {
+          // controller will not be loaded until $waitForAuth resolves
+          // Auth refers to our $firebaseAuth wrapper in the example above
+          "currentAuth": ["AuthService", function(AuthService) {
+            // $waitForAuth returns a promise so the resolve waits for it to complete
+            return AuthService.requireAuth();
+          }]
+        }
       })
       .when('/register', {
         templateUrl: 'views/register.html',
@@ -69,5 +88,14 @@ var app = angular
         redirectTo: '/'
       });
   })
-  .constant('FIREBASE_URL', 'https://resplendent-heat-2047.firebaseio.com/');
 
+  .run(["$rootScope", "$location", function($rootScope, $location) {
+    $rootScope.$on("$routeChangeError", function(event, next, previous, error) {
+      // We can catch the error thrown when the $requireAuth promise is rejected
+      // and redirect the user back to the home page
+      if (error === "AUTH_REQUIRED") {
+        $location.path("/home");
+      }
+      console.log("Authentication required")
+    });
+  }]);

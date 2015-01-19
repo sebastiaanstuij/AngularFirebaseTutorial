@@ -24,6 +24,12 @@ app.factory('AuthService', function ($firebaseAuth, $firebase, FIREBASE_URL) {
     resolveUser: function() {
       return auth.$getAuth();
     },
+    waitForAuth: function() {
+      return auth.$waitForAuth();
+    },
+    requireAuth: function() {
+      return auth.$requireAuth();
+    },
     signedIn: function() {
       return !!Auth.user.provider;
     },
