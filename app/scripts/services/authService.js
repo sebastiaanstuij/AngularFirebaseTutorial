@@ -37,9 +37,7 @@ app.factory('AuthService', function ($firebaseAuth, $firebase, FIREBASE_URL) {
       console.log(user);
       var profile = {
         username: user.username
-        //birthdate: user.birthdate
       };
-      //return $firebase(ref.child('profile')).$set(user.uid, profile);
       return $firebase(ref.child('users').child(user.uid).child('profile')).$set(profile);
     },
     user: {}
@@ -56,15 +54,8 @@ app.factory('AuthService', function ($firebaseAuth, $firebase, FIREBASE_URL) {
     } else {
       angular.copy({}, Auth.user);
       console.log('Logged out');
-      console.log(Auth.user);
     }
   });
-
-  //$rootScope.$on('$routeChangeError', function(event, next, previous, error) {
-  //  if (error === 'AUTH_REQUIRED') {
-  //    $location.path('/');
-  //  }
-  //});
 
   return Auth;
 });

@@ -18,6 +18,7 @@ var app = angular
     'ngSanitize',
     'ngTouch',
     'ui.calendar',
+    'ui.bootstrap',
     'ui.bootstrap.datetimepicker',
     'firebase'
   ])

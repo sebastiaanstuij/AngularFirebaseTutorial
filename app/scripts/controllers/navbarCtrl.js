@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('NavbarController', function ($scope, AuthService, $location) {
+app.controller('NavbarController', function ($rootScope, $scope, $location, AuthService, AlertService) {
   $scope.signedIn = AuthService.signedIn;
   $scope.logout = AuthService.logout;
   $scope.user = AuthService.user;
@@ -12,5 +12,7 @@ app.controller('NavbarController', function ($scope, AuthService, $location) {
   $scope.doCollapse = function() {
     $scope.isCollapsed=true;
   };
+
+  $rootScope.closeAlert = AlertService.closeAlert;
 
 });
