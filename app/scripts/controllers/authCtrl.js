@@ -1,7 +1,6 @@
 'use strict';
 
-app.controller('AuthCtrl', function ($scope, $location, AuthService, AlertService) {
-  $scope.user = AuthService.user;
+app.controller('AuthController', function ($rootScope, $scope, $location, AuthService, AlertService) {
 
   if (AuthService.signedIn()) {
     $location.path('/');
@@ -10,7 +9,8 @@ app.controller('AuthCtrl', function ($scope, $location, AuthService, AlertServic
   $scope.login = function () {
     AuthService.login($scope.user).then(function () {
       $location.path('/');
-      AlertService.addAlert('success', 'Successfully logged in as: ');
+      console.log('Successfully logged in as: ' + $scope.user);
+      AlertService.addAlert('success', 'Successfully logged in as: ' + $scope.user.email);
     }, function (error) {
       console.log(error);
       AlertService.addAlert('danger', error.message);
@@ -23,11 +23,12 @@ app.controller('AuthCtrl', function ($scope, $location, AuthService, AlertServic
       return AuthService.login($scope.user).then(function(user) {
         user.username = $scope.user.username;
         return AuthService.createProfile(user).then(function() {
-            AlertService.addAlert('success', 'Successfully registered as: ');
+            console.log('Successfully registered as: ' + $scope.user);
+            AlertService.addAlert('success', 'Successfully registered as: ' + $scope.user.email);
           }
         );
       }).then(function() {
-        $location.path('/');
+        $location.path('/home');
       });
     }, function(error) {
       AlertService.addAlert('danger', error.message);

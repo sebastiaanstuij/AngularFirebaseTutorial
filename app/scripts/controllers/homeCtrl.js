@@ -1,9 +1,9 @@
 'use strict';
 
-app.controller('PostOverviewCtrl', function ($scope, $location, PostService, AuthService) {
-  $scope.posts = PostService.all;
-  $scope.user = AuthService.user;
+app.controller('HomeController', function ($scope, $location, PostService, AuthService) {
+  $scope.user =  AuthService.user;
   $scope.signedIn = AuthService.signedIn;
+  $scope.posts = PostService.all;
 
   $scope.post = {
     title: '',

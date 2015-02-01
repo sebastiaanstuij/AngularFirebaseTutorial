@@ -1,61 +1,66 @@
 'use strict';
 
-app.factory('AuthService', function ($firebaseAuth, $firebase, FIREBASE_URL) {
+app.factory('AuthService', function ($rootScope, $firebaseAuth, $firebase, FIREBASE_URL) {
   var ref = new Firebase(FIREBASE_URL);
-  var auth = $firebaseAuth(ref);
-  var isNewUser = false;
+  var firebaseAuthService = $firebaseAuth(ref);
 
-  var Auth = {
+  var auth = {
     register: function (user) {
-      return auth.$createUser(user.email, user.password).then(function() {
-        console.log("user created succesfully");
-        isNewUser = true;
-      });
+      return firebaseAuthService.$createUser(user.email, user.password);
     },
     login: function(user){
-      return auth.$authWithPassword({
+      return firebaseAuthService.$authWithPassword({
         email: user.email,
-        password: user.password
+        password: user.password,
+        isAdmin: false
       });
     },
     logout: function() {
-      auth.$unauth();
+      firebaseAuthService.$unauth();
     },
     resolveUser: function() {
-      return auth.$getAuth();
+      return firebaseAuthService.$getAuth();
     },
     waitForAuth: function() {
-      return auth.$waitForAuth();
+      return firebaseAuthService.$waitForAuth();
     },
     requireAuth: function() {
-      return auth.$requireAuth();
+      return firebaseAuthService.$requireAuth();
     },
     signedIn: function() {
-      return !!Auth.user.provider;
+      return !!auth.user.provider;
+    },
+    isAdmin: function() {
+      if (this.signedIn()){
+        return !!auth.user.profile.isAdmin;
+      }
+      else {
+        return false;
+      }
     },
     createProfile: function (user) {
-      console.log(user);
       var profile = {
         username: user.username
       };
-      return $firebase(ref.child('users').child(user.uid).child('profile')).$set(profile);
+      var profileRef = $firebase(ref.child('user_profiles'));
+      return profileRef.$set(user.uid, profile);
     },
     user: {}
   };
 
-  auth.$onAuth(function(authData) {
+  firebaseAuthService.$onAuth(function(authData) {
     if (authData) {
-      if (isNewUser){
-        $firebase(ref.child('users').child(authData.uid)).$set(authData);
-        isNewUser = false;
-      }
-      Auth.user = $firebase(ref.child('users').child(authData.uid)).$asObject();
-      console.log('Logged in as:', authData.uid);
+      angular.copy(authData, auth.user);
+      auth.user.profile = $firebase(ref.child('user_profiles').child(auth.user.uid)).$asObject();
+      console.log('($onAuth) Logged in as: ', auth.user.profile);
     } else {
-      angular.copy({}, Auth.user);
-      console.log('Logged out');
+      if(auth.user && auth.user.profile) {
+        auth.user.profile.$destroy();
+      }
+      angular.copy({}, auth.user);
+      console.log('($onAuth) Logged out');
     }
   });
 
-  return Auth;
+  return auth;
 });

@@ -1,0 +1,64 @@
+<div class="content admin-section">
+  <div class="post row">
+    <div class="col-xs-10 col-xs-offset-1">
+
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Registered users</div>
+
+        <!-- Table -->
+        <table class="table">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Username</th>
+              <td>Registration Date</td>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Level</th>
+              <th>Bus driver</th>
+              <th>Own gear</th>
+              <th>Own car</th>
+              <th>Admin</th>
+            </tr>
+          </thead>
+          <tbod>
+            <tr ng-repeat="user in users">
+              <td>{{ user.firstName }}</td>
+              <td>{{ user.lastName }}</td>
+              <td>{{ user.username }}</td>
+              <td>{{ user.registrationDate }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.phone }}</td>
+              <td>{{ user.level }}</td>
+              <td>{{ user.busdriver }}</td>
+              <td>{{ user.ownGear }}</td>
+              <td>{{ user.ownCar }}</td>
+              <td>{{ user.isAdmin }}</td>
+            </tr>
+          </tbod>
+        </table>
+      </div>
+
+
+      <!--<div class="info">-->
+          <!--<span class="url">{{ user.username }}</span>-->
+          <!--<span class="dropdown">-->
+            <!--<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">-->
+              <!--Dropdown-->
+              <!--<span class="caret"></span>-->
+            <!--</button>-->
+            <!--<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">-->
+              <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>-->
+              <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>-->
+              <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>-->
+              <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>-->
+            <!--</ul>-->
+          <!--</span>-->
+      <!--</div>-->
+
+      <br>
+    </div>
+  </div>
+</div>

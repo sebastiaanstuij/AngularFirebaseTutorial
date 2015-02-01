@@ -28,36 +28,19 @@ var app = angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/posts.html',
-        controller: 'PostOverviewCtrl',
-        resolve: {
-          // controller will not be loaded until $waitForAuth resolves
-          // Auth refers to our $firebaseAuth wrapper in the example above
-          "currentAuth": ["AuthService", function(AuthService) {
-            // $waitForAuth returns a promise so the resolve waits for it to complete
-            return AuthService.waitForAuth();
-          }]
-        }
+        redirectTo: '/home'
+      })
+      .when('/home', {
+        templateUrl: '../views/home.html',
+        controller: 'HomeController'
       })
       .when('/posts/:postId', {
         templateUrl: 'views/post.html',
-        controller: 'PostDetailCtrl'
+        controller: 'PostDetailController'
       })
       .when('/users/:userId', {
         templateUrl: 'views/profile.html',
-        controller: 'ProfileCtrl',
-        resolve: {
-          profile: function($route, ProfileService) {
-            return ProfileService.get($route.current.params.userId);
-          },
-          posts: function($route, ProfileService) {
-            return ProfileService.getPosts($route.current.params.userId);
-          }
-        }
-      })
-      .when('/calendar', {
-        templateUrl: '/views/calendar.html',
-        controller: 'CalendarCtrl',
+        controller: 'ProfileController',
         resolve: {
           // controller will not be loaded until $waitForAuth resolves
           // Auth refers to our $firebaseAuth wrapper in the example above
@@ -67,36 +50,40 @@ var app = angular
           }]
         }
       })
+      .when('/calendar', {
+        templateUrl: '/views/calendar.html',
+        controller: 'CalendarController',
+        resolve: {
+          "currentAuth": ["AuthService", function(AuthService) {
+            return AuthService.requireAuth();
+          }]
+        }
+      })
+      .when('/admin', {
+        templateUrl: 'views/admin.html',
+        controller: 'AdminController'
+      })
       .when('/register', {
         templateUrl: 'views/register.html',
-        controller: 'AuthCtrl',
-        resolve: {
-          user: function(AuthService) {
-            return AuthService.resolveUser();
-          }
-        }
+        controller: 'AuthController'
       })
       .when('/login', {
         templateUrl: 'views/login.html',
-        controller: 'AuthCtrl',
-        resolve: {
-          user: function(AuthService) {
-            return AuthService.resolveUser();
-          }
-        }
+        controller: 'AuthController'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/home'
       });
   })
 
-  .run(["$rootScope", "$location", function($rootScope, $location) {
+  .run(['$rootScope', '$location', 'AlertService', function($rootScope, $location, AlertService) {
     $rootScope.$on("$routeChangeError", function(event, next, previous, error) {
       // We can catch the error thrown when the $requireAuth promise is rejected
       // and redirect the user back to the home page
-      if (error === "AUTH_REQUIRED") {
-        $location.path("/home");
+      if (error === 'AUTH_REQUIRED') {
+        $location.path('/home');
       }
-      console.log("Authentication required")
+      console.log(error);
+      AlertService.addAlert('danger', 'You need to login before you can go to this page');
     });
   }]);

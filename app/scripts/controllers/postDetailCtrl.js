@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('PostDetailCtrl', function ($scope, $routeParams, PostService, AuthService) {
+app.controller('PostDetailController', function ($scope, $routeParams, PostService, AuthService) {
   $scope.post = PostService.getPost($routeParams.postId);
   $scope.comments = PostService.getComments($routeParams.postId);
   $scope.user = AuthService.user;

@@ -1,18 +1,3 @@
-
-.animate.ng-leave
-{
-  -webkit-transition: 0.5s linear all; /* Chrome */
-  transition: 0.5s linear all;
-  opacity: 1;
-}
-
-.animate.ng-leave-active
-{
-  opacity: 0;
-}
-
-
-
 html,
 body {
   height: 100%;
@@ -113,3 +98,25 @@ body {
     border-bottom: 0;
   }
 }
+
+
+/*hides angular app until angularjs is loaded and kicks in*/
+[ng-cloak]
+{
+  display: none !important;
+}
+
+/*angular animation styles*/
+.animate.ng-leave
+{
+  -webkit-transition: 0.5s linear all; /* Chrome */
+  transition: 0.5s linear all;
+  opacity: 1;
+}
+.animate.ng-leave-active
+{
+  opacity: 0;
+}
+
+
+

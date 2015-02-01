@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('CalendarCtrl', function ($scope, EventService) {
+app.controller('CalendarController', function ($scope, EventService) {
   $scope.events = [EventService.all];
 
   $scope.newEvent = {

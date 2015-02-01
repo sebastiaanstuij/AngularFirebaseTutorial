@@ -2,6 +2,9 @@
 
 app.controller('NavbarController', function ($rootScope, $scope, $location, AuthService, AlertService) {
   $scope.signedIn = AuthService.signedIn;
+  $scope.isAdmin = AuthService.isAdmin;
+
+
   $scope.logout = AuthService.logout;
   $scope.user = AuthService.user;
 
