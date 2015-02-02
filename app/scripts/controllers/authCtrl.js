@@ -2,6 +2,13 @@
 
 app.controller('AuthController', function ($rootScope, $scope, $location, AuthService, AlertService) {
 
+  $scope.user = {
+    driversLicense: false,
+    ownGear: false,
+    ownCar: false
+  };
+
+
   if (AuthService.signedIn()) {
     $location.path('/');
   }
@@ -22,6 +29,7 @@ app.controller('AuthController', function ($rootScope, $scope, $location, AuthSe
     AuthService.register($scope.user).then(function() {
       return AuthService.login($scope.user).then(function(user) {
         user.username = $scope.user.username;
+
         return AuthService.createProfile(user).then(function() {
             console.log('Successfully registered as: ' + $scope.user);
             AlertService.addAlert('success', 'Successfully registered as: ' + $scope.user.email);

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-inverse" role="navigation">
 
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
@@ -14,12 +14,15 @@
 
   <div ng-controller="NavbarController" id="bs-example-navbar-collapse-1" collapse="isCollapsed" class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav">
-      <li ng-class="{ 'active bold': isActive('/')}"><a ng-href="#/" ng-click="doCollapse()">Home</a></li>
-      <li ng-class="{ 'active bold': isActive('/calendar')}"><a ng-href="#/calendar" ng-click="doCollapse()">Agenda</a></li>
+      <li ng-class="{active: isActive('/home')}">
+        <a ng-href="#/" ng-click="doCollapse()">Home</a>
+      </li>
+      <li ng-show="signedIn()" ng-class="{active: isActive('/calendar')}">
+        <a ng-href="#/calendar" ng-click="doCollapse()">Agenda</a>
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li ng-show="isAdmin()">
+      <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}">
         <a href="#/admin">Admin</a>
       </li>
       <li ng-show="signedIn()">
@@ -31,10 +34,10 @@
       <li ng-show="signedIn()">
         <a href="#" ng-click="logout()">Logout</a>
       </li>
-      <li ng-hide="signedIn()">
+      <li ng-hide="signedIn()" ng-class="{active: isActive('/login')}">
         <a href="#/login">Login</a>
       </li>
-      <li ng-hide="signedIn()">
+      <li ng-hide="signedIn()" ng-class="{active: isActive('/register')}">
         <a href="#/register">Register</a>
       </li>
     </ul>

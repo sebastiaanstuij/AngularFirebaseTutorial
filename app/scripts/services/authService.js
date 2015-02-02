@@ -11,8 +11,7 @@ app.factory('AuthService', function ($rootScope, $firebaseAuth, $firebase, FIREB
     login: function(user){
       return firebaseAuthService.$authWithPassword({
         email: user.email,
-        password: user.password,
-        isAdmin: false
+        password: user.password
       });
     },
     logout: function() {
@@ -40,7 +39,16 @@ app.factory('AuthService', function ($rootScope, $firebaseAuth, $firebase, FIREB
     },
     createProfile: function (user) {
       var profile = {
-        username: user.username
+        firstName: user.firstName,
+        lastName: user.lastName,
+        username: user.username,
+        email: user.email,
+        phone: user.phone,
+        level: user.level,
+        driversLicense: user.driversLicense,
+        ownGear: user.ownGear,
+        ownCar: user.ownCar,
+        isAdmin: false
       };
       var profileRef = $firebase(ref.child('user_profiles'));
       return profileRef.$set(user.uid, profile);
