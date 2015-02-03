@@ -32,6 +32,16 @@ body {
   padding-right: 20px;
 }
 
+/* To get the spacing of the navbar logo right */
+.navbar-brand {
+  padding-top: 0;
+}
+
+#navbarLogo {
+  height: inherit;
+}
+
+
 /* Custom page header */
 .header {
   border-bottom: 1px solid #e5e5e5;
