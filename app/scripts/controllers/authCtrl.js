@@ -8,7 +8,6 @@ app.controller('AuthController', function ($rootScope, $scope, $location, AuthSe
     ownCar: false
   };
 
-
   if (AuthService.signedIn()) {
     $location.path('/');
   }
@@ -24,24 +23,37 @@ app.controller('AuthController', function ($rootScope, $scope, $location, AuthSe
     });
   };
 
+  $scope.register = function (isValid) {
+    if (isValid) {
+      var profile = {
+        firstName: $scope.user.firstName,
+        lastName: $scope.user.lastName,
+        username: $scope.user.username,
+        registrationDate: moment().format('DD-MM-YYYY, hh:mm:ss'),
+        email: $scope.user.email,
+        phone: $scope.user.phone,
+        level: $scope.user.level,
+        driversLicense: $scope.user.driversLicense,
+        ownGear: $scope.user.ownGear,
+        ownCar: $scope.user.ownCar,
+        isAdmin: false
+      };
 
-  $scope.register = function () {
-    AuthService.register($scope.user).then(function() {
-      return AuthService.login($scope.user).then(function(user) {
-        user.username = $scope.user.username;
-
-        return AuthService.createProfile(user).then(function() {
-            console.log('Successfully registered as: ' + $scope.user);
-            AlertService.addAlert('success', 'Successfully registered as: ' + $scope.user.email);
-          }
-        );
-      }).then(function() {
-        $location.path('/home');
+      AuthService.register($scope.user).then(function () {
+        return AuthService.login($scope.user).then(function (loggedInUser) {
+          return AuthService.createProfile(loggedInUser, profile).then(function () {
+              console.log('Successfully registered as: ' + $scope.user);
+              AlertService.addAlert('success', 'Successfully registered as: ' + $scope.user.email);
+            }
+          );
+        }).then(function () {
+          $location.path('/home');
+        });
+      }, function (error) {
+        AlertService.addAlert('danger', error.message);
       });
-    }, function(error) {
-      AlertService.addAlert('danger', error.message);
-    });
-  };
+    }
+  }
 
 });
 

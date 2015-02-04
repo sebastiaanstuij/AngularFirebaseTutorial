@@ -17,6 +17,12 @@ app.factory('AuthService', function ($rootScope, $firebaseAuth, $firebase, FIREB
     logout: function() {
       firebaseAuthService.$unauth();
     },
+    createProfile: function (user, profile) {
+      console.log(profile);
+      var profileRef = $firebase(ref.child('user_profiles'));
+      return profileRef.$set(user.uid, profile);
+    },
+
     resolveUser: function() {
       return firebaseAuthService.$getAuth();
     },
@@ -37,22 +43,7 @@ app.factory('AuthService', function ($rootScope, $firebaseAuth, $firebase, FIREB
         return false;
       }
     },
-    createProfile: function (user) {
-      var profile = {
-        firstName: user.firstName,
-        lastName: user.lastName,
-        username: user.username,
-        email: user.email,
-        phone: user.phone,
-        level: user.level,
-        driversLicense: user.driversLicense,
-        ownGear: user.ownGear,
-        ownCar: user.ownCar,
-        isAdmin: false
-      };
-      var profileRef = $firebase(ref.child('user_profiles'));
-      return profileRef.$set(user.uid, profile);
-    },
+
     user: {}
   };
 

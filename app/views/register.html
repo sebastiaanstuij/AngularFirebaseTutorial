@@ -1,51 +1,55 @@
 <div class="content auth-forms">
 
   <div class="row col-xs-8 col-xs-offset-2">
-    <form class="form-horizontal" ng-submit="register()">
+    <form name="registerForm" class="form-horizontal" ng-submit="register(registerForm.$valid)" novalidate>
       <p ng-show="error" class="text-danger">{{ error }}</p>
       <fieldset>
         <legend>Register new user</legend>
         <div class="form-group">
           <label for="inputEmail" class="col-lg-2 control-label">Email</label>
           <div class="col-lg-10">
-            <input type="text" ng-model="user.email" class="form-control" id="inputEmail" placeholder="Email">
+            <input type="text" ng-model="user.email" class="form-control" id="inputEmail" name="email" placeholder="Email" required>
+            <p ng-show="registerForm.email.$invalid && !registerForm.email.$pristine" class="help-block">Email is required</p>
           </div>
         </div>
         <div class="form-group">
           <label for="inputPassword" class="col-lg-2 control-label">Password</label>
           <div class="col-lg-10">
-            <input type="password" ng-model="user.password" class="form-control" id="inputPassword" placeholder="Password">
+            <input type="password" ng-model="user.password" class="form-control" id="inputPassword" name="password" placeholder="Password" required>
+            <p ng-show="registerForm.password.$invalid && !registerForm.password.$pristine" class="help-block">Password is required</p>
           </div>
         </div>
         <div class="form-group">
           <label for="firstName" class="col-lg-2 control-label">First Name</label>
           <div class="col-lg-10">
-            <input type="text" ng-model="user.firstName" class="form-control" id="firstName" placeholder="Username">
+            <input type="text" ng-model="user.firstName" class="form-control" id="firstName" name="firstname" placeholder="First name" required>
           </div>
         </div>
         <div class="form-group">
           <label for="lastName" class="col-lg-2 control-label">Last Name</label>
           <div class="col-lg-10">
-            <input type="text" ng-model="user.lastName" class="form-control" id="lastName" placeholder="Username">
+            <input type="text" ng-model="user.lastName" class="form-control" id="lastName" name="lastname" placeholder="Last name" required>
           </div>
         </div>
         <div class="form-group">
           <label for="inputUsername" class="col-lg-2 control-label">Username</label>
           <div class="col-lg-10">
-            <input type="text" ng-model="user.username" class="form-control" id="inputUsername" placeholder="Username">
+            <input type="text" ng-model="user.username" class="form-control" id="inputUsername" name="username" placeholder="Username" required ng-minlength="3" ng-maxlength="12">
+            <p ng-show="registerForm.username.$error.minlength" class="help-block">Username is too short</p>
+            <p ng-show="registerForm.username.$error.maxlength" class="help-block">Username is too long</p>
           </div>
         </div>
         <div class="form-group">
           <label for="phone" class="col-lg-2 control-label">Phone Number</label>
           <div class="col-lg-10">
-            <input type="number" ng-model="user.phone" class="form-control" id="phone" placeholder="Phone Number">
+            <input type="number" ng-model="user.phone" class="form-control" id="phone" name ="phone" placeholder="Phone Number">
           </div>
         </div>
 
         <div class="form-group">
           <label for="selectLevel" class="col-lg-2 control-label">Kite Level</label>
           <div class="col-lg-10">
-            <select class="form-control" ng-model="user.level" id="selectLevel">
+            <select class="form-control" ng-model="user.level" id="selectLevel" name ="level">
               <option>Beginner</option>
               <option>Lesser</option>
               <option>Deler</option>
@@ -60,13 +64,13 @@
           <div class="col-lg-10">
             <div class="radio">
               <label>
-                <input type="radio" ng-model="user.driversLicense" name="drivingLicenceTrue" id="drivingLicenceTrue" ng-value="true">
+                <input type="radio" ng-model="user.driversLicense" name="drivingLicenceTrue" name ="license" id="drivingLicenceTrue" ng-value="true">
                 Yes
               </label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" ng-model="user.driversLicense" name="drivingLicenceFalse" id="drivingLicenceFalse" ng-value="false">
+                <input type="radio" ng-model="user.driversLicense" name="drivingLicenceFalse" name ="license" id="drivingLicenceFalse" ng-value="false">
                 No
               </label>
             </div>
@@ -77,13 +81,13 @@
           <div class="col-lg-10">
             <div class="radio">
               <label>
-                <input type="radio" ng-model="user.ownGear" name="ownGearTrue" id="ownGearTrue" ng-value="true">
+                <input type="radio" ng-model="user.ownGear" name="ownGearTrue" name ="gear" id="ownGearTrue" ng-value="true">
                 Yes
               </label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" ng-model="user.ownGear" name="ownGearFalse" id="ownGearFalse" ng-value="false">
+                <input type="radio" ng-model="user.ownGear" name="ownGearFalse" name ="gear" id="ownGearFalse" ng-value="false">
                 No
               </label>
             </div>
@@ -94,24 +98,22 @@
           <div class="col-lg-10">
             <div class="radio">
               <label>
-                <input type="radio" ng-model="user.ownCar" name="ownCarTrue" id="ownCarTrue" ng-value="true">
+                <input type="radio" ng-model="user.ownCar" name="ownCarTrue" name ="car" id="ownCarTrue" ng-value="true">
                 Yes
               </label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" ng-model="user.ownCar" name="ownCarFalse" id="ownCarFalse" ng-value="false">
+                <input type="radio" ng-model="user.ownCar" name="ownCarFalse" name ="car" id="ownCarFalse" ng-value="false">
                 No
               </label>
             </div>
           </div>
         </div>
 
-
-
         <div class="form-group">
           <div class="col-lg-8 col-lg-offset-2">
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-primary" ng-disabled="registerForm.$invalid">Register</button>
           </div>
         </div>
       </fieldset>
