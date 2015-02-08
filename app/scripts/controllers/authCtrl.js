@@ -37,6 +37,7 @@ app.controller('AuthController', function ($rootScope, $scope, $location, AuthSe
         driversLicense: $scope.user.driversLicense,
         ownGear: $scope.user.ownGear,
         ownCar: $scope.user.ownCar,
+        busdriver: false,
         saldo: 0,
         isAdmin: false
       };

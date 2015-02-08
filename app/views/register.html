@@ -16,10 +16,10 @@
         <div class="form-group" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.password.$invalid}">
           <label for="inputPassword" class="col-lg-2 control-label">Password</label>
           <div class="col-lg-10">
-            <input type="password" ng-model="user.password" ng-blur="validatePassword=true" class="form-control" id="inputPassword" name="password" placeholder="Password" required ng-minlength="6" ng-maxlength="12">
+            <input type="password" ng-model="user.password" ng-blur="validatePassword=true" class="form-control" id="inputPassword" name="password" placeholder="Password" required ng-minlength="5" ng-maxlength="15">
             <p ng-show="registerForm.password.$error.required && validatePassword" class="help-block">Password is required</p>
-            <p ng-show="registerForm.password.$error.minlength && validatePassword && !registerForm.password.$error.required" class="help-block">Password is too short</p>
-            <p ng-show="registerForm.password.$error.maxlength && validatePassword && !registerForm.password.$error.required" class="help-block">Password is too long</p>
+            <p ng-show="registerForm.password.$error.minlength && validatePassword && !registerForm.password.$error.required" class="help-block">Password is too short (min. 5 characters)</p>
+            <p ng-show="registerForm.password.$error.maxlength && validatePassword && !registerForm.password.$error.required" class="help-block">Password is too long (max. 15 characters)</p>
           </div>
         </div>
         <div class="form-group" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.firstname.$invalid}">
@@ -27,8 +27,8 @@
           <div class="col-lg-10">
             <input type="text" ng-model="user.firstName" ng-blur="validateFirstname=true" class="form-control" id="firstName" name="firstname" placeholder="First name" required ng-minlength="2" ng-maxlength="15">
             <p ng-show="registerForm.firstname.$error.required && validateFirstname" class="help-block">Firstname is required</p>
-            <p ng-show="registerForm.firstname.$error.minlength && validateFirstname && !registerForm.firstname.$error.required" class="help-block">Firstname is too short</p>
-            <p ng-show="registerForm.firstname.$error.maxlength && validateFirstname && !registerForm.firstname.$error.required" class="help-block">Firstname is too long</p>
+            <p ng-show="registerForm.firstname.$error.minlength && validateFirstname && !registerForm.firstname.$error.required" class="help-block">Firstname is too short (min. 2 characters)</p>
+            <p ng-show="registerForm.firstname.$error.maxlength && validateFirstname && !registerForm.firstname.$error.required" class="help-block">Firstname is too long (max. 15 characters)</p>
           </div>
         </div>
         <div class="form-group" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.lastname.$invalid}">
@@ -36,17 +36,17 @@
           <div class="col-lg-10">
             <input type="text" ng-model="user.lastName" ng-blur="validateLastname=true" class="form-control" id="lastName" name="lastname" placeholder="Last name" required ng-minlength="2" ng-maxlength="15">
             <p ng-show="registerForm.lastname.$error.required && validateLastname" class="help-block">Lastname is required</p>
-            <p ng-show="registerForm.lastname.$error.minlength && validateLastname && !registerForm.lastname.$error.required" class="help-block">Lastname is too short</p>
-            <p ng-show="registerForm.lastname.$error.maxlength && validateLastname && !registerForm.lastname.$error.required" class="help-block">Lastname is too long</p>
+            <p ng-show="registerForm.lastname.$error.minlength && validateLastname && !registerForm.lastname.$error.required" class="help-block">Lastname is too short (min. 2 characters)</p>
+            <p ng-show="registerForm.lastname.$error.maxlength && validateLastname && !registerForm.lastname.$error.required" class="help-block">Lastname is too long (max. 15 characters)</p>
           </div>
         </div>
         <div class="form-group" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.username.$invalid}">
           <label for="inputUsername" class="col-lg-2 control-label">Username</label>
           <div class="col-lg-10">
             <input type="text" ng-model="user.username" ng-blur="validateUsername=true" class="form-control" id="inputUsername" name="username" placeholder="Username" required ng-minlength="5" ng-maxlength="15">
-            <p ng-show="registerForm.username.$error.required && validateLastname" class="help-block">Username is required</p>
-            <p ng-show="registerForm.username.$error.minlength && validateLastname && !registerForm.username.$error.required" class="help-block">Username is too short</p>
-            <p ng-show="registerForm.username.$error.maxlength && validateLastname && !registerForm.username.$error.required" class="help-block">Username is too long</p>
+            <p ng-show="registerForm.username.$error.required && validateUsername" class="help-block">Username is required</p>
+            <p ng-show="registerForm.username.$error.minlength && validateUsername && !registerForm.username.$error.required" class="help-block">Username is too short (min. 5 characters)</p>
+            <p ng-show="registerForm.username.$error.maxlength && validateUsername && !registerForm.username.$error.required" class="help-block">Username is too long (max. 15 characters)</p>
           </div>
         </div>
         <div class="form-group" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.phone.$invalid}">

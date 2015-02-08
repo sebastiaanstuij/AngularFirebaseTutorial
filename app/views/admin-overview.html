@@ -8,26 +8,61 @@
 
         <!-- Table -->
         <table class="table table-striped table-hover">
+          <input ng-model="search" type="text" placeholder="Filter by"><span class="glyphicon glyphicon-search"></span>
           <thead>
             <tr>
               <th>Edit</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Username</th>
-              <th>Registration Date</th>
-              <th>Email</th>
+              <th>
+                <a href="" ng-click="orderByField='firstName'; reverseSort = !reverseSort">
+                  First Name
+                </a>
+              </th>
+              <th>
+                <a href="" ng-click="orderByField='lastName'; reverseSort = !reverseSort">
+                  Last Name
+                </a>
+              </th>
+              <th>
+                <a href="" ng-click="orderByField='username'; reverseSort = !reverseSort">
+                  User Name
+                </a>
+              </th>
+              <th>
+                <a href="" ng-click="orderByField='registrationDate'; reverseSort = !reverseSort">
+                  Registration Date
+                </a>
+              </th>
+              <th>
+                  Email
+              </th>
               <th>Phone</th>
-              <th>Level</th>
-              <th>Driver's License</th>
-              <th>Bus driver</th>
-              <th>Own gear</th>
-              <th>Own car</th>
-              <th>Admin</th>
-              <th>Saldo</th>
+              <th>
+                  Level
+              </th>
+              <th>
+                  Driver's License
+              </th>
+              <th>
+                  Own gear
+              </th>
+              <th>
+                  Own car
+              </th>
+              <th>
+                  Bus driver
+              </th>
+              <th>
+                  Admin
+              </th>
+              <th>
+                <a href="" ng-click="orderByField='saldo'; reverseSort = !reverseSort">
+                  Saldo
+                </a>
+              </th>
             </tr>
           </thead>
-          <tbod>
-            <tr ng-repeat="user in users">
+          <tbody>
+            <tr ng-repeat="user in users | filter:search | startFromFilter:currentPage*pageSize | limitTo:pageSize | orderBy:orderByField:reverseSort ">
               <td><a href="#/admin/{{ user.$id }}"><span class="glyphicon glyphicon-edit"></span></a></td>
               <td>{{ user.firstName }}</td>
               <td>{{ user.lastName }}</td>
@@ -37,17 +72,25 @@
               <td>{{ user.phone }}</td>
               <td>{{ user.level }}</td>
               <td>{{ user.driversLicense }}</td>
-              <td>{{ user.busdriver }}</td>
               <td>{{ user.ownGear }}</td>
               <td>{{ user.ownCar }}</td>
+              <td>{{ user.busdriver }}</td>
               <td>{{ user.isAdmin }}</td>
               <td>{{ user.saldo }}</td>
             </tr>
-          </tbod>
+          </tbody>
         </table>
+        <br>
+        <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+          Previous
+        </button>
+        {{currentPage+1}}/{{numberOfPages()}}
+        <button ng-disabled="currentPage >= users.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+          Next
+        </button>
       </div>
 
-      <br>
     </div>
+
   </div>
 </div>
