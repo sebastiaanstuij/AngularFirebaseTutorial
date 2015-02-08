@@ -10,6 +10,7 @@
         <table class="table table-striped table-hover">
           <thead>
             <tr>
+              <th>Edit</th>
               <th>First Name</th>
               <th>Last Name</th>
               <th>Username</th>
@@ -22,10 +23,12 @@
               <th>Own gear</th>
               <th>Own car</th>
               <th>Admin</th>
+              <th>Saldo</th>
             </tr>
           </thead>
           <tbod>
             <tr ng-repeat="user in users">
+              <td><a href="#/admin/{{ user.$id }}"><span class="glyphicon glyphicon-edit"></span></a></td>
               <td>{{ user.firstName }}</td>
               <td>{{ user.lastName }}</td>
               <td>{{ user.username }}</td>
@@ -38,6 +41,7 @@
               <td>{{ user.ownGear }}</td>
               <td>{{ user.ownCar }}</td>
               <td>{{ user.isAdmin }}</td>
+              <td>{{ user.saldo }}</td>
             </tr>
           </tbod>
         </table>

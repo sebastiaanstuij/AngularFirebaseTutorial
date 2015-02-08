@@ -38,7 +38,7 @@ var app = angular
         templateUrl: 'views/post.html',
         controller: 'PostDetailController'
       })
-      .when('/users/:userId', {
+      .when('/profile/:userId', {
         templateUrl: 'views/profile.html',
         controller: 'ProfileController',
         resolve: {
@@ -60,7 +60,11 @@ var app = angular
         }
       })
       .when('/admin', {
-        templateUrl: 'views/admin.html',
+        templateUrl: 'views/admin-overview.html',
+        controller: 'AdminController'
+      })
+      .when('/admin/:userId', {
+        templateUrl: 'views/admin-edit.html',
         controller: 'AdminController'
       })
       .when('/register', {

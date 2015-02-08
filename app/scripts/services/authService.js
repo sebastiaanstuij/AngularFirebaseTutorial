@@ -20,7 +20,11 @@ app.factory('AuthService', function ($rootScope, $firebaseAuth, $firebase, FIREB
     createProfile: function (user, profile) {
       console.log(profile);
       var profileRef = $firebase(ref.child('user_profiles'));
-      return profileRef.$set(user.uid, profile);
+      if (user.uid){
+        return profileRef.$set(user.uid, profile);
+      } else {
+        return profileRef.$set(user.$id, profile);
+      }
     },
 
     resolveUser: function() {

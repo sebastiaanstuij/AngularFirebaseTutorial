@@ -2,6 +2,7 @@
 
 app.controller('AuthController', function ($rootScope, $scope, $location, AuthService, AlertService) {
 
+  //set default visible values
   $scope.user = {
     driversLicense: false,
     ownGear: false,
@@ -29,13 +30,14 @@ app.controller('AuthController', function ($rootScope, $scope, $location, AuthSe
         firstName: $scope.user.firstName,
         lastName: $scope.user.lastName,
         username: $scope.user.username,
-        registrationDate: moment().format('DD-MM-YYYY, hh:mm:ss'),
+        registrationDate: moment().format('DD-MM-YYYY, HH:mm:ss'),
         email: $scope.user.email,
         phone: $scope.user.phone,
         level: $scope.user.level,
         driversLicense: $scope.user.driversLicense,
         ownGear: $scope.user.ownGear,
         ownCar: $scope.user.ownCar,
+        saldo: 0,
         isAdmin: false
       };
 

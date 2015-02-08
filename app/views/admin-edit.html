@@ -1,0 +1,150 @@
+<div class="content auth-forms">
+
+  <div class="row col-xs-8 col-xs-offset-2">
+    <form name="registerForm" class="form-horizontal" ng-submit="editUser(registerForm.$valid)" novalidate>
+      <p ng-show="error" class="text-danger">{{ error }}</p>
+      <fieldset>
+        <legend>Edit registered user</legend>
+        <div class="form-group" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.email.$invalid}">
+          <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+          <div class="col-lg-10">
+            <input type="email" ng-model="selectedUser.email" ng-blur="validateEmail=true" class="form-control" id="inputEmail" name="email" placeholder="Email" required>
+            <p ng-show="registerForm.email.$error.required && validateEmail" class="help-block">Email is required</p>
+            <p ng-show="registerForm.email.$invalid && validateEmail && !registerForm.email.$error.required" class="help-block">Not a valid email</p>
+          </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.firstname.$invalid}">
+          <label for="firstName" class="col-lg-2 control-label">First Name</label>
+          <div class="col-lg-10">
+            <input type="text" ng-model="selectedUser.firstName" ng-blur="validateFirstname=true" class="form-control" id="firstName" name="firstname" placeholder="First name" required ng-minlength="2" ng-maxlength="15">
+            <p ng-show="registerForm.firstname.$error.required && validateFirstname" class="help-block">Firstname is required</p>
+            <p ng-show="registerForm.firstname.$error.minlength && validateFirstname && !registerForm.firstname.$error.required" class="help-block">Firstname is too short</p>
+            <p ng-show="registerForm.firstname.$error.maxlength && validateFirstname && !registerForm.firstname.$error.required" class="help-block">Firstname is too long</p>
+          </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.lastname.$invalid}">
+          <label for="lastName" class="col-lg-2 control-label">Last Name</label>
+          <div class="col-lg-10">
+            <input type="text" ng-model="selectedUser.lastName" ng-blur="validateLastname=true" class="form-control" id="lastName" name="lastname" placeholder="Last name" required ng-minlength="2" ng-maxlength="15">
+            <p ng-show="registerForm.lastname.$error.required && validateLastname" class="help-block">Lastname is required</p>
+            <p ng-show="registerForm.lastname.$error.minlength && validateLastname && !registerForm.lastname.$error.required" class="help-block">Lastname is too short</p>
+            <p ng-show="registerForm.lastname.$error.maxlength && validateLastname && !registerForm.lastname.$error.required" class="help-block">Lastname is too long</p>
+          </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.username.$invalid}">
+          <label for="inputUsername" class="col-lg-2 control-label">Username</label>
+          <div class="col-lg-10">
+            <input type="text" ng-model="selectedUser.username" ng-blur="validateUsername=true" class="form-control" id="inputUsername" name="username" placeholder="Username" required ng-minlength="5" ng-maxlength="15">
+            <p ng-show="registerForm.username.$error.required && validateLastname" class="help-block">Username is required</p>
+            <p ng-show="registerForm.username.$error.minlength && validateLastname && !registerForm.username.$error.required" class="help-block">Username is too short</p>
+            <p ng-show="registerForm.username.$error.maxlength && validateLastname && !registerForm.username.$error.required" class="help-block">Username is too long</p>
+          </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.phone.$invalid}">
+          <label for="phone" class="col-lg-2 control-label">Phone Number</label>
+          <div class="col-lg-10">
+            <input type="number" ng-model="selectedUser.phone" ng-blur="validatePhone=true" class="form-control" id="phone" name ="phone" placeholder="Phone Number">
+            <p ng-show="registerForm.phone.$invalid && validatePhone" class="help-block">Incorrect phone number</p>
+          </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.level.$invalid}">
+          <label for="selectLevel" class="col-lg-2 control-label">Kite Level</label>
+          <div class="col-lg-10">
+            <select class="form-control" ng-model="selectedUser.level" id="selectLevel" name ="level" required>
+              <option>Beginner</option>
+              <option>Lesser</option>
+              <option>Deler</option>
+              <option>Brookie</option>
+              <option>Rookie</option>
+              <option>Gevorderd</option>
+            </select>
+            <p ng-show="registerForm.level.$error.required && registerForm.level.$touched" class="help-block">Level is required</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-2 control-label">Driver's License</label>
+          <div class="col-lg-10">
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="selectedUser.driversLicense" name="drivingLicenceTrue" name ="license" id="drivingLicenceTrue" ng-value="true">
+                Yes
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="selectedUser.driversLicense" name="drivingLicenceFalse" name ="license" id="drivingLicenceFalse" ng-value="false">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-2 control-label">Own Gear</label>
+          <div class="col-lg-10">
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="selectedUser.ownGear" name="ownGearTrue" name ="gear" id="ownGearTrue" ng-value="true">
+                Yes
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="selectedUser.ownGear" name="ownGearFalse" name ="gear" id="ownGearFalse" ng-value="false">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-2 control-label">Own Car</label>
+          <div class="col-lg-10">
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="selectedUser.ownCar" name="ownCarTrue" name ="car" id="ownCarTrue" ng-value="true">
+                Yes
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="selectedUser.ownCar" name="ownCarFalse" name ="car" id="ownCarFalse" ng-value="false">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-2 control-label">Has administrator rights?</label>
+          <div class="col-lg-10">
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="selectedUser.isAdmin" name="adminTrue" name ="admin" id="adminTrue" ng-value="true">
+                Yes
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="selectedUser.isAdmin" name="adminFalse" name ="admin" id="adminFalse" ng-value="false">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.saldo.$invalid}">
+          <label for="phone" class="col-lg-2 control-label">Saldo</label>
+          <div class="col-lg-10">
+            <input type="number" ng-model="selectedUser.saldo" ng-blur="validateSaldo=true" class="form-control" id="saldo" name ="saldo" required>
+            <p ng-show="registerForm.saldo.$invalid && validateSaldo" class="help-block">Saldo cannot be empty</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-lg-8 col-lg-offset-2">
+            <button type="submit" class="btn btn-primary">Update</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
+</div>
+
