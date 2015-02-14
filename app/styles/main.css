@@ -129,4 +129,8 @@ body {
 }
 
 
+/*calendar styling*/
+.fc-header-title h2 {
+  font-size: 20px;
+}
 

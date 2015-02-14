@@ -40,24 +40,11 @@ var app = angular
       })
       .when('/profile/:userId', {
         templateUrl: 'views/profile.html',
-        controller: 'ProfileController',
-        resolve: {
-          // controller will not be loaded until $waitForAuth resolves
-          // Auth refers to our $firebaseAuth wrapper in the example above
-          "currentAuth": ["AuthService", function(AuthService) {
-            // $waitForAuth returns a promise so the resolve waits for it to complete
-            return AuthService.requireAuth();
-          }]
-        }
+        controller: 'ProfileController'
       })
       .when('/calendar', {
         templateUrl: '/views/calendar.html',
-        controller: 'CalendarController',
-        resolve: {
-          "currentAuth": ["AuthService", function(AuthService) {
-            return AuthService.requireAuth();
-          }]
-        }
+        controller: 'CalendarController'
       })
       .when('/admin', {
         templateUrl: 'views/admin-overview.html',
