@@ -1,0 +1,82 @@
+<div class="content event-forms">
+
+  <div class="col-xs-8 col-xs-offset-2 well">
+    <form name="eventForm" class="form-horizontal" ng-submit="addEvent(eventForm.$valid)" novalidate>
+      <p ng-show="error" class="text-danger">{{ error }}</p>
+      <fieldset>
+        <legend>Create new event</legend>
+
+        <div class="form-group" ng-class="{ 'has-error' : eventForm.$submitted && eventForm.title.$invalid}">
+          <label for="inputTitle" class="col-lg-2 control-label">Title</label>
+          <div class="col-lg-10">
+            <input type="text" ng-model="event.title" ng-blur="validateTitle=true" class="form-control" id="inputTitle" name="title" placeholder="Title of the event" required>
+            <p ng-show="eventForm.title.$error.required && validateTitle" class="help-block">Title is required</p>
+          </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : eventForm.$submitted && eventForm.location.$invalid}">
+          <label for="selectLocation" class="col-lg-2 control-label">Location</label>
+          <div class="col-lg-10">
+            <select class="form-control" ng-model="event.location" id="selectLocation" name ="location" required>
+              <option>Workum</option>
+              <option>Mirns</option>
+              <option>Lauwersoog</option>
+            </select>
+            <p ng-show="eventForm.location.$error.required && eventForm.location.$touched" class="help-block">Location is required</p>
+          </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : eventForm.$submitted && eventForm.startdate.$invalid}">
+          <!--<p>Formatted Date: {{ event.start | date:'yyyy-MM-dd HH:mm' }}</p>-->
+          <label for="inputStartdate" class="col-lg-2 control-label">Start Date & Time</label>
+          <div class="dropdown col-lg-10">
+            <a class="dropdown-toggle" id="dropdown1" role="button" data-toggle="dropdown">
+              <div class="input-group">
+                <input type="text" ng-model="startDate" ng-blur="validateStartdate=true" class="form-control" id="inputStartdate" name="startdate" required>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+              </div>
+              <p ng-show="eventForm.startdate.$error.required && validateStartdate" class="help-block">Start date is required</p>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+              <datetimepicker ng-model="startDate"
+                              data-datetimepicker-config="{dropdownSelector: '#dropdown1'}"></datetimepicker>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : eventForm.$submitted && eventForm.enddate.$invalid}">
+          <!--<p>Formatted Date: {{ event.end | date:'yyyy-MM-dd HH:mm' }}</p>-->
+          <label for="inputEnddate" class="col-lg-2 control-label">End Date & Time</label>
+          <div class="dropdown col-lg-10">
+            <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown">
+              <div class="input-group">
+                <input type="text" ng-model="endDate" ng-blur="validateEnddate=true" class="form-control" id="inputEnddate" name="enddate" required>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+              </div>
+              <p ng-show="eventForm.enddate.$error.required && validateEnddate" class="help-block">End date is required</p>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+              <datetimepicker ng-model="endDate"
+                              data-datetimepicker-config="{dropdownSelector: '#dropdown2'}"></datetimepicker>
+            </ul>
+          </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+          <div class="col-lg-8 col-lg-offset-2">
+            <button type="submit" class="btn btn-primary">Add event</button>
+            <a href="#/calendar" class="btn btn-default">Cancel</a>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
+</div>
+
+
+
+

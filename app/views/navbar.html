@@ -1,54 +1,55 @@
-<nav class="navbar navbar-inverse" role="navigation">
+<div class="container" ng-controller="NavbarController">
 
-  <!-- Brand and toggle get grouped for better mobile display -->
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-            ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a class="navbar-brand" href="#/home"><img id="navbarLogo" src="images/Released-header.png" alt=""></a>
+  <nav class="navbar navbar-inverse" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" ng-href="#/home"><img id="navbarLogo" src="images/Released-header.png" alt=""></a>
+    </div>
+
+    <div id="navbarCollapse" collapse="isCollapsed" class="navbar-collapse collapse navbar-responsive-collapse">
+      <ul class="nav navbar-nav">
+        <li ng-class="{active: isActive('/home')}">
+          <a ng-href="#/home" ng-click="doCollapse()">Home</a>
+        </li>
+        <li ng-show="signedIn()" ng-class="{active: isActive('/calendar')}">
+          <a ng-href="#/calendar" ng-click="doCollapse()">Agenda</a>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}">
+          <a href="#/admin" ng-click="doCollapse()">Admin</a>
+        </li>
+        <li ng-show="signedIn()">
+          <a ng-href="#/profile/{{ user.uid }}">
+            <!--<img ng-src="http://www.gravatar.com/avatar/{{ user.profile.md5_hash }}" class="nav-pic" />-->
+            {{ user.profile.username }}
+          </a>
+        </li>
+        <li ng-show="signedIn()">
+          <a href="#" ng-click="logout()" ng-click="doCollapse()">Logout</a>
+        </li>
+        <li ng-hide="signedIn()" ng-class="{active: isActive('/login')}">
+          <a href="#/login" ng-click="doCollapse()">Login</a>
+        </li>
+        <li ng-hide="signedIn()" ng-class="{active: isActive('/register')}">
+          <a href="#/register" ng-click="doCollapse()">Register</a>
+        </li>
+      </ul>
+    </div>
+
+  </nav>
+
+  <div>
+    <alert class="animate" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{ alert.msg }}</alert>
   </div>
 
-  <div ng-controller="NavbarController" id="bs-example-navbar-collapse-1" collapse="isCollapsed" class="navbar-collapse collapse navbar-responsive-collapse">
-    <ul class="nav navbar-nav">
-      <li ng-class="{active: isActive('/home')}">
-        <a ng-href="#/" ng-click="doCollapse()">Home</a>
-      </li>
-      <li ng-show="signedIn()" ng-class="{active: isActive('/calendar')}">
-        <a ng-href="#/calendar" ng-click="doCollapse()">Agenda</a>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}">
-        <a href="#/admin">Admin</a>
-      </li>
-      <li ng-show="signedIn()">
-        <a ng-href="#/profile/{{ user.uid }}">
-          <!--<img ng-src="http://www.gravatar.com/avatar/{{ user.profile.md5_hash }}" class="nav-pic" />-->
-          {{ user.profile.username }}
-        </a>
-      </li>
-      <li ng-show="signedIn()">
-        <a href="#" ng-click="logout()">Logout</a>
-      </li>
-      <li ng-hide="signedIn()" ng-class="{active: isActive('/login')}">
-        <a href="#/login">Login</a>
-      </li>
-      <li ng-hide="signedIn()" ng-class="{active: isActive('/register')}">
-        <a href="#/register">Register</a>
-      </li>
-    </ul>
-  </div>
-
-</nav>
-
-<div>
-  <alert class="animate" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{ alert.msg }}</alert>
 </div>
-
-
 
 

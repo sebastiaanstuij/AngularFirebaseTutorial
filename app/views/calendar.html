@@ -1,80 +1,26 @@
 <div class="content calendar-section">
 
+  <div class="row">
   <div class="row col-md-8 col-md-offset-2">
+      <div>
+        <button ng-click="addNewEvent()" class="btn btn-primary glyphicon glyphicon-plus pull-right"> New event</button>
+        <br> <!-- dit moet anders kunnen-->
+        <br>
+      </div>
 
-    <button ng-click="toggleModal()" class="btn btn-primary glyphicon glyphicon-plus"> New event</button>
-    <div modal title="Add new event" visible="showModal">
-
-        <div class="modal-body">
-          <form name="eventForm" class="form-horizontal" ng-submit="addEvent(eventForm.$valid)" novalidate>
-            <p ng-show="error" class="text-danger">{{ error }}</p>
-            <fieldset>
-              <div class="form-group">
-                <label for="inputTitle" class="col-lg-2 control-label">Title</label>
-                <input ng-model="event.title" id="inputTitle" type="text" placeholder="Title of the event">
-              </div>
-
-              <div class="form-group">
-                <label for="inputStartDate" class="col-lg-2 control-label">Start Date</label>
-                <div class="dropdown" id="inputStartDate">
-                  <a class="dropdown-toggle my-toggle-select" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="">
-                    <div class="input-append">
-                      <input type="text" class="input-large" data-ng-model="event.start">
-                        <span class="add-on">
-                          <i class="glyphicon glyphicon-calendar"></i>
-                        </span>
-                    </div>
-                  </a>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                    <datetimepicker data-ng-model="event.start"
-                                    data-datetimepicker-config="{ dropdownSelector: '.my-toggle-select' }"></datetimepicker>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="inputEndDate" class="col-lg-2 control-label">End Date</label>
-                <div class="dropdown" id="inputEndDate">
-                  <a class="dropdown-toggle my-toggle-select" id="dLabel2" role="button" data-toggle="dropdown" data-target="#" href="">
-                    <div class="input-append">
-                      <input type="text" class="input-large" data-ng-model="event.end">
-                        <span class="add-on">
-                          <i class="glyphicon glyphicon-calendar"></i>
-                        </span>
-                    </div>
-                  </a>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel2">
-                    <datetimepicker data-ng-model="event.end"
-                                    data-datetimepicker-config="{ dropdownSelector: '.my-toggle-select' }"></datetimepicker>
-                  </ul>
-                </div>
-              </div>
+      <div class="list-group" ng-repeat="event in allEvents | orderBy: 'startDate' | limitTo:3 ">
+        <a href="" class="list-group-item">
+          <span>{{event.title}}</span>
+          <span>{{event.startDate}}</span>
+          <span>{{event.location}}</span>
+          <span class="badge">{{event.entries}}/{{event.maxEntries}}</span>
+        </a>
+      </div>
 
 
-
-            </fieldset>
-          </form>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" type="submit">Save</button>
-        </div>
+      <div ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="calendar"></div>
 
     </div>
-
-    <div class="list-group" ng-repeat="event in allEvents">
-      <a href="" class="list-group-item">
-        <span>{{event.title}}</span>
-        <span>{{event.start}}</span>
-        <span>{{event.location}}</span>
-        <span class="badge">{{event.entries}}/{{event.maxEntries}}</span>
-      </a>
-    </div>
-
-
-    <div ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="calendar"></div>
-
   </div>
 
 </div>
