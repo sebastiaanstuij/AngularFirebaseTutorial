@@ -50,13 +50,17 @@ var app = angular
         templateUrl: '/views/event.html',
         controller: 'EventController'
       })
-      .when('/admin', {
-        templateUrl: 'views/admin-overview.html',
-        controller: 'AdminController',
+      .when('/admin-users', {
+        templateUrl: 'views/admin-users-overview.html',
+        controller: 'AdminUserController'
       })
-      .when('/admin/:userId', {
-        templateUrl: 'views/admin-edit.html',
-        controller: 'AdminController'
+      .when('/admin-users/:userId', {
+        templateUrl: 'views/admin-edit-user.html',
+        controller: 'AdminUserController'
+      })
+      .when('/admin-settings', {
+        templateUrl: 'views/admin-settings.html',
+        controller: 'AdminSettingsController'
       })
       .when('/register', {
         templateUrl: 'views/register.html',

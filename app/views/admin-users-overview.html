@@ -63,7 +63,7 @@
           </thead>
           <tbody>
             <tr ng-repeat="user in filteredUsers | startFrom:(currentPage - 1)*itemsPerPage | limitTo:itemsPerPage | orderBy:orderByField:reverseSort ">
-              <td><a href="#/admin/{{ user.$id }}"><span class="glyphicon glyphicon-edit"></span></a></td>
+              <td><a href="#/admin-users/{{ user.$id }}"><span class="glyphicon glyphicon-edit"></span></a></td>
               <td>{{ user.firstName }}</td>
               <td>{{ user.lastName }}</td>
               <td>{{ user.username }}</td>
