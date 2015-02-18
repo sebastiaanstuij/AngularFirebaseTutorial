@@ -9,23 +9,45 @@
         <table class="table table-striped table-hover">
           <thead>
             <tr>
-              <th>Edit</th>
               <th>Name</th>
               <th>Cost</th>
               <th>Spotinfo</th>
               <th>Pro-spot</th>
+              <th>Edit</th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="location in locations">
-              <td><span class="glyphicon glyphicon-edit"></span></td>
-              <td>{{ location.name }}</td>
+              <td>
+                <span editable-text="location.name" e-name="name" e-form="rowform" e-required>
+                  {{ location.name || 'empty' }}
+                </span>
+              </td>
               <td>{{ location.cost }}</td>
               <td>{{ location.info }}</td>
               <td>{{ location.proSpot }}</td>
+
+              <td style="white-space: nowrap">
+                <!-- form -->
+                <form editable-form onbeforesave="saveLocation($data, location.id)" name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == location">
+                  <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+                    save
+                  </button>
+                  <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+                    cancel
+                  </button>
+                </form>
+                <div class="buttons" ng-show="!rowform.$visible">
+                  <button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
+                  <button class="btn btn-danger" ng-click="removeLocation($index)">del</button>
+                </div>
+              </td>
+
+
             </tr>
           </tbody>
         </table>
+        <button class="btn btn-default" ng-click="addLocationRow()">Add location</button>
       </div>
 
     </div>

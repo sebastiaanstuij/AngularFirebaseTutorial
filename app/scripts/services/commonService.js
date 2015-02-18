@@ -2,7 +2,7 @@
 
 app.factory('CommonService', function ($firebase, FIREBASE_URL) {
   var ref = new Firebase(FIREBASE_URL);
-  var locations = $firebase(ref.child('common').child('locations')).$asArray();
+  var locations = $firebase(ref.child('locations')).$asArray();
   var users = $firebase(ref.child('user_profiles')).$asArray();
 
   var Common = {

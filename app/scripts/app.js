@@ -20,7 +20,8 @@ var app = angular
     'ui.calendar',
     'ui.bootstrap',
     'ui.bootstrap.datetimepicker',
-    'firebase'
+    'firebase',
+    'xeditable'
   ])
 
   .constant('FIREBASE_URL', 'https://resplendent-heat-2047.firebaseio.com/')
@@ -75,7 +76,11 @@ var app = angular
       });
   })
 
-  .run(['$rootScope', '$location', 'AlertService', function($rootScope, $location, AlertService) {
+  .run(['$rootScope', '$location', 'AlertService', 'editableOptions', function($rootScope, $location, AlertService, editableOptions) {
+    // set editable options theme
+    editableOptions.theme = 'bs3';
+
+    // navigate to home when something goes wrong
     $rootScope.$on("$routeChangeError", function(event, next, previous, error) {
       // We can catch the error thrown when the $requireAuth promise is rejected
       // and redirect the user back to the home page
