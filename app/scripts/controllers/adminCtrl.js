@@ -1,21 +1,32 @@
 'use strict';
 
-app.controller('AdminController', function ($rootScope, $scope, $routeParams, $location, $firebase, FIREBASE_URL, AuthService, AlertService) {
-  //navigation variables
-  $scope.currentPage = 0;
-  $scope.pageSize = 5;
-  $scope.numberOfPages = function(){
-    return Math.ceil($scope.users.length/$scope.pageSize);
-  };
-
+app.controller('AdminController', function ($rootScope, $scope, $routeParams, $filter, $location, AlertService, AuthService, CommonService) {
   // reference to Firebase user profiles
-  var ref = new Firebase(FIREBASE_URL);
-  $scope.users = $firebase(ref.child('user_profiles')).$asArray();
+  $scope.users = CommonService.users.all;
+
+  //navigation variables
+  $scope.search;
+  $scope.currentPage = 1;
+  $scope.maxSize = 6;
+  $scope.itemsPerPage = 8;
+
+  // wait for users to load
+  $scope.users.$loaded().then(function(users) {
+    $scope.totalItems = users.length;
+  });
+
+  $scope.$watch('search', function (newSearch) {
+    $scope.currentPage = 1;
+    $scope.filteredUsers = $filter('filter')($scope.users, $scope.search);
+    $scope.totalItems = $scope.filteredUsers.length;
+  });
+
+
 
   // check whether this controller has been called with a user id as routeParam
   // so that the selected user can be retrieved from firebase
   if($routeParams.userId) {
-    $scope.selectedUser = $firebase(ref.child('user_profiles').child($routeParams.userId)).$asObject();
+    $scope.selectedUser = CommonService.users.get($routeParams.userId);
   }
 
   $scope.editUser = function (isValid) {
@@ -41,6 +52,7 @@ app.controller('AdminController', function ($rootScope, $scope, $routeParams, $l
           AlertService.addAlert('success', 'Successfully updated: ' + $scope.selectedUser.username);
         },
         function (error) {
+          console.log(error);
           AlertService.addAlert('danger', error.message);
       }).then(function () {
           $location.path('/admin');

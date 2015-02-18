@@ -52,7 +52,7 @@ var app = angular
       })
       .when('/admin', {
         templateUrl: 'views/admin-overview.html',
-        controller: 'AdminController'
+        controller: 'AdminController',
       })
       .when('/admin/:userId', {
         templateUrl: 'views/admin-edit.html',

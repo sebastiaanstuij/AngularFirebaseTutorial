@@ -17,10 +17,10 @@
         <div class="form-group" ng-class="{ 'has-error' : eventForm.$submitted && eventForm.location.$invalid}">
           <label for="selectLocation" class="col-lg-2 control-label">Location</label>
           <div class="col-lg-10">
-            <select class="form-control" ng-model="event.location" id="selectLocation" name ="location" required>
-              <option>Workum</option>
-              <option>Mirns</option>
-              <option>Lauwersoog</option>
+            <select class="form-control" ng-model="event.location" ng-options="location in locations" id="selectLocation" name ="location" required>
+              <!--<option>Workum</option>-->
+              <!--<option>Mirns</option>-->
+              <!--<option>Lauwersoog</option>-->
             </select>
             <p ng-show="eventForm.location.$error.required && eventForm.location.$touched" class="help-block">Location is required</p>
           </div>
@@ -30,7 +30,7 @@
           <!--<p>Formatted Date: {{ event.start | date:'yyyy-MM-dd HH:mm' }}</p>-->
           <label for="inputStartdate" class="col-lg-2 control-label">Start Date & Time</label>
           <div class="dropdown col-lg-10">
-            <a class="dropdown-toggle" id="dropdown1" role="button" data-toggle="dropdown">
+            <a class="dropdown-toggle" id="dropdown1" role="button" data-toggle="dropdown" href="">
               <div class="input-group">
                 <input type="text" ng-model="startDate" ng-blur="validateStartdate=true" class="form-control" id="inputStartdate" name="startdate" required>
                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
@@ -48,7 +48,7 @@
           <!--<p>Formatted Date: {{ event.end | date:'yyyy-MM-dd HH:mm' }}</p>-->
           <label for="inputEnddate" class="col-lg-2 control-label">End Date & Time</label>
           <div class="dropdown col-lg-10">
-            <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown">
+            <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" href="">
               <div class="input-group">
                 <input type="text" ng-model="endDate" ng-blur="validateEnddate=true" class="form-control" id="inputEnddate" name="enddate" required>
                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
@@ -61,8 +61,6 @@
             </ul>
           </div>
         </div>
-
-
 
 
         <div class="form-group">

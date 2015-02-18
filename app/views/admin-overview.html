@@ -62,7 +62,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="user in users | filter:search | startFromFilter:currentPage*pageSize | limitTo:pageSize | orderBy:orderByField:reverseSort ">
+            <tr ng-repeat="user in filteredUsers | startFrom:(currentPage - 1)*itemsPerPage | limitTo:itemsPerPage | orderBy:orderByField:reverseSort ">
               <td><a href="#/admin/{{ user.$id }}"><span class="glyphicon glyphicon-edit"></span></a></td>
               <td>{{ user.firstName }}</td>
               <td>{{ user.lastName }}</td>
@@ -80,14 +80,10 @@
             </tr>
           </tbody>
         </table>
-        <br>
-        <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
-          Previous
-        </button>
-        {{currentPage+1}}/{{numberOfPages()}}
-        <button ng-disabled="currentPage >= users.length/pageSize - 1" ng-click="currentPage=currentPage+1">
-          Next
-        </button>
+
+        <br/>
+        <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" max-size="maxSize" class="pagination-sm"
+                    boundary-links="true" rotate="false" ></pagination>
       </div>
 
     </div>

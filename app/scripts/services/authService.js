@@ -26,7 +26,6 @@ app.factory('AuthService', function ($rootScope, $firebaseAuth, $firebase, FIREB
         return profileRef.$set(user.$id, profile);
       }
     },
-
     resolveUser: function() {
       return firebaseAuthService.$getAuth();
     },

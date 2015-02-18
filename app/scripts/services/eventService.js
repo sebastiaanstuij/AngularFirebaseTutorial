@@ -7,7 +7,6 @@ app.factory('EventService', function ($firebase, FIREBASE_URL) {
   var Event = {
     all: events,
     create: function (event) {
-      console.log(event);
       return events.$add(event);
     },
     get: function (eventId) {
