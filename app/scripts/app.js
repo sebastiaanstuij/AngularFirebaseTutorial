@@ -35,10 +35,6 @@ var app = angular
         templateUrl: '../views/home.html',
         controller: 'HomeController'
       })
-      .when('/posts/:postId', {
-        templateUrl: 'views/post.html',
-        controller: 'PostDetailController'
-      })
       .when('/profile/:userId', {
         templateUrl: 'views/profile.html',
         controller: 'ProfileController'
