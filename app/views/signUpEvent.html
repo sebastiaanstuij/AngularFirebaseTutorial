@@ -1,0 +1,46 @@
+<div class="content event-forms">
+
+  <div class="col-xs-8 col-xs-offset-2 well">
+    <form name="signupForm" class="form-horizontal" ng-submit="signup()" novalidate>
+      <p ng-show="error" class="text-danger">{{ error }}</p>
+      <fieldset>
+        <legend>Sign up for event</legend>
+
+        <div class="form-group">
+          <span>{{selectedEvent.title}}</span>
+        </div>
+
+        <div class="form-group">
+          <label class="col-lg-2 control-label">Rent a kite</label>
+          <div class="col-lg-10">
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="selectedEvent.kiteRent" name="ownCarTrue" name ="kiteRent" id="kiteRentTrue" ng-value="true">
+                Yes
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="selectedEvent.kiteRent" name="ownCarFalse" name ="kiteRent" id="kiteRentFalse" ng-value="false">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="col-lg-8 col-lg-offset-2">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="#/calendar" class="btn btn-default">Cancel</a>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
+</div>
+
+
+
+

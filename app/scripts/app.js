@@ -51,6 +51,10 @@ var app = angular
         templateUrl: '/views/event.html',
         controller: 'EventController'
       })
+      .when('/event/:eventId', {
+        templateUrl: '/views/signUpEvent.html',
+        controller: 'SignUpController'
+      })
       .when('/admin-users', {
         templateUrl: 'views/admin-users-overview.html',
         controller: 'AdminUserController'

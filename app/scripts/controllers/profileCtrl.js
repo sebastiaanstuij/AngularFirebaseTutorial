@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('ProfileController', function ($scope, $routeParams, $location, CommonService, AuthService, AlertService) {
-  $scope.user = CommonService.users.get($routeParams.userId);
+app.controller('ProfileController', function ($scope, $routeParams, $location, UsersService, AuthService, AlertService) {
+  $scope.user = UsersService.get($routeParams.userId);
 
   $scope.editUser = function (isValid) {
     if (isValid) {

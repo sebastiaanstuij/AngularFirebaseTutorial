@@ -9,7 +9,7 @@
       </div>
 
       <div class="list-group" ng-repeat="event in allEvents | orderBy: 'startDate' | limitTo:3 ">
-        <a href="" class="list-group-item">
+        <a href="#/event/{{event.$id}}" class="list-group-item">
           <div>{{event.start | date:"d MMM yyyy 'at' HH:mm"}}</div>
           <div>{{event.title}}</div>
           <span>{{event.location.name}}</span>

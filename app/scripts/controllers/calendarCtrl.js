@@ -10,17 +10,18 @@ app.controller('CalendarController', function ($scope, $location, EventsService)
         left: 'title',
         right: 'basicWeek,month,prev,next'
       },
-      eventClick: function(){
+      eventClick: function(eventData){
         $scope.$apply(function(){
-          $scope.alertOnEventClick()
+          $scope.gotoEvent(eventData)
         });
       }
       //timeFormat: 'H(:mm)'
     }
   };
 
-  $scope.alertOnEventClick = function(){
-    console.log('ik kom hier');
+  $scope.gotoEvent = function(eventData){
+    $location.path('/event/'+ eventData.$id);
+    console.log(eventData);
   };
 
   //get all events
