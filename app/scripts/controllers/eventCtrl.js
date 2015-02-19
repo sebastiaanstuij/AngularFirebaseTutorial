@@ -1,11 +1,11 @@
 'use strict';
 
-app.controller('EventController', function ($scope, EventService, $location, CommonService, AlertService) {
+app.controller('EventController', function ($scope, $location, AlertService, EventsService, CommonService) {
   // Get all location information
   $scope.locations = CommonService.locations.all;
 
   // Get all events
-  $scope.allEvents = EventService.all;
+  $scope.allEvents = EventsService.all;
   $scope.eventSources = [$scope.allEvents];
 
   //Declare a new event property which will be filled by the view
@@ -22,8 +22,8 @@ app.controller('EventController', function ($scope, EventService, $location, Com
       $scope.event.start = moment($scope.startDate).format('YYYY/MM/DD hh:mm');
       $scope.event.end = moment($scope.endDate).format('YYYY/MM/DD hh:mm');
 
-      // call the eventservice and create the new event
-      EventService.create($scope.event).then(
+      // call the events service and create the new event
+      EventsService.create($scope.event).then(
         function () {
           console.log('Successfully created event: ' + $scope.event.title);
           AlertService.addAlert('success', 'Successfully created event: ' + $scope.event.title);
@@ -37,14 +37,14 @@ app.controller('EventController', function ($scope, EventService, $location, Com
     }
   };
 
-  // call eventservice to delete selected event
+  // call events service to delete selected event
   $scope.deleteEvent = function(event){
-    EventService.delete(event);
+    EventsService.delete(event);
   };
 
   // call eventservice to modify selected event
   $scope.modifyEvent = function(event){
-    $scope.event = EventService.get(event);
+    $scope.event = EventsService.get(event);
   };
 
 

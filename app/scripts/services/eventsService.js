@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('EventService', function ($firebase, FIREBASE_URL) {
+app.factory('EventsService', function ($firebase, FIREBASE_URL) {
   var ref = new Firebase(FIREBASE_URL);
   var events = $firebase(ref.child('events')).$asArray();
 
