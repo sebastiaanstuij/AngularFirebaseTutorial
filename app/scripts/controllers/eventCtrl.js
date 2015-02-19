@@ -16,11 +16,13 @@ app.controller('EventController', function ($scope, $location, AlertService, Eve
     // check if the form is valid before adding event
     if (isValid) {
       // add registrationdate and convert dates to strings for firebase
-      $scope.event.registrationDate = moment().format('YYYY/MM/DD hh:mm:ss');
+      $scope.event.registrationDate = moment().format('YYYY/MM/DD HH:mm:ss');
       //moment(moment($scope.event.start).unix()*1000)
       //Firebase.ServerValue.TIMESTAMP
-      $scope.event.start = moment($scope.startDate).format('YYYY/MM/DD hh:mm');
-      $scope.event.end = moment($scope.endDate).format('YYYY/MM/DD hh:mm');
+      $scope.event.start = moment($scope.startDate).format('YYYY/MM/DD HH:mm');
+      console.log($scope.event.start);
+
+      $scope.event.end = moment($scope.endDate).format('YYYY/MM/DD HH:mm');
 
       // call the events service and create the new event
       EventsService.create($scope.event).then(

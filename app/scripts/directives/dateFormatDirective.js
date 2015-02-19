@@ -1,4 +1,5 @@
 'use strict';
+//TODO voorbeeld: verwijderen
 app.directive('dateFormat', function () {
   return {
     require: 'ngModel',

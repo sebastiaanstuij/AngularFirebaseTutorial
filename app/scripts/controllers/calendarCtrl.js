@@ -9,9 +9,18 @@ app.controller('CalendarController', function ($scope, $location, EventsService)
       header:{
         left: 'title',
         right: 'basicWeek,month,prev,next'
+      },
+      eventClick: function(){
+        $scope.$apply(function(){
+          $scope.alertOnEventClick()
+        });
       }
       //timeFormat: 'H(:mm)'
     }
+  };
+
+  $scope.alertOnEventClick = function(){
+    console.log('ik kom hier');
   };
 
   //get all events

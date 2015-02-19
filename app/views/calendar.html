@@ -10,9 +10,9 @@
 
       <div class="list-group" ng-repeat="event in allEvents | orderBy: 'startDate' | limitTo:3 ">
         <a href="" class="list-group-item">
-          <span>{{event.title}}</span>
-          <span>{{event.startDate}}</span>
-          <span>{{event.location}}</span>
+          <div>{{event.start | date:"d MMM yyyy 'at' HH:mm"}}</div>
+          <div>{{event.title}}</div>
+          <span>{{event.location.name}}</span>
           <span class="badge">{{event.entries}}/{{event.maxEntries}}</span>
         </a>
       </div>
