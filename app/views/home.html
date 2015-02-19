@@ -1,29 +1,53 @@
-<div class="content posts-overview-section">
+<div class="content home-section">
 
-<form ng-submit="addPost()" ng-show="signedIn()">
-  <input type="text" ng-model="post.title" />
-  <input type="text" ng-model="post.url" />
-  <input type="submit" value="Add Post" />
-</form>
-
-<br>
-
-  <div class="post row" ng-repeat="post in posts">
-    <div class="col-xs-12">
-
-      <div class="info">
-        <a target="_blank" ng-href="{{ post.url }}">
-          {{ post.title }}
-          <span class="url">({{ post.url | urlFilter }})</span>
-        </a>
-      </div>
-      <div>
-        <span>submitted by <a ng-href="#/users/{{ post.creatorUID }}">{{ post.creator }}</a></span>
-        &mdash;
-        <a ng-href="#/posts/{{ post.$id }}">comments</a>
-        <a href="" ng-click="deletePost(post)" ng-show="user.uid === post.creatorUID">delete</a>
-      </div>
-      <br>
+  <div class="row content">
+    <div class="col-md-4 col-sm-6">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vulputate libero mauris, vitae malesuada mauris porttitor
+        at. Nam scelerisque enim ac libero mattis pharetra sit amet eget neque. Fusce et efficitur nunc. Quisque maximus dui ut
+        tellus condimentum, sit amet sollicitudin ex porta. Class aptent taciti sociosqu ad litora torquent per conubia nostra,
+        per inceptos himenaeos. Suspendisse aliquet, arcu quis dignissim vehicula, velit nulla tincidunt neque, ac volutpat erat
+        urna nec risus. Maecenas imperdiet, est sed pretium mollis, nulla ante rhoncus nisi, ac tincidunt est ipsum non quam.
+        Nunc id leo quis ligula elementum efficitur.</p>
+    </div>
+    <div class="col-md-4 col-sm-6">
+      <p>Donec ultricies id arcu eu semper. Sed et nisl non nisl ullamcorper sollicitudin eget ac neque. Curabitur ullamcorper
+        elementum mi, vel tempus urna consectetur vitae. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+        cubilia Curae; Nam faucibus et ligula id dictum. Nunc ante quam, gravida et ornare nec, fermentum eu lectus.
+        Aenean sagittis libero non est pulvinar, quis rutrum lacus vehicula. Vivamus aliquet, ex ac placerat rutrum, tortor magna
+        scelerisque est, tempor fermentum neque odio non metus. Cras laoreet dolor a massa dapibus semper.</p>
+    </div>
+    <div class="col-md-4 col-sm-6">
+      <p>Sed sagittis, arcu luctus sollicitudin placerat, nisi arcu elementum nisl, vel tempus ligula libero eget odio.
+        Integer posuere velit in justo vehicula bibendum. Praesent a venenatis ligula. Duis elementum venenatis urna ut semper.
+        Nullam tempus libero at laoreet pellentesque. Duis rhoncus at arcu pharetra congue. Donec sed egestas quam. Nam et
+        consectetur nisi.</p>
     </div>
   </div>
+
+  <!--<form ng-submit="addPost()" ng-show="signedIn()">-->
+    <!--<input type="text" ng-model="post.title" />-->
+    <!--<input type="text" ng-model="post.url" />-->
+    <!--<input type="submit" value="Add Post" />-->
+  <!--</form>-->
+  <!---->
+  <!--<br>-->
+
+  <!--<div class="post row" ng-repeat="post in posts">-->
+    <!--<div class="col-xs-12">-->
+
+      <!--<div class="info">-->
+        <!--<a target="_blank" ng-href="{{ post.url }}">-->
+          <!--{{ post.title }}-->
+          <!--<span class="url">({{ post.url | urlFilter }})</span>-->
+        <!--</a>-->
+      <!--</div>-->
+      <!--<div>-->
+        <!--<span>submitted by <a ng-href="#/users/{{ post.creatorUID }}">{{ post.creator }}</a></span>-->
+        <!--&mdash;-->
+        <!--<a ng-href="#/posts/{{ post.$id }}">comments</a>-->
+        <!--<a href="" ng-click="deletePost(post)" ng-show="user.uid === post.creatorUID">delete</a>-->
+      <!--</div>-->
+      <!--<br>-->
+    <!--</div>-->
+  <!--</div>-->
 </div>

@@ -9,7 +9,7 @@ app.controller('NavbarController', function ($rootScope, $scope, $location, Auth
   $scope.user = AuthService.user;
 
   $scope.isActive = function (viewLocation) {
-    return viewLocation === $location.path();
+    return viewLocation == $location.path();
   };
 
   $scope.doCollapse = function() {

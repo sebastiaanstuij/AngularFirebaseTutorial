@@ -15,12 +15,9 @@
         </div>
 
         <div class="form-group" ng-class="{ 'has-error' : eventForm.$submitted && eventForm.location.$invalid}">
-          <label for="selectLocation" class="col-lg-2 control-label">Location</label>
+          <label for="selectLocation" class="col-lg-2 control-label">Location <span ng-show="event.location">(Cost: {{event.location.cost}})</span></label>
           <div class="col-lg-10">
             <select class="form-control" ng-model="event.location" ng-options="location.name for location in locations" id="selectLocation" name ="location" required>
-              <!--<option>Workum</option>-->
-              <!--<option>Mirns</option>-->
-              <!--<option>Lauwersoog</option>-->
             </select>
             <p ng-show="eventForm.location.$error.required && eventForm.location.$touched" class="help-block">Location is required</p>
           </div>

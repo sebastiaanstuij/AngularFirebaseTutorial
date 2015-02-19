@@ -3,30 +3,29 @@
 app.controller('AdminSettingsController', function ($scope, AlertService, CommonService) {
   // reference to Firebase locations
   $scope.locations = CommonService.locations.all;
+  $scope.boolValues = [{value: true, name: 'True'}, {value: false, name: 'False'}];
+
 
   // add location row
   $scope.addLocationRow = function() {
     $scope.inserted = {
-      id: $scope.locations.length+1,
       name: '',
       cost: '',
       info: '',
       proSpot:''
     };
-    $scope.locations.push($scope.inserted);
+    CommonService.locations.create($scope.inserted);
   };
 
   // remove location
-  $scope.saveLocation = function(data, id) {
-    CommonService.locations.create(data);
+  $scope.saveLocation = function(location) {
+    console.log(location);
+    CommonService.locations.update(location);
   };
 
   // remove location
-  $scope.removeLocation = function(index) {
-    //TODO delete location
-    var deleteLocation = $scope.locations[index];
-    CommonService.locations.delete(deleteLocation);
-    //$scope.locations.splice(index, 1);
+  $scope.removeLocation = function(location) {
+    CommonService.locations.delete(location);
   };
 
 

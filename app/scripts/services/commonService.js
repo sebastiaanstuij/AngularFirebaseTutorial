@@ -11,6 +11,10 @@ app.factory('CommonService', function ($firebase, FIREBASE_URL) {
       create: function (location) {
         return locations.$add(location);
       },
+      update: function (location) {
+        console.log(location);
+        return locations.$save(location);
+      },
       get: function (locationId) {
         return $firebase(locations.child(locationId)).$asObject();
       },

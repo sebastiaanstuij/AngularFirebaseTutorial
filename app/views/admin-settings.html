@@ -19,26 +19,38 @@
           <tbody>
             <tr ng-repeat="location in locations">
               <td>
-                <span editable-text="location.name" e-name="name" e-form="rowform" e-required>
+                <span editable-text="location.name" e-name="name" e-form="locationform" e-required>
                   {{ location.name || 'empty' }}
                 </span>
               </td>
-              <td>{{ location.cost }}</td>
-              <td>{{ location.info }}</td>
-              <td>{{ location.proSpot }}</td>
+              <td>
+                <span editable-text="location.cost" e-name="cost" e-form="locationform" e-required>
+                  {{ location.cost }}
+                </span>
+              </td>
+              <td>
+                 <span editable-text="location.info" e-name="info" e-form="locationform" e-required>
+                  {{ location.info }}
+                </span>
+              </td>
+              <td>
+                <span editable-select="location.proSpot" e-name="proSpot" e-form="locationform" e-ng-options="bool.value as bool.name for bool in boolValues" e-required>
+                  {{ location.proSpot }}
+                </span>
+              </td>
 
               <td style="white-space: nowrap">
                 <!-- form -->
-                <form editable-form onbeforesave="saveLocation($data, location.id)" name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == location">
-                  <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+                <form editable-form onaftersave="saveLocation(location)" name="locationform" ng-show="locationform.$visible" class="form-buttons form-inline" >
+                  <button type="submit" ng-disabled="locationform.$waiting" class="btn btn-primary">
                     save
                   </button>
-                  <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+                  <button type="button" ng-disabled="locationform.$waiting" ng-click="locationform.$cancel()" class="btn btn-default">
                     cancel
                   </button>
                 </form>
-                <div class="buttons" ng-show="!rowform.$visible">
-                  <button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
+                <div class="buttons" ng-show="!locationform.$visible">
+                  <button class="btn btn-primary" ng-click="locationform.$show()">edit</button>
                   <button class="btn btn-danger" ng-click="removeLocation($index)">del</button>
                 </div>
               </td>

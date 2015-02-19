@@ -1,5 +1,6 @@
 'use strict';
 
+//TODO verwijderen
 app.factory('ProfileService', function (FIREBASE_URL, $firebase, PostService, $q) {
   var ref = new Firebase(FIREBASE_URL);
 

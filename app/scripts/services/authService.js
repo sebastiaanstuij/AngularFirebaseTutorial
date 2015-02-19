@@ -18,7 +18,6 @@ app.factory('AuthService', function ($rootScope, $firebaseAuth, $firebase, FIREB
       firebaseAuthService.$unauth();
     },
     createProfile: function (user, profile) {
-      console.log(profile);
       var profileRef = $firebase(ref.child('user_profiles'));
       if (user.uid){
         return profileRef.$set(user.uid, profile);

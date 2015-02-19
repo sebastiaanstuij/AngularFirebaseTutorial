@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('EventController', function ($scope, EventService, CommonService, AlertService) {
+app.controller('EventController', function ($scope, EventService, $location, CommonService, AlertService) {
   // Get all location information
   $scope.locations = CommonService.locations.all;
 
