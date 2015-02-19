@@ -148,6 +148,25 @@
           </div>
         </div>
 
+        <div class="form-group">
+          <label class="col-lg-2 control-label">User verified?</label>
+          <div class="col-lg-10">
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="selectedUser.verified" name="verifiedTrue" name ="verified" id="verifiedTrue" ng-value="true">
+                Yes
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="selectedUser.verified" name="verifiedFalse" name ="verified" id="verifiedFalse" ng-value="false">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+
+
         <div class="form-group" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.saldo.$invalid}">
           <label for="phone" class="col-lg-2 control-label">Saldo</label>
           <div class="col-lg-10">

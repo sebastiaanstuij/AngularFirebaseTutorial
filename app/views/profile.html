@@ -4,7 +4,7 @@
     <form name="registerForm" class="form-horizontal" ng-submit="editUser(registerForm.$valid)" novalidate>
       <p ng-show="error" class="text-danger">{{ error }}</p>
       <fieldset>
-        <legend>Edit registered user</legend>
+        <legend>Edit User Profile</legend>
         <div class="form-group" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.email.$invalid}">
           <label for="inputEmail" class="col-lg-2 control-label">Email</label>
           <div class="col-lg-10">

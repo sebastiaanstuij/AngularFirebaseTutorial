@@ -39,7 +39,8 @@ app.controller('AuthController', function ($rootScope, $scope, $location, AuthSe
         ownCar: $scope.user.ownCar,
         busdriver: false,
         saldo: 0,
-        isAdmin: false
+        isAdmin: false,
+        verified: false
       };
 
       AuthService.register($scope.user).then(function () {

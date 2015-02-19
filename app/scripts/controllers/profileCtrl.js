@@ -11,9 +11,14 @@ app.controller('ProfileController', function ($scope, $routeParams, $location, C
         username: $scope.user.username,
         email: $scope.user.email,
         phone: $scope.user.phone,
+        level: $scope.user.level,
         driversLicense: $scope.user.driversLicense,
         ownGear: $scope.user.ownGear,
-        ownCar: $scope.user.ownCar
+        ownCar: $scope.user.ownCar,
+        busdriver: $scope.user.busdriver,
+        isAdmin: $scope.user.isAdmin,
+        verified: $scope.user.verified,
+        saldo: $scope.user.saldo
       };
 
       AuthService.createProfile($scope.user, profile).then(
@@ -29,6 +34,5 @@ app.controller('ProfileController', function ($scope, $routeParams, $location, C
         });
     }
   }
-
 
 });

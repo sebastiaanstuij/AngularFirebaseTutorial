@@ -43,6 +43,7 @@ app.controller('AdminUserController', function ($scope, $routeParams, $filter, $
         ownCar: $scope.selectedUser.ownCar,
         busdriver: $scope.selectedUser.busdriver,
         isAdmin: $scope.selectedUser.isAdmin,
+        verified: $scope.selectedUser.verified,
         saldo: $scope.selectedUser.saldo
       };
 
