@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('CalendarController', function ($scope, $location, EventsService) {
+app.controller('CalendarController', function ($scope, $location, EventService) {
   //config settings for calendar
   $scope.uiConfig = {
     calendar:{
@@ -15,22 +15,21 @@ app.controller('CalendarController', function ($scope, $location, EventsService)
           $scope.gotoEvent(eventData)
         });
       }
-      //timeFormat: 'H(:mm)'
     }
   };
 
   $scope.gotoEvent = function(eventData){
     $location.path('/event/'+ eventData.$id);
-    console.log(eventData);
   };
 
   //get all events
-  $scope.allEvents = EventsService.all;
+  $scope.allEvents = EventService.events.all;
+
   $scope.eventSources = [$scope.allEvents];
 
   // call eventservice to modify selected event
   $scope.modifyEvent = function(event){
-    $scope.event = EventsService.get(event);
+    $scope.event = EventService.events.get(event);
   };
 
   // go to event view and controller to add new event

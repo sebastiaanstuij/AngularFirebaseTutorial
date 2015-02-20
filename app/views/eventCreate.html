@@ -1,6 +1,6 @@
 <div class="content event-forms">
 
-  <div class="col-xs-8 col-xs-offset-2 well">
+  <div class="col-sm-6 col-sm-offset-3 well">
     <form name="eventForm" class="form-horizontal" ng-submit="addEvent(eventForm.$valid)" novalidate>
       <p ng-show="error" class="text-danger">{{ error }}</p>
       <fieldset>
@@ -15,13 +15,24 @@
         </div>
 
         <div class="form-group" ng-class="{ 'has-error' : eventForm.$submitted && eventForm.location.$invalid}">
-          <label for="selectLocation" class="col-lg-2 control-label">Location <span ng-show="event.location">(Cost: {{event.location.cost}})</span></label>
+          <label for="selectLocation" class="col-lg-2 control-label">Location</label>
+          <span ng-show="event.location">(Cost: {{event.location.cost}})</span>
           <div class="col-lg-10">
             <select class="form-control" ng-model="event.location" ng-options="location.name for location in locations" id="selectLocation" name ="location" required>
             </select>
             <p ng-show="eventForm.location.$error.required && eventForm.location.$touched" class="help-block">Location is required</p>
           </div>
         </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : eventForm.$submitted && eventForm.maxParticipants.$invalid}">
+          <label for="maxParticipants" class="col-lg-2 control-label">Maximum number of participants</label>
+          <div class="col-lg-10">
+            <input type="number" class="form-control" ng-model="event.maxNumberParticipants" min="1" max="14" id="maxParticipants" name ="maxParticipants"  required>
+            <p ng-show="eventForm.maxNumberParticipants.$error.required && eventForm.maxParticipants.$touched" class="help-block">Maximum participants is required</p>
+          </div>
+        </div>
+
+
 
         <div class="form-group" ng-class="{ 'has-error' : eventForm.$submitted && eventForm.startdate.$invalid}">
           <!--<p>Formatted Date: {{ event.start | date:'yyyy-MM-dd HH:mm' }}</p>-->

@@ -44,12 +44,12 @@ var app = angular
         controller: 'CalendarController'
       })
       .when('/event', {
-        templateUrl: '/views/event.html',
-        controller: 'EventController'
+        templateUrl: '/views/eventCreate.html',
+        controller: 'EventCreateController'
       })
       .when('/event/:eventId', {
-        templateUrl: '/views/signUpEvent.html',
-        controller: 'SignUpController'
+        templateUrl: '/views/eventSignup.html',
+        controller: 'EventSignupController'
       })
       .when('/admin-users', {
         templateUrl: 'views/admin-users-overview.html',

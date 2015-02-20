@@ -1,10 +1,10 @@
 'use strict';
 
-app.factory('UsersService', function ($firebase, FIREBASE_URL) {
+app.factory('UserService', function ($firebase, FIREBASE_URL) {
   var ref = new Firebase(FIREBASE_URL);
   var users = $firebase(ref.child('user_profiles')).$asArray();
 
-  var Users = {
+  var UserService = {
     all: users,
     get: function (userId) {
       return $firebase(ref.child('user_profiles').child(userId)).$asObject();
@@ -14,5 +14,5 @@ app.factory('UsersService', function ($firebase, FIREBASE_URL) {
     }
   };
 
-  return Users;
+  return UserService;
 });

@@ -1,9 +1,9 @@
 'use strict';
 
 app.controller('AdminUserController', function ($scope, $routeParams, $filter, $location,
-                                                AlertService, AuthService, UsersService) {
+                                                AlertService, AuthService, UserService) {
   // reference to Firebase user profiles
-  $scope.users = UsersService.all;
+  $scope.users = UserService.all;
 
   //navigation variables
   $scope.search;
@@ -27,7 +27,7 @@ app.controller('AdminUserController', function ($scope, $routeParams, $filter, $
   // check whether this controller has been called with a user id as routeParam
   // so that the selected user can be retrieved from firebase
   if($routeParams.userId) {
-    $scope.selectedUser = UsersService.get($routeParams.userId);
+    $scope.selectedUser = UserService.get($routeParams.userId);
   }
 
   $scope.editUser = function (isValid) {

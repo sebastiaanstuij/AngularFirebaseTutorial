@@ -1,22 +1,21 @@
 'use strict';
 
+//TODO delete this service
 app.factory('PostService', function ($firebase, FIREBASE_URL) {
   var ref = new Firebase(FIREBASE_URL);
-  var posts = $firebase(ref.child('posts')).$asArray();
+  //var posts = $firebase(ref.child('posts')).$asArray();
 
   var Post = {
-    all: posts,
-    createPost: function (post) {
-      return posts.$add(post).then(function(postRef){
-        $firebase(ref.child('user_posts').child(post.creatorUID))
-          .$push(postRef.key());
-        return postRef;
-      });
+    all: function(eventId){
+      var posts = $firebase(ref.child('events').child(eventId).child('posts')).$asArray();
+      return posts;
     },
-    getPost: function (postId) {
-      return $firebase(ref.child('posts').child(postId)).$asObject();
+    createPost: function (eventId, post) {
+      var posts = $firebase(ref.child('events').child(eventId).child('posts')).$asArray();
+      return posts.$add(post);
     },
-    deletePost: function (post) {
+    deletePost: function (eventId, post) {
+      var posts = $firebase(ref.child('events').child(eventId).child('posts')).$asArray();
       return posts.$remove(post);
     }
   };
