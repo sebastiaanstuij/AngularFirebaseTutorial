@@ -23,6 +23,7 @@ app.controller('EventSignupController', function ($scope, $routeParams, $locatio
   };
 
   $scope.signup = function(){
+    console.log($scope.selectedEvent);
     $scope.participant.userID = $scope.user.uid;
     $scope.participant.username = $scope.user.profile.username;
     $scope.selectedEvent.numberParticipants = $scope.participants.length+1;
