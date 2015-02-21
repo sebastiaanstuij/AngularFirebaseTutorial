@@ -19,33 +19,27 @@ app.factory('EventService', function ($firebase, FIREBASE_URL) {
     },
     posts: {
       all: function(eventId){
-        var posts = $firebase(ref.child('events').child(eventId).child('posts')).$asArray();
-        return posts;
+        return $firebase(ref.child('events').child(eventId).child('posts')).$asArray();
       },
       createPost: function (eventId, post) {
-        var posts = $firebase(ref.child('events').child(eventId).child('posts')).$asArray();
-        return posts.$add(post);
+        return $firebase(ref.child('events').child(eventId).child('posts')).$push(post);
+
+        //var posts = $firebase(ref.child('events').child(eventId).child('posts')).$asArray();
+        //return posts.$add(post);
       },
       deletePost: function (eventId, post) {
-        // possible bug in AngularFire?
-        // var posts = $firebase(ref.child('events').child(eventId).child('posts')).$asArray();
-        // return posts.$remove(post);
+        return $firebase(ref.child('events').child(eventId).child('posts')).$remove(post.$id);
       }
     },
     participants: {
       all: function(eventId){
-        var participants = $firebase(ref.child('events').child(eventId).child('participants')).$asArray();
-        return participants;
+        return $firebase(ref.child('events').child(eventId).child('participants')).$asArray();
       },
       addParticipant: function (eventId, participant) {
-        //console.log(participant);
-        var participants = $firebase(ref.child('events').child(eventId).child('participants')).$asArray();
-        return participants.$add(participant);
+        return $firebase(ref.child('events').child(eventId).child('participants')).$push(participant);
       },
-      deleteParticipant: function (eventId, participant) {
-        // possible bug in AngularFire?
-        // var participants = $firebase(ref.child('events').child(eventId).child('participants')).$asArray();
-        // return participants.$remove(participant);
+      deleteParticipant: function (eventId, participantId) {
+        return $firebase(ref.child('events').child(eventId).child('participants')).$remove(participantId);
       }
     }
   };

@@ -27,6 +27,7 @@ app.controller('EventSignupController', function ($scope, $routeParams, $locatio
     $scope.participant.userID = $scope.user.uid;
     $scope.participant.username = $scope.user.profile.username;
     $scope.selectedEvent.numberParticipants = $scope.participants.length+1;
+    // save changes made to selectedEvent (number of participants + 1)
     $scope.selectedEvent.$save();
 
     EventService.participants.addParticipant($scope.selectedEvent.$id, $scope.participant).then(
@@ -57,9 +58,7 @@ app.controller('EventSignupController', function ($scope, $routeParams, $locatio
   };
 
   $scope.deletePost = function(post){
-    // workaround for eventService bug
-    //EventsService.posts.deletePost($scope.selectedEvent.$id, post);
-    $scope.posts.$remove(post);
+    EventService.posts.deletePost($scope.selectedEvent.$id, post);
   };
 
 
