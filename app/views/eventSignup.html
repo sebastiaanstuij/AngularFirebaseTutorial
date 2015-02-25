@@ -62,8 +62,8 @@
 
         <div class="form-group">
           <div class="col-lg-8 col-lg-offset-2">
-            <button type="submit" class="btn btn-primary">Sign up for event</button>
             <a href="#/calendar" class="btn btn-default">Cancel</a>
+            <button type="submit" class="btn btn-primary">Sign up for event</button>
           </div>
         </div>
       </fieldset>
@@ -84,7 +84,8 @@
         </div>
         <div>
           <span>submitted by {{ post.creator }}</span>
-          <a href="" ng-click="deletePost(post)" ng-show="user.uid === post.creatorUID">delete</a>
+          <a href="" ng-click="deletePost(post)">delete</a>
+          <!--ng-show="user.uid === post.creatorUID"-->
         </div>
         <br>
       </div>

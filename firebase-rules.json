@@ -1,73 +1,49 @@
 
 {
   "rules": {
+    // default rules are false if not specified
+    // setting these to true would make ALL CHILD PATHS readable/writable
+    //".read": true,
+    //".write": true
 
-    "users": {
-      ".read": "(auth != null)",
-      ".write": true
+    //"users": {
+    //  ".read": "(auth != null)",
+    //  ".write": true
+    //},
+
+    "user_profiles": {
+      //".read": "(data.child($user_profile_id).child('isAdmin').val() == true)",
+      ".read": "data.child(auth.uid).child('isAdmin').val() == true",
+
+      "$user_profile_id": {
+        ".read": "(auth.uid === $user_profile_id)",
+        ".write": "!data.exists() && auth.uid === $user_profile_id"
+      }
     },
 
     "events": {
-      ".read": true,
+      ".write": "(auth != null)",
+      ".read": "(auth != null)",
+
+      "$event_id": {
+        "posts": {
+          //".read": true,
+
+          "$post_id": {
+            ".validate": "(auth != null && !data.exists()) || data.child('creatorUID').val() === auth.uid"
+          }
+        }
+      }
+
+    },
+
+    "common": {
+      ".read": "(auth != null)",
       ".write": "(auth != null)"
-    },
-
-    "posts": {
-      // anyone can view posts
-      ".read": true,
-
-      "$id": {
-        // auth can't be null to make/edit post
-        // if the post exists, auth.uid must match creatorUID
-        ".write": "(auth != null && !data.exists()) || data.child('creatorUID').val() === auth.uid",
-
-        // We want to make sure that all 4 fields are present before saving a new post
-        ".validate": "newData.hasChildren(['title','url','creator','creatorUID'])",
-
-        // title must be a string with length>0
-        "title": {
-          ".validate": "newData.isString() && newData.val().length > 0"
-        },
-        "url": {
-          ".validate": "newData.isString()"
-        },
-        "creator": {
-          ".validate": "newData.isString()"
-        },
-        "creatorUID": {
-          ".validate": "auth.uid === newData.val() && root.child('profile/'+newData.val()).exists()"
-        }
-      }
-    },
-
-    "comments": {
-      // anyone can view comments
-      ".read": true,
-
-      "$post_id": {
-        // make sure the post we're adding comments to existing posts
-        ".validate": "root.child('posts/'+$post_id).exists()",
-
-        "$comment_id": {
-          // same write rules as for Post
-          ".write": "(auth != null && !data.exists()) || data.child('creatorUID').val() === auth.uid",
-          ".validate": "!data.exists() || data.child('creatorUID').val() === auth.uid"
-        }
-      }
-    },
-
-    "user_posts": {
-      ".read": true,
-
-      "$uid": {
-        // only the user can write here
-        ".write": "auth.uid === $uid"
-      }
-    },
-
+    }
 
     // Don't let users post to other fields
-    "$other": { ".validate": false }
+    // "$other": { ".validate": false }
 
   }
 }

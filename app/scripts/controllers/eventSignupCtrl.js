@@ -14,6 +14,7 @@ app.controller('EventSignupController', function ($scope, $routeParams, $locatio
   $scope.participants = EventService.participants.all($scope.selectedEvent.$id);
   // get all posts
   $scope.posts = EventService.posts.all($scope.selectedEvent.$id);
+  console.log($scope.posts);
 
   // set default values
   $scope.participant = {

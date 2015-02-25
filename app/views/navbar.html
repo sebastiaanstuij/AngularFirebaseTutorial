@@ -42,7 +42,7 @@
           </a>
         </li>
         <li ng-show="signedIn()">
-          <a href="#" ng-click="logout()" ng-click="doCollapse()">Logout</a>
+          <a href="#/home" ng-click="logout()" ng-click="doCollapse()">Logout</a>
         </li>
         <li ng-hide="signedIn()" ng-class="{active: isActive('/login')}">
           <a href="#/login" ng-click="doCollapse()">Login</a>

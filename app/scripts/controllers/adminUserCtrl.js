@@ -57,7 +57,7 @@ app.controller('AdminUserController', function ($scope, $routeParams, $filter, $
           console.log(error);
           AlertService.addAlert('danger', error.message);
       }).then(function () {
-          $location.path('/admin');
+          $location.path('/admin-users');
         });
     }
   }

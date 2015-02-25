@@ -52,11 +52,11 @@ var app = angular
         controller: 'EventSignupController'
       })
       .when('/admin-users', {
-        templateUrl: 'views/admin-users-overview.html',
+        templateUrl: '../views/admin-user-overview.html',
         controller: 'AdminUserController'
       })
       .when('/admin-users/:userId', {
-        templateUrl: 'views/admin-edit-user.html',
+        templateUrl: '../views/admin-user-edit.html',
         controller: 'AdminUserController'
       })
       .when('/admin-settings', {
