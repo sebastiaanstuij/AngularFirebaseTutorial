@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('AlertService', function ($rootScope, $timeout) {
+app.factory('AlertService', function ($rootScope, $timeout, cfpLoadingBar) {
 
   // create an array of alerts available globally
   $rootScope.alerts = [];
@@ -16,6 +16,15 @@ app.factory('AlertService', function ($rootScope, $timeout) {
     },
     closeAlert: function(index) {
       $rootScope.alerts.splice(index);
+    },
+    addProgressbar: function(firebaseRequest){
+      cfpLoadingBar.start();
+      //var events = $firebase(ref.child('events')).$asArray();
+      firebaseRequest.$loaded()
+        .then(function() {
+          cfpLoadingBar.complete();
+        });
+      return firebaseRequest;
     }
   };
 

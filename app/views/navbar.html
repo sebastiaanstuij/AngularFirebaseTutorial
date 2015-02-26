@@ -30,9 +30,9 @@
           </a>
           <ul class="dropdown-menu">
             <li ng-class="{active: isActive('/admin-users')}"><a href="#/admin-users" ng-click="doCollapse()">User overview</a></li>
-            <li ng-class="{active: isActive('/admin-settings')}"><a href="#/admin-settings" ng-click="doCollapse()">Edit settings</a></li>
+            <li ng-class="{active: isActive('/admin-events')}"><a href="" ng-click="doCollapse()">Events overview</a></li>
             <li class="divider"></li>
-            <li><a href="">Separated link</a></li>
+            <li ng-class="{active: isActive('/admin-settings')}"><a href="#/admin-settings" ng-click="doCollapse()">Edit settings</a></li>
           </ul>
         </li>
         <li ng-show="signedIn()">

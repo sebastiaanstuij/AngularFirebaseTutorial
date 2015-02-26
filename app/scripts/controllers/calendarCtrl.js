@@ -23,12 +23,12 @@ app.controller('CalendarController', function ($scope, $location, EventService) 
   };
 
   //get all events
-  $scope.allEvents = EventService.events.all;
-
+  $scope.allEvents = (EventService.events.all());
   $scope.eventSources = [$scope.allEvents];
 
+
   // call eventservice to modify selected event
-  $scope.modifyEvent = function(event){
+  $scope.getEvent = function(event){
     $scope.event = EventService.events.get(event);
   };
 

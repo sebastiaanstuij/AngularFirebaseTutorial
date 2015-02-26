@@ -6,19 +6,14 @@
     //".read": true,
     //".write": true
 
-    //"users": {
-    //  ".read": "(auth != null)",
-    //  ".write": true
-    //},
+    "users": {
+      ".read": "(auth != null)",
+      ".write": true
+    },
 
-    "user_profiles": {
-      //".read": "(data.child($user_profile_id).child('isAdmin').val() == true)",
-      ".read": "data.child(auth.uid).child('isAdmin').val() == true",
-
-      "$user_profile_id": {
-        ".read": "(auth.uid === $user_profile_id)",
-        ".write": "!data.exists() && auth.uid === $user_profile_id"
-      }
+    "common": {
+      ".read": "(auth != null)",
+      ".write": "(auth != null && root.child('user_profiles').child(auth.uid).child('isAdmin').val() == true)"
     },
 
     "events": {
@@ -30,20 +25,25 @@
           //".read": true,
 
           "$post_id": {
-            ".validate": "(auth != null && !data.exists()) || data.child('creatorUID').val() === auth.uid"
+            ".validate": "((auth != null && !data.exists()) || data.child('creatorUID').val() === auth.uid)"
           }
         }
       }
-
     },
 
-    "common": {
-      ".read": "(auth != null)",
-      ".write": "(auth != null)"
-    }
+    "user_profiles": {
+      //".read": "(data.child($user_profile_id).child('isAdmin').val() == true)",
+      ".read": "(auth != null && data.child(auth.uid).child('isAdmin').val() == true)",
+
+      "$user_profile_id": {
+        ".read": "(auth.uid === $user_profile_id)",
+        ".write": "(!data.exists() && auth.uid === $user_profile_id)"
+      }
+    },
+
 
     // Don't let users post to other fields
-    // "$other": { ".validate": false }
+    "$other": { ".validate": false }
 
   }
 }

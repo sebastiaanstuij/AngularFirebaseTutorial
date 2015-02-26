@@ -1,18 +1,28 @@
 'use strict';
 
-app.factory('AuthService', function ($rootScope, $firebaseAuth, $firebase, FIREBASE_URL) {
+app.factory('AuthService', function ($rootScope, $firebaseAuth, $firebase, FIREBASE_URL, cfpLoadingBar, AlertService) {
   var ref = new Firebase(FIREBASE_URL);
   var firebaseAuthService = $firebaseAuth(ref);
 
   var auth = {
     register: function (user) {
-      return firebaseAuthService.$createUser(user.email, user.password);
+      cfpLoadingBar.start();
+      return firebaseAuthService.$createUser(user.email, user.password).then(function() {
+        cfpLoadingBar.complete();
+      });
     },
     login: function(user){
+      //return AlertService.addProgressbar(firebaseAuthService.$authWithPassword({
+      //  email: user.email,
+      //  password: user.password
+      //}));
+      cfpLoadingBar.start();
       return firebaseAuthService.$authWithPassword({
         email: user.email,
         password: user.password
-      });
+      }).then(function() {
+          cfpLoadingBar.complete();
+        });
     },
     logout: function() {
       firebaseAuthService.$unauth();
