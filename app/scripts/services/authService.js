@@ -2,7 +2,9 @@
 
 app.factory('AuthService', function ($rootScope, $firebaseAuth, $firebase, FIREBASE_URL, cfpLoadingBar, AlertService) {
   var ref = new Firebase(FIREBASE_URL);
+  var onAuth = ref.onAuth.bind(ref);
   var firebaseAuthService = $firebaseAuth(ref);
+
 
   var auth = {
     register: function (user) {
@@ -16,7 +18,7 @@ app.factory('AuthService', function ($rootScope, $firebaseAuth, $firebase, FIREB
       }), true);
     },
     logout: function() {
-      return AlertService.addProgressbar(firebaseAuthService.$unauth(), true);
+      firebaseAuthService.$unauth();
     },
     createProfile: function (user, profile) {
       var profileRef = $firebase(ref.child('user_profiles'));
@@ -46,11 +48,11 @@ app.factory('AuthService', function ($rootScope, $firebaseAuth, $firebase, FIREB
         return false;
       }
     },
-
+    onAuth: onAuth,
     user: {}
   };
 
-  firebaseAuthService.$onAuth(function(authData) {
+  onAuth(function(authData) {
     if (authData) {
       angular.copy(authData, auth.user);
       auth.user.profile = $firebase(ref.child('user_profiles').child(auth.user.uid)).$asObject();
