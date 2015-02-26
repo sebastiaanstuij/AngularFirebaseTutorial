@@ -7,25 +7,16 @@ app.factory('AuthService', function ($rootScope, $firebaseAuth, $firebase, FIREB
   var auth = {
     register: function (user) {
       cfpLoadingBar.start();
-      return firebaseAuthService.$createUser(user.email, user.password).then(function() {
-        cfpLoadingBar.complete();
-      });
+      return AlertService.addProgressbar(firebaseAuthService.$createUser(user.email, user.password),true);
     },
     login: function(user){
-      //return AlertService.addProgressbar(firebaseAuthService.$authWithPassword({
-      //  email: user.email,
-      //  password: user.password
-      //}));
-      cfpLoadingBar.start();
-      return firebaseAuthService.$authWithPassword({
+      return AlertService.addProgressbar(firebaseAuthService.$authWithPassword({
         email: user.email,
         password: user.password
-      }).then(function() {
-          cfpLoadingBar.complete();
-        });
+      }), true);
     },
     logout: function() {
-      firebaseAuthService.$unauth();
+      return AlertService.addProgressbar(firebaseAuthService.$unauth(), true);
     },
     createProfile: function (user, profile) {
       var profileRef = $firebase(ref.child('user_profiles'));

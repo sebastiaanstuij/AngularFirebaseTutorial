@@ -54,6 +54,7 @@ app.controller('AuthController', function ($rootScope, $scope, $location, AuthSe
           $location.path('/home');
         });
       }, function (error) {
+        console.log(error);
         AlertService.addAlert('danger', error.message);
       });
     }

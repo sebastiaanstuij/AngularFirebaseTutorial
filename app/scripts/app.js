@@ -22,7 +22,6 @@ var app = angular
     'ui.bootstrap.datetimepicker',
     'firebase',
     'xeditable',
-    'angular-loading-bar',
     'cfp.loadingBar'
   ])
 

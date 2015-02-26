@@ -17,14 +17,35 @@ app.factory('AlertService', function ($rootScope, $timeout, cfpLoadingBar) {
     closeAlert: function(index) {
       $rootScope.alerts.splice(index);
     },
-    addProgressbar: function(firebaseRequest){
+    addProgressbar: function(firebaseRequest, isAuth){
       cfpLoadingBar.start();
-      //var events = $firebase(ref.child('events')).$asArray();
-      firebaseRequest.$loaded()
-        .then(function() {
+      // set timeout in case something takes longer than 10s and throw error message
+      var timeout = setTimeout(function(){
+        cfpLoadingBar.complete();
+        alertService.addAlert('warning','failed to load data (check internet connectivity)');
+      }, 10000);
+
+      // check if request concerns authentication (different callbacks)
+      if (isAuth){
+        firebaseRequest.then(function() {
+          clearTimeout(timeout);
+          cfpLoadingBar.complete();
+        }, function (error) {
+          clearTimeout(timeout);
           cfpLoadingBar.complete();
         });
-      return firebaseRequest;
+        return firebaseRequest;
+      } else{
+        firebaseRequest.$loaded()
+          .then(function() {
+            clearTimeout(timeout);
+            cfpLoadingBar.complete();
+          }, function (error) {
+            clearTimeout(timeout);
+            cfpLoadingBar.complete();
+          });
+        return firebaseRequest;
+      }
     }
   };
 
