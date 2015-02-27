@@ -17,12 +17,15 @@ app.factory('AlertService', function ($rootScope, $timeout, cfpLoadingBar) {
     closeAlert: function(index) {
       $rootScope.alerts.splice(index);
     },
-    addProgressbar: function(firebaseRequest, isAuth){
+    addProgressbar: function(firebaseRequest, isAuth, message){
       cfpLoadingBar.start();
       // set timeout in case something takes longer than 10s and throw error message
       var timeout = setTimeout(function(){
         cfpLoadingBar.complete();
-        alertService.addAlert('warning','failed to load data (check internet connectivity)');
+        if(message) {
+          alertService.addAlert('warning','Failed to load ' + message + ' (check internet connectivity)');
+        }
+        console.log('Failed to load data from firebase (progressbar call)')
       }, 10000);
 
       // check if request concerns authentication (different callbacks)
@@ -35,7 +38,7 @@ app.factory('AlertService', function ($rootScope, $timeout, cfpLoadingBar) {
           cfpLoadingBar.complete();
         });
         return firebaseRequest;
-      } else{
+      } else {
         firebaseRequest.$loaded()
           .then(function() {
             clearTimeout(timeout);

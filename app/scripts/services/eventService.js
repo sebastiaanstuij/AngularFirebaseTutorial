@@ -2,7 +2,7 @@
 
 app.factory('EventService', function ($firebase, FIREBASE_URL, AlertService) {
   var ref = new Firebase(FIREBASE_URL);
-  var events = AlertService.addProgressbar($firebase(ref.child('events')).$asArray());
+  var events = AlertService.addProgressbar($firebase(ref.child('events')).$asArray(), false, 'events');
   var posts;
   var participants;
 
@@ -22,7 +22,7 @@ app.factory('EventService', function ($firebase, FIREBASE_URL, AlertService) {
     },
     posts: {
       all: function(eventId){
-        posts =  $firebase(ref.child('events').child(eventId).child('posts')).$asArray();
+        posts =  AlertService.addProgressbar($firebase(ref.child('events').child(eventId).child('posts')).$asArray(), false, 'posts');
         return posts;
       },
       createPost: function (post) {
@@ -34,7 +34,7 @@ app.factory('EventService', function ($firebase, FIREBASE_URL, AlertService) {
     },
     participants: {
       all: function(eventId){
-        participants = AlertService.addProgressbar($firebase(ref.child('events').child(eventId).child('participants')).$asArray());
+        participants = AlertService.addProgressbar($firebase(ref.child('events').child(eventId).child('participants')).$asArray(), false, 'participants');
         return participants
       },
       addParticipant: function (eventId, participant) {
