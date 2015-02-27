@@ -25,7 +25,7 @@ app.controller('EventSignupController', function ($scope, $routeParams, $locatio
 
   $scope.signup = function(){
     console.log($scope.selectedEvent);
-    $scope.participant.userID = $scope.user.uid;
+    $scope.participant.uid = $scope.user.uid;
     $scope.participant.username = $scope.user.profile.username;
     $scope.selectedEvent.numberParticipants = $scope.participants.length+1;
     // save changes made to selectedEvent (number of participants + 1)
@@ -44,6 +44,10 @@ app.controller('EventSignupController', function ($scope, $routeParams, $locatio
       });
   };
 
+  $scope.deleteParticipant = function() {
+    EventService.participants.deleteParticipant($scope.participant);
+  };
+
 
 
   // Message functionality
@@ -54,12 +58,11 @@ app.controller('EventSignupController', function ($scope, $routeParams, $locatio
   $scope.addPost = function (){
     $scope.post.creator = $scope.user.profile.username;
     $scope.post.creatorUID = $scope.user.uid;
-
-    EventService.posts.createPost($scope.selectedEvent.$id, $scope.post);
+    EventService.posts.createPost($scope.post);
   };
 
   $scope.deletePost = function(post){
-    EventService.posts.deletePost($scope.selectedEvent.$id, post);
+    EventService.posts.deletePost(post);
   };
 
 

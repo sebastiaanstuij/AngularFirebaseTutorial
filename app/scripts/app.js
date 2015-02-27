@@ -41,8 +41,8 @@ var app = angular
         controller: 'ProfileController'
       })
       .when('/calendar', {
-        templateUrl: '/views/calendar.html',
-        controller: 'CalendarController'
+        templateUrl: '/views/agenda.html',
+        controller: 'AgendaController'
       })
       .when('/event', {
         templateUrl: '/views/eventCreate.html',
