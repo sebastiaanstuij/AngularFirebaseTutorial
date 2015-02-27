@@ -9,7 +9,10 @@ app.factory('AuthService', function ($rootScope, $firebaseAuth, $firebase, FIREB
   var auth = {
     register: function (user) {
       cfpLoadingBar.start();
-      return AlertService.addProgressbar(firebaseAuthService.$createUser(user.email, user.password),true);
+      return AlertService.addProgressbar(firebaseAuthService.$createUser({
+        email: user.email,
+        password: user.password
+      }),true);
     },
     login: function(user){
       return AlertService.addProgressbar(firebaseAuthService.$authWithPassword({
