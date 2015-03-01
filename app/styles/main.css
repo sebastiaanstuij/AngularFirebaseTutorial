@@ -133,4 +133,7 @@ body {
 .fc-header-title h2 {
   font-size: 20px;
 }
+.addButton {
+  margin: -8px 0px;
+}
 
