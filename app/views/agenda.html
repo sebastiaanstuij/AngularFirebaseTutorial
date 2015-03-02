@@ -18,7 +18,7 @@
   <div class="col-md-8 col-md-offset-2 well">
     <legend>
       Upcoming events
-      <button ng-click="addNewEvent()" class="btn btn-primary addButton glyphicon glyphicon-plus pull-right"></button>
+      <button ng-click="addNewEvent()" class="btn btn-sm btn-primary glyphicon glyphicon-plus pull-right"></button>
     </legend>
       <div class="list-group" ng-repeat="event in allEvents | orderBy: 'startDate' | limitTo:3 ">
         <a href="#/event/{{event.$id}}" class="list-group-item">
@@ -33,7 +33,10 @@
   </div>
 
   <div class="col-md-8 col-md-offset-2 well">
-    <legend>Calendar</legend>
+    <legend>
+      Calendar
+      <button ng-click="addNewEvent()" class="btn btn-sm btn-primary glyphicon glyphicon-plus pull-right"></button>
+    </legend>
     <div ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="calendar"></div>
   </div>
 

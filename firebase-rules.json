@@ -37,13 +37,18 @@
 
       "$user_profile_id": {
         ".read": "(auth.uid === $user_profile_id)",
-        ".write": "(!data.exists() && auth.uid === $user_profile_id)"
+        ".write": "(!data.exists() && auth.uid === $user_profile_id)",
+
+        "username": {
+          ".validate": "!data.child(newData.child('username').val().replace(' ', '').toLowerCase()).exists()"
+        }
       }
-    },
 
 
-    // Don't let users post to other fields
-    "$other": { ".validate": false }
+      // Don't let users post to other fields
+      //"$other": { ".validate": false }
 
+    }
   }
+
 }
