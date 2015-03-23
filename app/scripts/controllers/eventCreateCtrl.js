@@ -29,6 +29,7 @@ app.controller('EventCreateController', function ($scope, $location, AlertServic
       $scope.event.end = moment($scope.endDate).format('YYYY/MM/DD HH:mm');
       $scope.event.id = $scope.allEvents.length+1;
       $scope.event.numberParticipants = 0;
+      $scope.event.full = false;
 
       // call the events service and create the new event
       EventService.events.create($scope.event).then(

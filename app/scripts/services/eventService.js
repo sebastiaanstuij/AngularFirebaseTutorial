@@ -18,7 +18,7 @@ app.factory('EventService', function ($firebase, FIREBASE_URL, AlertService) {
       },
       delete: function (event) {
         return events.$remove(event);
-      }
+      },
     },
     posts: {
       all: function(eventId){
