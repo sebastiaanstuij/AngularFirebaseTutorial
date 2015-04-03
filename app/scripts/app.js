@@ -22,7 +22,8 @@ var app = angular
     'ui.bootstrap.datetimepicker',
     'firebase',
     'xeditable',
-    'cfp.loadingBar'
+    'cfp.loadingBar',
+    'toggle-switch'
   ])
 
   .constant('FIREBASE_URL', 'https://resplendent-heat-2047.firebaseio.com/')

@@ -9,56 +9,40 @@
         <div class="form-group">
           <label class="col-lg-2 control-label">Rent a kite?</label>
           <div class="col-lg-10">
-            <div class="radio">
-              <label>
-                <input type="radio" ng-model="participant.kiteRent" name="kiteRentTrue" name ="kiteRent" id="kiteRentTrue" ng-value="true">
-                Yes
-              </label>
-            </div>
-            <div class="radio">
-              <label>
-                <input type="radio" ng-model="participant.kiteRent" name="kiteRentFalse" name ="kiteRent" id="kiteRentFalse" ng-value="false">
-                No
-              </label>
-            </div>
+            <toggle-switch
+              model="participant.kiteRent"
+              on-label="Yes"
+              off-label="No"
+              class="switch-success">
+              <toggle-switch>
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-lg-2 control-label">Share a kite?</label>
           <div class="col-lg-10">
-            <div class="radio">
-              <label>
-                <input type="radio" ng-model="participant.shareKite" name="shareKiteTrue" name ="shareKite" id="shareKiteTrue" ng-value="true">
-                Yes
-              </label>
-            </div>
-            <div class="radio">
-              <label>
-                <input type="radio" ng-model="participant.shareKite" name="shareKiteFalse" name ="shareKite" id="shareKiteFalse" ng-value="false">
-                No
-              </label>
-            </div>
+            <toggle-switch
+              model="participant.shareKite"
+              on-label="Yes"
+              off-label="No"
+              class="switch-success">
+              <toggle-switch>
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-lg-2 control-label">Drive the bus?</label>
           <div class="col-lg-10">
-            <div class="radio">
-              <label>
-                <input type="radio" ng-model="participant.busDriverVolunteer" name="busDriverTrue" name ="busDriver" id="busDriverTrue" ng-value="true">
-                Yes
-              </label>
-            </div>
-            <div class="radio">
-              <label>
-                <input type="radio" ng-model="participant.busDriverVolunteer" name="busDriverFalse" name ="busDriver" id="busDriverFalse" ng-value="false">
-                No
-              </label>
-            </div>
+            <toggle-switch
+              model="participant.busDriverVolunteer"
+              on-label="Yes"
+              off-label="No"
+              class="switch-success">
+              <toggle-switch>
           </div>
         </div>
+
+        <br><br>
 
         <div class="form-group">
           <div class="col-lg-8 col-lg-offset-2">

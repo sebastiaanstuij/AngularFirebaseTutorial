@@ -33,7 +33,6 @@ app.controller('EventSignupController', function ($scope, $routeParams, $locatio
 
   $scope.signup = function(){
     // first check if event is not fully booked already or that the user has not already subscribed
-    console.log($scope.userSubscribed);
     if (!$scope.selectedEvent.full && !$scope.userSubscribed) {
         $scope.participant.uid = $scope.user.uid;
         $scope.participant.username = $scope.user.profile.username;

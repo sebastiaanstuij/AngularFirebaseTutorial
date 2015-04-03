@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('AlertService', function ($rootScope, $timeout, cfpLoadingBar) {
+app.factory('AlertService', function ($rootScope, $timeout, $anchorScroll, cfpLoadingBar) {
 
   // create an array of alerts available globally
   $rootScope.alerts = [];
@@ -9,6 +9,7 @@ app.factory('AlertService', function ($rootScope, $timeout, cfpLoadingBar) {
     //all: messages,
     addAlert: function(type, msg) {
       $rootScope.alerts.push({'type': type, 'msg': msg});
+      $anchorScroll('navbar');
 
       $timeout(function(){
         alertService.closeAlert($rootScope.alerts.indexOf(alert));
