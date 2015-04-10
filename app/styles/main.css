@@ -38,7 +38,13 @@ body {
 }
 
 #navbarLogo {
-  height: inherit;
+  height: 125%;
+  margin-top: 6px;
+}
+
+#navbarImage {
+  height: 240%;
+  margin-top: -16px;
 }
 
 

@@ -23,7 +23,8 @@ var app = angular
     'firebase',
     'xeditable',
     'cfp.loadingBar',
-    'toggle-switch'
+    'toggle-switch',
+    'cropme'
   ])
 
   .constant('FIREBASE_URL', 'https://resplendent-heat-2047.firebaseio.com/')

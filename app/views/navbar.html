@@ -36,9 +36,9 @@
           </ul>
         </li>
         <li ng-show="signedIn()">
-          <a ng-href="#/profile/{{ user.uid }}" ng-click="doCollapse()">
-            <!--<img ng-src="http://www.gravatar.com/avatar/{{ user.profile.md5_hash }}" class="nav-pic" />-->
-            {{ user.profile.username }}
+          <a class="navbar-brand" ng-href="#/profile/{{ user.uid }}" ng-click="doCollapse()">
+            <img id="navbarImage" class="img-circle" ng-src="{{user.profile.profilePicture}}"  />
+            <!--{{ user.profile.username }}-->
           </a>
         <li ng-show="signedIn()">
           <a href="#/home" ng-click="logout()" ng-click="doCollapse()">Logout</a>

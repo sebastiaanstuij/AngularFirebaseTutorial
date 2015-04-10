@@ -27,6 +27,7 @@ app.controller('AuthController', function ($rootScope, $scope, $location, AuthSe
   $scope.register = function (isValid) {
     if (isValid) {
       var profile = {
+        profilePicture: $scope.user.image,
         firstName: $scope.user.firstName,
         lastName: $scope.user.lastName,
         username: $scope.user.username,
@@ -58,7 +59,22 @@ app.controller('AuthController', function ($rootScope, $scope, $location, AuthSe
         AlertService.addAlert('danger', error.message);
       });
     }
-  }
+  };
+
+  $scope.$on("cropme:done", function(e, result, canvasEl) {
+    console.log('crop geslaagd');
+    var reader = new window.FileReader();
+    // reader is an async call so we use it's 'onloadend' method to get the full
+    reader.readAsDataURL(result.croppedImage);
+    reader.onloadend = function() {
+      console.log(reader.result);
+      $scope.user.image = reader.result;
+
+      console.log($scope.user);
+    };
+  });
+
+
 
 });
 

@@ -5,6 +5,34 @@
       <p ng-show="error" class="text-danger">{{ error }}</p>
       <fieldset>
         <legend>Edit User Profile</legend>
+
+        <div class="form-group">
+          <label class="col-lg-2 control-label">Profile picture (optional)</label>
+          <div class="col-lg-10">
+            <cropme
+              width="300"
+              height="200"
+              ratio="1"
+              icon-class=""
+              type="png"
+              destination-width="200"
+              destination-height="200"
+              id="cropme1"
+              ok-label="Ok"
+              src="{{profilePic}}"
+              autocrop="true"
+              cancel-label="Cancel">
+            </cropme>
+          </div>
+        </div>
+
+        <div class="form-group" ng-show="user.image" >
+          <label class="col-lg-2 control-label">Profile picture result:</label>
+          <div class="col-lg-10">
+            <img ng-src="{{user.image}}" alt="Profile pic" height="200" width="200" />
+          </div>
+        </div>
+
         <div class="form-group" ng-class="{ 'has-error' : registerForm.$submitted && registerForm.email.$invalid}">
           <label for="inputEmail" class="col-lg-2 control-label">Email</label>
           <div class="col-lg-10">
