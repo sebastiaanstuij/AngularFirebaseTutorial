@@ -42,6 +42,10 @@ var app = angular
         templateUrl: 'views/profile.html',
         controller: 'ProfileController'
       })
+      .when('/user', {
+        templateUrl: 'views/user.html',
+        controller: 'UserController'
+      })
       .when('/calendar', {
         templateUrl: '/views/agenda.html',
         controller: 'AgendaController'

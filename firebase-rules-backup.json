@@ -1,0 +1,54 @@
+
+{
+  "rules": {
+    // default rules are false if not specified
+    // setting these to true would make ALL CHILD PATHS readable/writable
+    //".read": true,
+    //".write": true
+
+    "users": {
+      ".read": "(auth != null)",
+      ".write": true
+    },
+
+    "common": {
+      ".read": "(auth != null)",
+      ".write": "(auth != null && root.child('user_profiles').child(auth.uid).child('isAdmin').val() == true)"
+    },
+
+    "events": {
+      ".write": "(auth != null)",
+      ".read": "(auth != null)",
+
+      "$event_id": {
+        "posts": {
+          //".read": true,
+
+          "$post_id": {
+            ".validate": "((auth != null && !data.exists()) || data.child('creatorUID').val() === auth.uid)"
+          }
+        }
+      }
+    },
+
+    "user_profiles": {
+      //".read": "(data.child($user_profile_id).child('isAdmin').val() == true)",
+      ".read": "(auth != null && data.child(auth.uid).child('isAdmin').val() == true)",
+
+      "$user_profile_id": {
+        ".read": "(auth.uid === $user_profile_id)",
+        ".write": "(!data.exists() && auth.uid === $user_profile_id)",
+
+        "username": {
+          ".validate": "!data.child(newData.child('username').val().replace(' ', '').toLowerCase()).exists()"
+        }
+      }
+
+
+      // Don't let users post to other fields
+      //"$other": { ".validate": false }
+
+    }
+  }
+
+}
