@@ -39,22 +39,22 @@
 
 
         <li ng-show="signedIn()">
-        <a class="dropdown-toggle navbar-brand hidden-xs" data-toggle="dropdown" href="" aria-expanded="false">
-            <img id="navbarImage" class="img-circle hidden-xs" ng-src="{{user.profile.profilePicture}}"/>
-        </a>
-        <ul class="dropdown-menu">
-            <li><a href="#/profile/{{ user.uid }}" ng-click="doCollapse()">Edit profile</a></li>
-            <li class="divider"></li>
-            <li ng-show="isAdmin()"><a href="#/admin-users" ng-click="doCollapse()">User overview</a></li>
-            <li ng-show="isAdmin()"><a href="" ng-click="doCollapse()">Events overview</a></li>
-            <li ng-show="isAdmin()"><a href="#/admin-settings" ng-click="doCollapse()">Edit settings</a></li>
-            <li class="divider"></li>
-            <li><a href="#/home" ng-click="logout()" ng-click="doCollapse()">Logout</a></li>
+          <a class="dropdown-toggle navbar-brand hidden-xs" data-toggle="dropdown" href="" aria-expanded="false">
+              <img id="navbarImage" class="img-circle hidden-xs" ng-src="{{user.profile.profilePicture}}"/>
+          </a>
+          <ul class="dropdown-menu">
+              <li><a href="#/profile/{{ user.uid }}" ng-click="doCollapse()">Edit profile</a></li>
+              <li class="divider"></li>
+              <li ng-show="isAdmin()"><a href="#/admin-users" ng-click="doCollapse()">User overview</a></li>
+              <li ng-show="isAdmin()"><a href="" ng-click="doCollapse()">Events overview</a></li>
+              <li ng-show="isAdmin()"><a href="#/admin-settings" ng-click="doCollapse()">Edit settings</a></li>
+              <li class="divider"></li>
+              <li><a href="#/home" ng-click="logout()" ng-click="doCollapse()">Logout</a></li>
           </ul>
         </li>
         <li class="divider"></li>
         <li class="visible-xs" ng-class="{active: isActive('/user')}">
-          <a href="#/user" ng-click="doCollapse()">{{user.profile.username}}</a>
+          <a href="#/user/{{ user.uid }}" ng-click="doCollapse()">{{user.profile.username}}</a>
         </li>
         <li ng-hide="signedIn()" ng-class="{active: isActive('/login')}">
           <a href="#/login" ng-click="doCollapse()">Login</a>

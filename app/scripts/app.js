@@ -42,7 +42,7 @@ var app = angular
         templateUrl: 'views/profile.html',
         controller: 'ProfileController'
       })
-      .when('/user', {
+      .when('/user/:userId', {
         templateUrl: 'views/user.html',
         controller: 'UserController'
       })

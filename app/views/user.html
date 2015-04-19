@@ -1,21 +1,21 @@
-<div class="content home-section">
+<div class="content user-section">
 
-  <ul class="nav nav-pills">
-    <li class="active"><a href="#">Home</a></li>
-    <li><a href="#">Profile</a></li>
-    <li class="disabled"><a href="#">Disabled</a></li>
-    <li class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-        Dropdown <span class="caret"></span>
-      </a>
-      <ul class="dropdown-menu">
-        <li><a href="#">Action</a></li>
-        <li><a href="#">Another action</a></li>
-        <li><a href="#">Something else here</a></li>
-        <li class="divider"></li>
-        <li><a href="#">Separated link</a></li>
-      </ul>
-    </li>
-  </ul>
+  <div class="col-xs-12 col-md-10 col-md-offset-1">
+
+    <ul id="subnavbar" class="nav nav-pills">
+      <li><a href="#/admin-users">Dashboard</a></li>
+      <li><a href="#/admin-users">Profile</a></li>
+      <li ng-show="isAdmin()" ng-class="{active: isActive('/admin-users') || isActive('/admin-settings') }">
+        <a class="dropdown-toggle"  data-toggle="dropdown" href="" aria-expanded="false">
+          Admin <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li ng-class="{active: isActive('/admin-users')}"><a href="#/admin-users" ng-click="doCollapse()">User overview</a></li>
+          <li ng-class="{active: isActive('/admin-users')}"><a href="#/admin-users" ng-click="doCollapse()">Events overview</a></li>
+          <li ng-class="{active: isActive('/admin-settings')}"><a href="#/admin-settings" ng-click="doCollapse()">Edit settings</a></li>
+        </ul>
+      </li>
+    </ul>
+
+  </div>
 
 </div>
