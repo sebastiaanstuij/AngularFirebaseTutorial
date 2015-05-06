@@ -1,20 +1,44 @@
 <div class="navbar-section" ng-controller="NavbarController">
 
+  <!--slide in navmenu from the right side of the screen-->
+  <div class="navmenu navmenu-default navmenu-fixed-right offcanvas">
+    <a class="navmenu-brand">{{user.profile.username}} </a>
+
+    <ul class="nav navmenu-nav">
+      <li><a>Saldo: €{{user.profile.saldo}}</a></li>
+      <li><a href="#/profile/{{ user.uid }}" data-toggle="offcanvas" data-target=".navmenu">Profile</a></li>
+      <li class="dropdown" dropdown ng-show="isAdmin()">
+        <a role="button" class="dropdown-toggle" href="" dropdown-toggle>
+          Admin <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu navmenu-nav" data-toggle="offcanvas" data-target=".navmenu">
+          <li><a href="#/admin-events">Events</a></li>
+          <li><a href="#/admin-users">Users</a></li>
+          <li class="divider"></li>
+          <li><a href="#/admin-settings">Settings</a></li>
+        </ul>
+      </li>
+      <li><a href="#/home" ng-click="logout()" data-toggle="offcanvas" data-target=".navmenu">Logout</a></li>
+    </ul>
+  </div>
+
+  <!--navbar at the top of the screen-->
   <nav id="navbar" class="navbar navbar-inverse" role="navigation">
-    <!-- Brand and toggle get grouped for better mobile display -->
+    <!--Brand and toggle get grouped for better mobile display-->
     <div class="navbar-header">
+      <a class="navbar-brand" ng-href="#/home">
+        <img id="navbarLogo" src="images/Released-header.png" alt="">
+      </a>
       <button type="button" class="navbar-toggle" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" ng-href="#/home">
-        <img id="navbarLogo" src="images/Released-header.png" alt="">
-      </a>
     </div>
 
     <div id="navbarCollapse" collapse="isCollapsed" class="navbar-collapse collapse navbar-responsive-collapse">
+      <!--left navbar elements (desktop view)-->
       <ul class="nav navbar-nav">
         <li ng-class="{active: isActive('/home')}">
           <a ng-href="#/home" ng-click="doCollapse()">Home</a>
@@ -24,43 +48,36 @@
         </li>
       </ul>
 
+      <!--right navbar elements (desktop view)-->
       <ul class="nav navbar-nav navbar-right">
-        <!--<li class="dropdown" ng-show="isAdmin()" ng-class="{active: isActive('/admin-users') || isActive('/admin-settings') }">-->
-          <!--<a class="dropdown-toggle" data-toggle="dropdown" href="" aria-expanded="false">-->
-            <!--Admin <span class="caret"></span>-->
-          <!--</a>-->
-          <!--<ul class="dropdown-menu">-->
-            <!--<li ng-class="{active: isActive('/admin-users')}"><a href="#/admin-users" ng-click="doCollapse()">User overview</a></li>-->
-            <!--<li ng-class="{active: isActive('/admin-events')}"><a href="" ng-click="doCollapse()">Events overview</a></li>-->
-            <!--<li class="divider"></li>-->
-            <!--<li ng-class="{active: isActive('/admin-settings')}"><a href="#/admin-settings" ng-click="doCollapse()">Edit settings</a></li>-->
-          <!--</ul>-->
-        <!--</li>-->
-
-
         <li ng-show="signedIn()">
-          <a class="dropdown-toggle navbar-brand hidden-xs" data-toggle="dropdown" href="" aria-expanded="false">
-              <img id="navbarImage" class="img-circle hidden-xs" ng-src="{{user.profile.profilePicture}}"/>
+          <!--toggle the slide in navmenu to the right-->
+          <a class="dropdown-toggle navbar-brand hidden-xs" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body" href="" aria-expanded="false">
+              <img ng-if="user.profile.profilePicture" class="navbarImage img-circle hidden-xs" ng-src="{{user.profile.profilePicture}}"/>
+              <!--<img ng-if="!user.profile.profilePicture" class="navbarImage img-circle hidden-xs" ng-src="../images/default-avatar.gif"/>-->
           </a>
-          <ul class="dropdown-menu">
-              <li><a href="#/profile/{{ user.uid }}" ng-click="doCollapse()">Edit profile</a></li>
-              <li class="divider"></li>
-              <li ng-show="isAdmin()"><a href="#/admin-users" ng-click="doCollapse()">User overview</a></li>
-              <li ng-show="isAdmin()"><a href="" ng-click="doCollapse()">Events overview</a></li>
-              <li ng-show="isAdmin()"><a href="#/admin-settings" ng-click="doCollapse()">Edit settings</a></li>
-              <li class="divider"></li>
-              <li><a href="#/home" ng-click="logout()" ng-click="doCollapse()">Logout</a></li>
-          </ul>
         </li>
-        <li class="divider"></li>
         <li class="visible-xs" ng-class="{active: isActive('/user')}">
-          <a href="#/user/{{ user.uid }}" ng-click="doCollapse()">{{user.profile.username}}</a>
+          <a href="#/user/{{ user.uid }}" ng-click="doCollapse()">Profile settings</a>
+        </li>
+        <li class="dropdown visible-xs" dropdown ng-show="isAdmin()" ng-class="{active: isActive('/admin-users' || '/admin-events' || 'admin-settings')}">
+          <a role="button" class="dropdown-toggle" href="" dropdown-toggle>
+            Admin <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu navmenu-nav" data-toggle="navbar-collapse" data-target=".navmenu">
+            <li><a href="#/admin-events" ng-click="doCollapse()">Events</a></li>
+            <li><a href="#/admin-users" ng-click="doCollapse()">Users</a></li>
+            <li><a href="#/admin-settings" ng-click="doCollapse()">Settings</a></li>
+          </ul>
         </li>
         <li ng-hide="signedIn()" ng-class="{active: isActive('/login')}">
           <a href="#/login" ng-click="doCollapse()">Login</a>
         </li>
         <li ng-hide="signedIn()" ng-class="{active: isActive('/register')}">
           <a href="#/register" ng-click="doCollapse()">Register</a>
+        </li>
+        <li>
+          <a ng-show="signedIn()" class="visible-xs" href="#/home" ng-click="logout()" ng-click="doCollapse()">Logout</a>
         </li>
       </ul>
     </div>

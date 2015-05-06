@@ -6,7 +6,8 @@ app.controller('AuthController', function ($rootScope, $scope, $location, AuthSe
   $scope.user = {
     driversLicense: false,
     ownGear: false,
-    ownCar: false
+    ownCar: false,
+    image: null
   };
 
   if (AuthService.signedIn()) {
@@ -26,6 +27,9 @@ app.controller('AuthController', function ($rootScope, $scope, $location, AuthSe
 
   $scope.register = function (isValid) {
     if (isValid) {
+      if ($scope.user.image === null) {
+        $scope.user.image = "../images/default-avatar.gif"
+      }
       var profile = {
         profilePicture: $scope.user.image,
         firstName: $scope.user.firstName,
@@ -33,7 +37,7 @@ app.controller('AuthController', function ($rootScope, $scope, $location, AuthSe
         username: $scope.user.username,
         registrationDate: moment().format('YYYY/MM/DD hh:mm:ss'),
         email: $scope.user.email,
-        phone: $scope.user.phone,
+        phone: parseInt($scope.user.phone),
         level: $scope.user.level,
         driversLicense: $scope.user.driversLicense,
         ownGear: $scope.user.ownGear,

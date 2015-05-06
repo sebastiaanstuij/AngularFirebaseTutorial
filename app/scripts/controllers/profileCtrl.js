@@ -11,7 +11,7 @@ app.controller('ProfileController', function ($scope, $routeParams, $location, U
         lastName: $scope.user.lastName,
         username: $scope.user.username,
         email: $scope.user.email,
-        phone: $scope.user.phone,
+        phone: parseInt($scope.user.phone),
         level: $scope.user.level,
         driversLicense: $scope.user.driversLicense,
         ownGear: $scope.user.ownGear,

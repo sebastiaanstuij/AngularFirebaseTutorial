@@ -42,6 +42,8 @@ module.exports = function(config) {
       'bower_components/angular-bootstrap-toggle-switch/angular-toggle-switch.js',
       'bower_components/angular-superswipe/superswipe.js',
       'bower_components/angular-cropme/cropme.js',
+      'bower_components/bootstrap/dist/js/bootstrap.js',
+      'bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/angular-scenario/angular-scenario.js',
       // endbower
