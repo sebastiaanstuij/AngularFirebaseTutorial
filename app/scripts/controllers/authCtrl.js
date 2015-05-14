@@ -35,7 +35,7 @@ app.controller('AuthController', function ($rootScope, $scope, $location, AuthSe
         firstName: $scope.user.firstName,
         lastName: $scope.user.lastName,
         username: $scope.user.username,
-        registrationDate: moment().format('YYYY/MM/DD hh:mm:ss'),
+        registrationDate: moment().format('yyyy-mm-ddThh:mm:ss'),
         email: $scope.user.email,
         phone: parseInt($scope.user.phone),
         level: $scope.user.level,

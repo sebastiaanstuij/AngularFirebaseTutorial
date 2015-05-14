@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('AgendaController', function ($scope, $location, EventService, cfpLoadingBar) {
+app.controller('AgendaController', function ($scope, $location, EventService) {
   //config settings for calendar
   $scope.uiConfig = {
     calendar:{
@@ -10,6 +10,7 @@ app.controller('AgendaController', function ($scope, $location, EventService, cf
         left: 'title',
         right: 'basicWeek,month,prev,next'
       },
+      stick: true,
       eventClick: function(eventData){
         $scope.$apply(function(){
           $scope.gotoEvent(eventData)
@@ -23,7 +24,7 @@ app.controller('AgendaController', function ($scope, $location, EventService, cf
   };
 
   //get all events
-  $scope.allEvents = (EventService.events.all);
+  $scope.allEvents = EventService.events.all;
   $scope.eventSources = [$scope.allEvents];
 
 

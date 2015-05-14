@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('AuthService', function ($rootScope, $firebaseAuth, $firebase, FIREBASE_URL, cfpLoadingBar, AlertService) {
+app.factory('AuthService', function ($rootScope, $firebaseAuth, $firebaseObject, $firebaseArray, FIREBASE_URL, cfpLoadingBar, AlertService) {
   var ref = new Firebase(FIREBASE_URL);
   var onAuth = ref.onAuth.bind(ref);
   var firebaseAuthService = $firebaseAuth(ref);
@@ -24,11 +24,11 @@ app.factory('AuthService', function ($rootScope, $firebaseAuth, $firebase, FIREB
       firebaseAuthService.$unauth();
     },
     createProfile: function (user, profile) {
-      var profileRef = $firebase(ref.child('user_profiles'));
+      var profileRef =  $firebaseArray(ref.child('user_profiles'));
       if (user.uid){
-        return profileRef.$set(user.uid, profile);
+        return profileRef.$add(user.uid, profile);
       } else {
-        return profileRef.$set(user.$id, profile);
+        return profileRef.$add(user.$id, profile);
       }
     },
     resolveUser: function() {
@@ -58,7 +58,7 @@ app.factory('AuthService', function ($rootScope, $firebaseAuth, $firebase, FIREB
   onAuth(function(authData) {
     if (authData) {
       angular.copy(authData, auth.user);
-      auth.user.profile = $firebase(ref.child('user_profiles').child(auth.user.uid)).$asObject();
+      auth.user.profile = $firebaseObject(ref.child('user_profiles').child(auth.user.uid));
       console.log('($onAuth) Logged in as: ', auth.user.profile);
     } else {
       if(auth.user && auth.user.profile) {

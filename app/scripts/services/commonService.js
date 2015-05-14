@@ -1,8 +1,8 @@
 'use strict';
 
-app.factory('CommonService', function ($firebase, FIREBASE_URL) {
+app.factory('CommonService', function ($firebaseObject, $firebaseArray, FIREBASE_URL, AlertService) {
   var ref = new Firebase(FIREBASE_URL);
-  var locations = $firebase(ref.child('common').child('locations')).$asArray();
+  var locations = AlertService.addProgressbar($firebaseArray(ref.child('common').child('locations')));
 
   var Common = {
     locations: {
@@ -14,7 +14,7 @@ app.factory('CommonService', function ($firebase, FIREBASE_URL) {
         return locations.$save(location);
       },
       get: function (locationId) {
-        return $firebase(locations.child(locationId)).$asObject();
+        return $firebaseObject(locations.child(locationId));
       },
       delete: function (location) {
         return locations.$remove(location);

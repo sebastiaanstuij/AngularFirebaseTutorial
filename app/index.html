@@ -8,7 +8,7 @@
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <!-- build:css(.) styles/vendor.css -->
   <!-- bower:css -->
-  <link rel="stylesheet" href="bower_components/fullcalendar/fullcalendar.css" />
+  <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css" />
   <link rel="stylesheet" href="bower_components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css" />
   <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
   <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
@@ -21,6 +21,7 @@
   <!-- build:css(.tmp) styles/main.css -->
   <link rel="stylesheet" href="styles/bootswatch.css">
   <link rel="stylesheet" href="styles/main.css">
+  <!--<link rel="stylesheet" href="styles/jasny-bootstrap.css">-->
   <!-- endbuild -->
 
 
@@ -76,10 +77,9 @@
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
   <script src="bower_components/angular-touch/angular-touch.js"></script>
-  <script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
-  <script src="bower_components/fullcalendar/fullcalendar.js"></script>
-  <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
   <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/fullcalendar/dist/fullcalendar.js"></script>
+  <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
   <script src="bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
   <script src="bower_components/firebase/firebase.js"></script>
   <script src="bower_components/angularfire/dist/angularfire.js"></script>
@@ -96,7 +96,9 @@
 
   <!-- build:js({.tmp,app}) scripts/scripts.js -->
   <script src="scripts/app.js"></script>
-  <script src="scripts/thirdparty/bootstrap.js"></script>
+  <!-- TODO: jasny uit thirdparty en styles verwijderen indien bower versie goed werkt, anders moet bootstrap hier blijven staan-->
+  <!--<script src="scripts/thirdparty/bootstrap.js"></script>-->
+  <!--<script src="scripts/thirdparty/jasny-bootstrap.js"></script>-->
   <script src="scripts/services/postService.js"></script>
   <script src="scripts/services/authService.js"></script>
   <script src="scripts/services/eventService.js"></script>
