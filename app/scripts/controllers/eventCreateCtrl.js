@@ -24,9 +24,11 @@ app.controller('EventCreateController', function ($scope, $location, AlertServic
     // check if the form is valid before adding event
     if (isValid) {
       // add registrationdate and convert dates to strings for firebase
-      $scope.event.registrationDate = moment().format('yyyy-mm-ddThh:mm:ss');
-      $scope.event.start = moment($scope.startDate).format('yyyy-mm-ddThh:mm');
-      $scope.event.end = moment($scope.endDate).format('yyyy-mm-ddThh:mm');
+      //$scope.event.registrationDate = moment().format('YYYY/MM/DD HH:mm:ss');
+      //$scope.event.registrationDate = moment().format('yyyy-mm-ddThh:mm');
+      $scope.event.registrationDate = moment().format('YYYY-MM-DDTHH:mm:ss');
+      $scope.event.start = moment($scope.startDate).format('YYYY-MM-DDTHH:mm');
+      $scope.event.end = moment($scope.endDate).format('YYYY-MM-DDTHH:mm');
       $scope.event.id = $scope.allEvents.length+1;
       $scope.event.numberParticipants = 0;
       $scope.event.full = false;
