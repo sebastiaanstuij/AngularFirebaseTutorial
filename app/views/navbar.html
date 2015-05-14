@@ -7,18 +7,7 @@
     <ul class="nav navmenu-nav">
       <li><a>Saldo: €{{user.profile.saldo}}</a></li>
       <li><a href="#/profile/{{ user.uid }}" data-toggle="offcanvas" data-target=".navmenu">Profile</a></li>
-      <li class="dropdown" dropdown ng-show="isAdmin()">
-        <a role="button" class="dropdown-toggle" href="" dropdown-toggle>
-          Admin <b class="caret"></b>
-        </a>
-        <!-- TODO: change to admin sub navbar-->
-        <ul class="dropdown-menu navmenu-nav" data-toggle="offcanvas" data-target=".navmenu">
-          <li><a href="#/admin/events">Events</a></li>
-          <li><a href="#/admin/users">Users</a></li>
-          <li class="divider"></li>
-          <li><a href="#/admin/settings">Settings</a></li>
-        </ul>
-      </li>
+      <li ng-show="signedIn() && isAdmin()"><a href="#/admin/events" data-toggle="offcanvas" data-target=".navmenu">Admin</a></li>
       <li><a href="#/home" ng-click="logout()" data-toggle="offcanvas" data-target=".navmenu">Logout</a></li>
     </ul>
   </div>
@@ -57,18 +46,11 @@
               <img ng-if="user.profile.profilePicture" class="navbarImage img-circle hidden-xs" ng-src="{{user.profile.profilePicture}}"/>
           </a>
         </li>
-        <li class="visible-xs" ng-class="{active: isActive('/user')}">
-          <a href="#/user/{{ user.uid }}" ng-click="doCollapse()">Profile settings</a>
+        <li ng-show="signedIn()" class="visible-xs" ng-class="{active: isActive('/user')}">
+          <a href="#/profile/{{ user.uid }}" ng-click="doCollapse()">Profile</a>
         </li>
-        <li class="dropdown visible-xs" dropdown ng-show="isAdmin()" ng-class="{active: isActive('/admin/')}">
-          <a role="button" class="dropdown-toggle" href="" dropdown-toggle>
-            Admin <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu navmenu-nav" data-toggle="navbar-collapse" data-target=".navmenu">
-            <li><a href="#/admin/events" ng-click="doCollapse()">Events</a></li>
-            <li><a href="#/admin/users" ng-click="doCollapse()">Users</a></li>
-            <li><a href="#/admin/settings" ng-click="doCollapse()">Settings</a></li>
-          </ul>
+        <li ng-show="signedIn() && isAdmin()" class="visible-xs" ng-class="{active: isActive('/user')}">
+          <a href="#/admin/events" ng-click="doCollapse()">Admin</a>
         </li>
         <li ng-hide="signedIn()" ng-class="{active: isActive('/login')}">
           <a href="#/login" ng-click="doCollapse()">Login</a>
@@ -85,21 +67,11 @@
 
 
   <!--extra admin navbar (depends on url)-->
-  <div id="adminSubNavbar">
-    <ul class="nav nav-tabs" ng-show="isAdmin && isAdminRoute()">
-      <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-      <li><a href="#profile" data-toggle="tab">Profile</a></li>
-      <li class="disabled"><a>Disabled</a></li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          Dropdown <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="#dropdown1" data-toggle="tab">Action</a></li>
-          <li class="divider"></li>
-          <li><a href="#dropdown2" data-toggle="tab">Another action</a></li>
-        </ul>
-      </li>
+  <div id="adminSubNavbar" ng-show="isAdmin && isAdminRoute()">
+    <ul class="nav nav-tabs">
+      <li ng-class="{active: isActive('/admin/events')}"><a href="#/admin/events">Events</a></li>
+      <li ng-class="{active: isActive('/admin/users')}"><a href="#/admin/users">Users</a></li>
+      <li ng-class="{active: isActive('/admin/settings')}"><a href="#/admin/settings">Settings</a></li>
     </ul>
   </div>
 

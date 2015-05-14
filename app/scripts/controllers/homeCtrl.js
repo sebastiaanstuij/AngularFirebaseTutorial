@@ -2,6 +2,6 @@
 
 app.controller('HomeController', function ($scope, $location) {
 
-  //TODO
+  //TODO: empty
 
 });

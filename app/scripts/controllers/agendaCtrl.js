@@ -1,6 +1,12 @@
 'use strict';
 
 app.controller('AgendaController', function ($scope, $location, EventService) {
+  $scope.eventClick =  function(eventData) {
+    $scope.$apply(function () {
+      $location.path('/event/'+ eventData.$id);
+    });
+  };
+
   //config settings for calendar
   $scope.uiConfig = {
     calendar:{
@@ -10,23 +16,13 @@ app.controller('AgendaController', function ($scope, $location, EventService) {
         left: 'title',
         right: 'basicWeek,month,prev,next'
       },
-      stick: true,
-      eventClick: function(eventData){
-        $scope.$apply(function(){
-          $scope.gotoEvent(eventData)
-        });
-      }
+      eventClick: $scope.eventClick
     }
-  };
-
-  $scope.gotoEvent = function(eventData){
-    $location.path('/event/'+ eventData.$id);
   };
 
   //get all events
   $scope.allEvents = EventService.events.all;
   $scope.eventSources = [$scope.allEvents];
-
 
   // call eventservice to modify selected event
   $scope.getEvent = function(event){

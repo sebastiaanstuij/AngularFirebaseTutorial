@@ -36,7 +36,6 @@ var app = angular
       })
       .when('/home', {
         templateUrl: '../views/home.html',
-        //TODO: staat nog niks in deze controller
         controller: 'HomeController'
       })
       .when('/profile/:userId', {
@@ -59,9 +58,13 @@ var app = angular
         templateUrl: '/views/eventSignup.html',
         controller: 'EventSignupController'
       })
+      .when('/admin/events', {
+        templateUrl: '../views/admin-events-overview.html',
+        controller: 'AdminEventsController'
+      })
       .when('/admin/users', {
-        templateUrl: '../views/admin-user-overview.html',
-        controller: 'AdminUserController'
+        templateUrl: '../views/admin-users-overview.html',
+        controller: 'AdminUsersController'
       })
       .when('/admin/users/:userId', {
         templateUrl: '../views/admin-user-edit.html',

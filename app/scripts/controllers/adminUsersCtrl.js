@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('AdminUserController', function ($scope, $routeParams, $filter, $location,
+app.controller('AdminUsersController', function ($scope, $routeParams, $filter, $location,
                                                 AlertService, AuthService, UserService) {
   // reference to Firebase user profiles
   $scope.users = UserService.all;

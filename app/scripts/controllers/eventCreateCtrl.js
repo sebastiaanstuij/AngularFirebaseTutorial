@@ -9,6 +9,7 @@ app.controller('EventCreateController', function ($scope, $location, AlertServic
   $scope.eventSources = [$scope.allEvents];
 
   //Declare a new event property which will be filled by the view
+  //TODO:(stick property is needed for angular-ui calendar, this keeps events in place when switching between months)
   $scope.event = {
     title:'',
     maxNumberParticipants: '',
@@ -16,7 +17,8 @@ app.controller('EventCreateController', function ($scope, $location, AlertServic
     registrationDate: '',
     start: '',
     end: '',
-    id:''
+    id:'',
+    stick: true
   }
 
   // Call eventservice to add new event
