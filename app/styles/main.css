@@ -47,11 +47,8 @@ body {
   margin-top: -16px;
 }
 
-#subnavbar {
-  margin-bottom: 23px;
-  list-style: none;
-  background-color: #f5f5f5;
-  border-radius: 3px;
+#adminSubNavbar {
+  margin: 15px 20px;
 }
 
 /* Custom page header */

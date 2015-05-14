@@ -85,21 +85,23 @@
 
 
   <!--extra admin navbar (depends on url)-->
-  <ul class="nav nav-tabs" ng-show="isAdmin && isAdminRoute()">
-    <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-    <li><a href="#profile" data-toggle="tab">Profile</a></li>
-    <li class="disabled"><a>Disabled</a></li>
-    <li class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-        Dropdown <span class="caret"></span>
-      </a>
-      <ul class="dropdown-menu">
-        <li><a href="#dropdown1" data-toggle="tab">Action</a></li>
-        <li class="divider"></li>
-        <li><a href="#dropdown2" data-toggle="tab">Another action</a></li>
-      </ul>
-    </li>
-  </ul>
+  <div id="adminSubNavbar">
+    <ul class="nav nav-tabs" ng-show="isAdmin && isAdminRoute()">
+      <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+      <li><a href="#profile" data-toggle="tab">Profile</a></li>
+      <li class="disabled"><a>Disabled</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          Dropdown <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#dropdown1" data-toggle="tab">Action</a></li>
+          <li class="divider"></li>
+          <li><a href="#dropdown2" data-toggle="tab">Another action</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
 
   <div>
     <alert class="animate" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{ alert.msg }}</alert>
