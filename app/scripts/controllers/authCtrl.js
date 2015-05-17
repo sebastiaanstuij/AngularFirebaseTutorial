@@ -1,17 +1,19 @@
 'use strict';
 
-app.controller('AuthController', function ($rootScope, $scope, $location, AuthService, AlertService) {
+app.controller('AuthController', function ($rootScope, $routeParams, $scope, $location, UserService, AuthService, AlertService) {
 
-  //set default visible values
-  $scope.user = {
-    driversLicense: false,
-    ownGear: false,
-    ownCar: false,
-    image: null
-  };
-
-  if (AuthService.signedIn()) {
-    $location.path('/');
+  // check whether existing user is being modified
+  if($routeParams.userId) {
+    $scope.user = UserService.get($routeParams.userId);
+  } else{
+    // a new user is being added
+    // set default visible values
+    $scope.user = {
+      driversLicense: false,
+      ownGear: false,
+      ownCar: false,
+      image: null
+    };
   }
 
   $scope.login = function () {
@@ -47,7 +49,6 @@ app.controller('AuthController', function ($rootScope, $scope, $location, AuthSe
         isAdmin: false,
         verified: false
       };
-
       AuthService.register($scope.user).then(function () {
         return AuthService.login($scope.user).then(function (loggedInUser) {
           return AuthService.createProfile(loggedInUser, profile).then(function () {
@@ -65,19 +66,48 @@ app.controller('AuthController', function ($rootScope, $scope, $location, AuthSe
     }
   };
 
+  $scope.editUser = function (isValid) {
+    if (isValid) {
+      var profile = {
+        profilePicture: $scope.user.image,
+        firstName: $scope.user.firstName,
+        lastName: $scope.user.lastName,
+        username: $scope.user.username,
+        email: $scope.user.email,
+        phone: parseInt($scope.user.phone),
+        level: $scope.user.level,
+        driversLicense: $scope.user.driversLicense,
+        ownGear: $scope.user.ownGear,
+        ownCar: $scope.user.ownCar,
+        busdriver: $scope.user.busdriver,
+        isAdmin: $scope.user.isAdmin,
+        verified: $scope.user.verified,
+        saldo: $scope.user.saldo
+      };
+
+      AuthService.createProfile($scope.user, profile).then(
+        function () {
+          console.log('Successfully edited user: ' + $scope.user);
+          AlertService.addAlert('success', 'Successfully updated: ' + $scope.user.username);
+        },
+        function (error) {
+          console.log(error);
+          AlertService.addAlert('danger', error.message);
+        }).then(function () {
+          $location.path('/home');
+        });
+    }
+  };
+
+
   $scope.$on("cropme:done", function(e, result, canvasEl) {
-    console.log('crop geslaagd');
     var reader = new window.FileReader();
     // reader is an async call so we use it's 'onloadend' method to get the full
     reader.readAsDataURL(result.croppedImage);
     reader.onloadend = function() {
-      console.log(reader.result);
       $scope.user.image = reader.result;
-
-      console.log($scope.user);
     };
   });
-
 
 
 });

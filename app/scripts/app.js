@@ -38,9 +38,17 @@ var app = angular
         templateUrl: '../views/home.html',
         controller: 'HomeController'
       })
+      .when('/register', {
+        templateUrl: 'views/register.html',
+        controller: 'AuthController'
+      })
+      .when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'AuthController'
+      })
       .when('/profile/:userId', {
         templateUrl: 'views/profile.html',
-        controller: 'ProfileController'
+        controller: 'AuthController'
       })
       .when('/user/:userId', {
         templateUrl: 'views/user.html',
@@ -73,14 +81,6 @@ var app = angular
       .when('/admin/settings', {
         templateUrl: 'views/admin-settings.html',
         controller: 'AdminSettingsController'
-      })
-      .when('/register', {
-        templateUrl: 'views/register.html',
-        controller: 'AuthController'
-      })
-      .when('/login', {
-        templateUrl: 'views/login.html',
-        controller: 'AuthController'
       })
       .otherwise({
         redirectTo: '/home'

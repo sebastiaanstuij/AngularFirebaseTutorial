@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('AuthService', function ($rootScope, $firebaseAuth, $firebaseObject, $firebaseArray, FIREBASE_URL, cfpLoadingBar, AlertService) {
+app.factory('AuthService', function ($rootScope, $q, $location, $firebaseAuth, $firebaseObject, $firebaseArray, FIREBASE_URL, cfpLoadingBar, AlertService) {
   var ref = new Firebase(FIREBASE_URL);
   var onAuth = ref.onAuth.bind(ref);
   var firebaseAuthService = $firebaseAuth(ref);
@@ -24,12 +24,17 @@ app.factory('AuthService', function ($rootScope, $firebaseAuth, $firebaseObject,
       firebaseAuthService.$unauth();
     },
     createProfile: function (user, profile) {
-      var profileRef =  $firebaseArray(ref.child('user_profiles'));
-      if (user.uid){
-        return profileRef.$add(user.uid, profile);
-      } else {
-        return profileRef.$add(user.$id, profile);
-      }
+      // firebase set/promise construction because angularFire.$set method has changed
+      var deferred = $q.defer();
+      var profileRef =  ref.child('user_profiles/' + user.uid);
+      profileRef.set(profile, function(error){
+        if(!error) {
+          deferred.resolve(ref);
+        } else {
+          console('createProfile failed');
+        }
+      });
+      return deferred.resolve(ref);
     },
     resolveUser: function() {
       return firebaseAuthService.$getAuth();
@@ -57,10 +62,15 @@ app.factory('AuthService', function ($rootScope, $firebaseAuth, $firebaseObject,
 
   onAuth(function(authData) {
     if (authData) {
+      // copy authenticated user data to user object
       angular.copy(authData, auth.user);
+      // get profile data and assign it to authenticated user object
       auth.user.profile = $firebaseObject(ref.child('user_profiles').child(auth.user.uid));
       console.log('($onAuth) Logged in as: ', auth.user.profile);
+      // after user is logged in -> go to home page
+      //$location.path('/');
     } else {
+      // if no authData is received then the user is not logged in and all relevant data is removed
       if(auth.user && auth.user.profile) {
         auth.user.profile.$destroy();
       }
