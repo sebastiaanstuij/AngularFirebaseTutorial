@@ -24,7 +24,7 @@ var app = angular
     'xeditable',
     'cfp.loadingBar',
     'toggle-switch',
-    'cropme'
+    'ngImgCrop'
   ])
 
   .constant('FIREBASE_URL', 'https://resplendent-heat-2047.firebaseio.com/')

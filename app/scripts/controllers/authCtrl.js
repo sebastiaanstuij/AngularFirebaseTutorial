@@ -1,6 +1,11 @@
 'use strict';
 
 app.controller('AuthController', function ($rootScope, $routeParams, $scope, $location, UserService, AuthService, AlertService) {
+  // profile picture variables
+  $scope.image = null;
+  $scope.croppedImage = null;
+  $scope.showCroppedImage = false;
+
 
   // check whether existing user is being modified
   if($routeParams.userId) {
@@ -11,8 +16,7 @@ app.controller('AuthController', function ($rootScope, $routeParams, $scope, $lo
     $scope.user = {
       driversLicense: false,
       ownGear: false,
-      ownCar: false,
-      image: null
+      ownCar: false
     };
   }
 
@@ -29,11 +33,11 @@ app.controller('AuthController', function ($rootScope, $routeParams, $scope, $lo
 
   $scope.register = function (isValid) {
     if (isValid) {
-      if ($scope.user.image === null) {
-        $scope.user.image = "../images/default-avatar.gif"
+      if ($scope.croppedImage === null) {
+        $scope.croppedImage = "../images/default-avatar.gif"
       }
       var profile = {
-        profilePicture: $scope.user.image,
+        profilePicture: $scope.croppedImage,
         firstName: $scope.user.firstName,
         lastName: $scope.user.lastName,
         username: $scope.user.username,
@@ -67,9 +71,17 @@ app.controller('AuthController', function ($rootScope, $routeParams, $scope, $lo
   };
 
   $scope.editUser = function (isValid) {
+    console.log($scope.user.profilePicture);
+    console.log($scope.croppedImage);
+
     if (isValid) {
+
+      if ($scope.croppedImage) {
+        $scope.user.profilePicture = $scope.croppedImage;
+      }
+
       var profile = {
-        profilePicture: $scope.user.image,
+        profilePicture: $scope.user.profilePicture,
         firstName: $scope.user.firstName,
         lastName: $scope.user.lastName,
         username: $scope.user.username,
@@ -87,7 +99,7 @@ app.controller('AuthController', function ($rootScope, $routeParams, $scope, $lo
 
       AuthService.createProfile($scope.user, profile).then(
         function () {
-          console.log('Successfully edited user: ' + $scope.user);
+          console.log('Successfully edited user: ' + $scope.user.username);
           AlertService.addAlert('success', 'Successfully updated: ' + $scope.user.username);
         },
         function (error) {
@@ -99,17 +111,21 @@ app.controller('AuthController', function ($rootScope, $routeParams, $scope, $lo
     }
   };
 
-
-  $scope.$on("cropme:done", function(e, result, canvasEl) {
-    var reader = new window.FileReader();
-    // reader is an async call so we use it's 'onloadend' method to get the full
-    reader.readAsDataURL(result.croppedImage);
-    reader.onloadend = function() {
-      $scope.user.image = reader.result;
+  // function to handle the profile photo file after selection
+  var handleFileSelect = function(evt) {
+    var file=evt.currentTarget.files[0];
+    var reader = new FileReader();
+    reader.onload = function (evt) {
+      $scope.$apply(function($scope){
+        $scope.image = evt.target.result;
+        $scope.showCroppedImage = true;
+      });
     };
-  });
+    reader.readAsDataURL(file);
+  };
 
-
+  //jQuery on change event for triggering handleFileSelect function after profile photo is selected from files
+  angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
 });
 
 

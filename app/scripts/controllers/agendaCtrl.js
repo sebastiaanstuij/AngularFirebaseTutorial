@@ -10,7 +10,7 @@ app.controller('AgendaController', function ($scope, $location, EventService) {
   //config settings for calendar
   $scope.uiConfig = {
     calendar:{
-      height: 350,
+      height: 400,
       editable: false,
       header:{
         left: 'title',

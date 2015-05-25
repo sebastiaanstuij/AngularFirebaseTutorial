@@ -26,15 +26,16 @@ app.factory('AuthService', function ($rootScope, $q, $location, $firebaseAuth, $
     createProfile: function (user, profile) {
       // firebase set/promise construction because angularFire.$set method has changed
       var deferred = $q.defer();
-      var profileRef =  ref.child('user_profiles/' + user.uid);
+      var profileRef =  ref.child('user_profiles/' + user.$id);
       profileRef.set(profile, function(error){
         if(!error) {
           deferred.resolve(ref);
         } else {
+          deferred.reject('createProfile promise failed');
           console('createProfile failed');
         }
       });
-      return deferred.resolve(ref);
+      return deferred.promise;
     },
     resolveUser: function() {
       return firebaseAuthService.$getAuth();

@@ -138,6 +138,15 @@ body {
 }
 
 
+/*profile styling*/
+.cropArea {
+  background: #E4E4E4;
+  overflow: hidden;
+  width:350px;
+  height:350px;
+}
+
+
 /*calendar styling*/
 .fc-header-title h2 {
   font-size: 20px;
