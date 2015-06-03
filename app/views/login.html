@@ -2,10 +2,10 @@
 
   <div class="col-xs-10 col-md-6 col-xs-offset-1 col-md-offset-3 well">
     <h3>Log in</h3>
-    <form ng-submit="login()">
+    <form ng-submit="login()" name="login-form" autocomplete="on">
       <p ng-show="error" class="text-danger">{{ error }}</p>
-      <input type="email" ng-model="user.email" placeholder="Email" class="form-control"><br>
-      <input type="password" ng-model="user.password" placeholder="Password" class="form-control"><br>
+      <input type="email" ng-model="user.email" placeholder="Email" class="form-control" autocomplete="on"><br>
+      <input type="password" ng-model="user.password" placeholder="Password" class="form-control" autocomplete="on"><br>
       <a href="#/home" class="btn btn-default">Cancel</a>
       <input type="submit" value="Log in" class="btn btn-primary" />
     </form>

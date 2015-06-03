@@ -76,6 +76,7 @@ app.factory('AuthService', function ($rootScope, $q, $location, $firebaseAuth, $
         auth.user.profile.$destroy();
       }
       angular.copy({}, auth.user);
+      $location.path('/home');
       console.log('($onAuth) Logged out');
     }
   });

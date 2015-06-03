@@ -148,7 +148,12 @@ body {
 
 
 /*calendar styling*/
-.fc-header-title h2 {
-  font-size: 20px;
+.fc-toolbar h2 {
+  font-size: 23px;
+  font-weight: 600;
+}
+
+#addNewEventButton {
+  margin-bottom: 20px;
 }
 

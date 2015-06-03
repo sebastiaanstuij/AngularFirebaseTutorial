@@ -1,6 +1,10 @@
-<div class="content calendar-section">
+<div class="content calendar-section col-md-8 col-md-offset-2">
 
-  <div class="col-md-8 col-md-offset-2 well">
+  <div id="addNewEventButton">
+    <button class="btn btn-default btn-lg btn-primary btn-block" ng-click="addNewEvent()">Add new event</button>
+  </div>
+
+  <div class="well">
     <legend>
       My events
     </legend>
@@ -12,13 +16,12 @@
         <span class="badge">{{event.numberParticipants}} / {{event.maxNumberParticipants}}</span>
       </a>
     </div>
-    <div ng-show="!!!myEvents.length">You have no upcoming events</div>
+    <div ng-show="!myEvents.length">You have no upcoming events</div>
   </div>
 
-  <div class="col-md-8 col-md-offset-2 well">
+  <div class="well">
     <legend>
       Upcoming events
-      <button ng-click="addNewEvent()" class="btn btn-sm btn-primary glyphicon glyphicon-plus pull-right"></button>
     </legend>
       <div class="list-group" ng-repeat="event in allEvents | orderBy: 'startDate' | limitTo:3 ">
         <a href="#/event/{{event.$id}}" class="list-group-item">
@@ -29,13 +32,11 @@
         </a>
       </div>
     <div ng-show="!!!allEvents.length">There are no upcoming events</div>
-
   </div>
 
-  <div class="col-md-8 col-md-offset-2 well">
+  <div class="well">
     <legend>
       Calendar
-      <button ng-click="addNewEvent()" class="btn btn-sm btn-primary glyphicon glyphicon-plus pull-right"></button>
     </legend>
     <div ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="calendar"></div>
   </div>
