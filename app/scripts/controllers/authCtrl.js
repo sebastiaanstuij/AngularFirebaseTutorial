@@ -23,7 +23,6 @@ app.controller('AuthController', function ($rootScope, $routeParams, $scope, $lo
   $scope.login = function () {
     AuthService.login($scope.user).then(function () {
       $location.path('/');
-      //console.log('Successfully logged in as: ' + $scope.user.username);
       AlertService.addAlert('success', 'Successfully logged in as: ' + $scope.user.email);
     }, function (error) {
       console.log(error);

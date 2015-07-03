@@ -22,7 +22,7 @@ var app = angular
     'ui.bootstrap.datetimepicker',
     'firebase',
     'xeditable',
-    'cfp.loadingBar',
+    'angular-loading-bar',
     'toggle-switch',
     'ngImgCrop'
   ])
@@ -101,4 +101,22 @@ var app = angular
       console.log(error);
       AlertService.addAlert('danger', 'You need to login before you can go to this page');
     });
+  }])
+
+  .config(['$provide', function($provide) {
+    // adapt ng-cloak to wait for auth before it does its magic
+    $provide.decorator('ngCloakDirective', ['$delegate', 'AuthService',
+      function($delegate, AuthService) {
+        var directive = $delegate[0];
+        // make a copy of the old directive
+        var _compile = directive.compile;
+        directive.compile = function(element, attr) {
+          AuthService.waitForAuth().then(function() {
+            // after auth, run the original ng-cloak directive
+            _compile.call(directive, element, attr);
+          });
+        };
+        // return the modified directive
+        return $delegate;
+      }]);
   }]);

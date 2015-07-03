@@ -14,11 +14,14 @@ app.factory('AuthService', function ($rootScope, $q, $location, $firebaseAuth, $
         password: user.password
       }),true);
     },
+    //TODO: Hook for addProgressbar
     login: function(user){
-      return AlertService.addProgressbar(firebaseAuthService.$authWithPassword({
+      return firebaseAuthService.$authWithPassword({
         email: user.email,
         password: user.password
-      }), true);
+      }).catch(function(error) {
+        console.error("Authentication failed:", error);
+      });
     },
     logout: function() {
       firebaseAuthService.$unauth();
@@ -42,6 +45,9 @@ app.factory('AuthService', function ($rootScope, $q, $location, $firebaseAuth, $
     },
     waitForAuth: function() {
       return firebaseAuthService.$waitForAuth();
+      // this method is called before angular bindings kick in (ng-cloak),
+      // so the user is resolved in all controllers/services that need it before the page continues loading
+      // this will also fire the onAuth method and copy profile information to the logged in user
     },
     requireAuth: function() {
       return firebaseAuthService.$requireAuth();
@@ -68,8 +74,6 @@ app.factory('AuthService', function ($rootScope, $q, $location, $firebaseAuth, $
       // get profile data and assign it to authenticated user object
       auth.user.profile = $firebaseObject(ref.child('user_profiles').child(auth.user.uid));
       console.log('($onAuth) Logged in as: ', auth.user.profile);
-      // after user is logged in -> go to home page
-      //$location.path('/');
     } else {
       // if no authData is received then the user is not logged in and all relevant data is removed
       if(auth.user && auth.user.profile) {

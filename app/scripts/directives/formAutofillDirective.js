@@ -11,6 +11,7 @@
 //});
 
 //TODO: directive voor password autocomplete (nog niet geïmplementeerd)
+//http://timothy.userapp.io/post/63412334209/form-autocomplete-and-remember-password-with
 app.directive("ngLoginSubmit", function(){
   return {
     restrict: "A",

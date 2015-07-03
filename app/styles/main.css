@@ -157,3 +157,22 @@ body {
   margin-bottom: 20px;
 }
 
+/*event styling*/
+.overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color:#eee;
+  z-index:5;
+  opacity:0.7;
+  width: 100%;
+  height: 100%;
+}
+
+#editSignup {
+  position: relative;
+  top: 86%;
+  left: 20px;
+}

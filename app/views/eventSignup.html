@@ -1,7 +1,8 @@
 <div class="content event-forms">
 
   <div class="col-xs-10 col-xs-offset-1 well">
-    <form name="signupForm" class="form-horizontal" ng-submit="signup()" novalidate>
+
+    <form name="signupForm" class="form-horizontal" novalidate ng-class="{'greyed-form': userSubscribed && !editParticipant}">
       <p ng-show="error" class="text-danger">{{ error }}</p>
       <fieldset>
         <legend>{{selectedEvent.title}}</legend>
@@ -45,14 +46,17 @@
         <br><br>
 
         <div class="form-group">
-          <div class="col-lg-8 col-lg-offset-2">
+          <div class="col-lg-8 col-lg-offset-2" ng-hide="userSubscribed && !editParticipant">
             <a href="#/calendar" class="btn btn-default">Cancel</a>
-            <button type="submit" class="btn btn-primary" ng-hide="participant.signedUp === true">Sign up for event</button>
-            <button type="submit" class="btn btn-warning" ng-show="participant.signedUp === true">Edit registration</button>
-            <!--ng-class="{'disabled': participant.signedUp === true}"-->
+            <button type="submit" class="btn btn-primary" ng-click="signup()">Sign up for event</button>
+            <!--ng-class="{'disabled': userSubscribed}"-->
           </div>
         </div>
       </fieldset>
+
+      <div class="overlay" ng-show="userSubscribed && !editParticipant" >
+        <button id="editSignup" ng-click="editSubscription()" class="btn btn-warning">Edit registration</button>
+      </div>
     </form>
   </div>
 

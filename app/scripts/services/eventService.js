@@ -38,10 +38,14 @@ app.factory('EventService', function ($firebaseObject, $firebaseArray, FIREBASE_
         return participants
       },
       addParticipant: function (eventId, participant) {
-        return $firebaseArray(ref.child('events').child(eventId).child('participants')).$add(participant.uid, participant);
+        return ref.child('events').child(eventId).child('participants').child(participant.uid).set(participant);
       },
       deleteParticipant: function (eventId, participant) {
         return $firebaseArray(ref.child('events').child(eventId).child('participants')).$remove(participant);
+      },
+      //TODO: je kunt op deze manier niet saven, moet via het evenement waarschijnlijk...
+      updateParticipant: function (eventId, participant) {
+        return $firebaseArray(ref.child('events').child(eventId).child('participants')).$save(participant.uid);
       }
     }
   };
