@@ -171,7 +171,13 @@ body {
   height: 100%;
 }
 
-#editSignup {
+#editSubscription {
+  position: relative;
+  top: 86%;
+  left: 20px;
+}
+
+#removeSubscription {
   position: relative;
   top: 86%;
   left: 20px;

@@ -63,8 +63,8 @@ app.controller('AuthController', function ($rootScope, $routeParams, $scope, $lo
           $location.path('/home');
         });
       }, function (error) {
-        console.log(error);
         AlertService.addAlert('danger', error.message);
+        console.log(error);
       });
     }
   };

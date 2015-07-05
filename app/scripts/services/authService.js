@@ -8,20 +8,18 @@ app.factory('AuthService', function ($rootScope, $q, $location, $firebaseAuth, $
 
   var auth = {
     register: function (user) {
-      cfpLoadingBar.start();
       return AlertService.addProgressbar(firebaseAuthService.$createUser({
         email: user.email,
         password: user.password
       }),true);
     },
-    //TODO: Hook for addProgressbar
     login: function(user){
-      return firebaseAuthService.$authWithPassword({
+      return AlertService.addProgressbar(firebaseAuthService.$authWithPassword({
         email: user.email,
         password: user.password
       }).catch(function(error) {
         console.error("Authentication failed:", error);
-      });
+      }), true);
     },
     logout: function() {
       firebaseAuthService.$unauth();
@@ -34,8 +32,7 @@ app.factory('AuthService', function ($rootScope, $q, $location, $firebaseAuth, $
         if(!error) {
           deferred.resolve(ref);
         } else {
-          deferred.reject('createProfile promise failed');
-          console('createProfile failed');
+          deferred.reject(error);
         }
       });
       return deferred.promise;
@@ -44,7 +41,7 @@ app.factory('AuthService', function ($rootScope, $q, $location, $firebaseAuth, $
       return firebaseAuthService.$getAuth();
     },
     waitForAuth: function() {
-      return firebaseAuthService.$waitForAuth();
+      return AlertService.addProgressbar(firebaseAuthService.$waitForAuth(), true);
       // this method is called before angular bindings kick in (ng-cloak),
       // so the user is resolved in all controllers/services that need it before the page continues loading
       // this will also fire the onAuth method and copy profile information to the logged in user

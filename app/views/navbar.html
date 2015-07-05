@@ -5,7 +5,7 @@
     <a class="navmenu-brand">{{user.profile.username}} </a>
 
     <ul class="nav navmenu-nav">
-      <li><a>Saldo: €{{user.profile.saldo}}</a></li>
+      <li><a>Saldo: € {{user.profile.saldo}}</a></li>
       <li><a href="#/profile/{{ user.uid }}" data-toggle="offcanvas" data-target=".navmenu">Profile</a></li>
       <li ng-show="signedIn() && isAdmin()"><a href="#/admin/events" data-toggle="offcanvas" data-target=".navmenu">Admin</a></li>
       <li><a href="#/home" ng-click="logout()" data-toggle="offcanvas" data-target=".navmenu">Logout</a></li>

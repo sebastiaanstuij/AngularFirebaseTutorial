@@ -1,11 +1,67 @@
 <div class="content event-forms">
 
   <div class="col-xs-10 col-xs-offset-1 well">
+      <fieldset>
+        <legend>Event information</legend>
+
+        <!--TODO: doorzichtige tabel van maken-->
+        <div class="form-group">
+          <div>
+            <label>Title:</label>
+            <span>{{selectedEvent.title}}</span>
+          </div>
+          <div>
+            <label>Location:</label>
+            <span>{{selectedEvent.location.name}}</span>
+          </div>
+          <div>
+            <label>Start:</label>
+            <span>{{selectedEvent.start}}</span>
+          </div>
+          <div>
+            <label>End:</label>
+            <span>{{selectedEvent.end}}</span>
+          </div>
+          <div>
+            <label>Cost:</label>
+            <span>€ {{selectedEvent.location.cost}}</span>
+          </div>
+          <div>
+            <label>Number of participants:</label>
+            <span>{{selectedEvent.numberParticipants}}</span>
+          </div>
+          <div>
+            <label>Maximum participants:</label>
+            <span>{{selectedEvent.maxNumberParticipants}}</span>
+          </div>
+          <div>
+            <label>Spot info:</label>
+            <span>{{selectedEvent.location.info}}</span>
+          </div>
+          <div>
+            <label>Pro spot:</label>
+            <span>{{selectedEvent.location.proSpot}}</span>
+          </div>
+        </div>
+
+        <h6>Who's going?</h6>
+        <br>
+        <div class="form-group">
+          <span ng-repeat="participant in participants">
+            <img class="navbarImage img-circle" title="{{participant.username}}" ng-src="{{participant.picture}}" />
+          </span>
+        </div>
+
+      </fieldset>
+  </div>
+
+
+  <div class="col-xs-10 col-xs-offset-1 well">
 
     <form name="signupForm" class="form-horizontal" novalidate ng-class="{'greyed-form': userSubscribed && !editParticipant}">
       <p ng-show="error" class="text-danger">{{ error }}</p>
       <fieldset>
-        <legend>{{selectedEvent.title}}</legend>
+        <legend>Subscription</legend>
 
         <div class="form-group">
           <label class="col-lg-2 control-label">Rent a kite?</label>
@@ -48,14 +104,15 @@
         <div class="form-group">
           <div class="col-lg-8 col-lg-offset-2" ng-hide="userSubscribed && !editParticipant">
             <a href="#/calendar" class="btn btn-default">Cancel</a>
-            <button type="submit" class="btn btn-primary" ng-click="signup()">Sign up for event</button>
-            <!--ng-class="{'disabled': userSubscribed}"-->
+            <button type="submit" class="btn btn-primary" ng-click="signup()" ng-hide="editParticipant">Sign up for event</button>
+            <button type="submit" class="btn btn-primary" ng-click="editSubscription()" ng-show="editParticipant">Save</button>
           </div>
         </div>
       </fieldset>
 
       <div class="overlay" ng-show="userSubscribed && !editParticipant" >
-        <button id="editSignup" ng-click="editSubscription()" class="btn btn-warning">Edit registration</button>
+        <button id="editSubscription" ng-click="editParticipant = true" class="btn btn-warning">Edit</button>
+        <button id="removeSubscription" ng-click="removeSubscription()" class="btn btn-danger">Leave event</button>
       </div>
     </form>
   </div>

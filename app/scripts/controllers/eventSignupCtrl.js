@@ -21,7 +21,8 @@ app.controller('EventSignupController', function ($scope, $routeParams, $locatio
     busDriverVolunteer: false,
     shareKite: false,
     uid: $scope.user.uid,
-    username: $scope.user.profile.username
+    username: $scope.user.profile.username,
+    picture: $scope.user.profile.profilePicture
   };
 
 
@@ -30,6 +31,8 @@ app.controller('EventSignupController', function ($scope, $routeParams, $locatio
       for(var i=0;i<participants.length;i++){
         if(participants[i].uid === $scope.user.uid){
           $scope.userSubscribed = true;
+          //$scope.participant =  participants[i];
+          $scope.participant =  EventService.participants.getParticipant($scope.selectedEvent.$id,$scope.user.uid);
           break;
         }
       }
@@ -40,12 +43,12 @@ app.controller('EventSignupController', function ($scope, $routeParams, $locatio
     // first check if event is not fully booked already or that the user has not already subscribed
     if (!$scope.userSubscribed && ($scope.selectedEvent.numberParticipants <  $scope.selectedEvent.maxNumberParticipants)) {
 
-        // save changes made to selectedEvent (number of participants + 1 etc.)
-        $scope.selectedEvent.numberParticipants = $scope.participants.length+1;
-        $scope.selectedEvent.$save();
-
         EventService.participants.addParticipant($scope.selectedEvent.$id, $scope.participant).then(
           function () {
+            // save changes made to selectedEvent (number of participants + 1)
+            $scope.selectedEvent.numberParticipants = $scope.participants.length+1;
+            $scope.selectedEvent.$save();
+
             console.log('Successfully signed-up for event: ' + $scope.selectedEvent.title);
             AlertService.addAlert('success', 'Successfully signed-up for event: ' + $scope.selectedEvent.title);
           },
@@ -55,31 +58,55 @@ app.controller('EventSignupController', function ($scope, $routeParams, $locatio
           }).then(function () {
             $location.path('/calendar');
           });
-    } else if ($scope.editParticipant === true) {
-      EventService.participants.updateParticipant($scope.selectedEvent.$id, $scope.participant).then(
+    } else {
+      AlertService.addAlert('danger', 'Something went wrong while signing you up for this event');
+    }
+  };
+
+
+  $scope.editSubscription = function () {
+    if ($scope.editParticipant === true) {
+      // User wants to update subscription
+      $scope.participant.$save().then(
         function () {
-          console.log('Successfully updated event: ' + $scope.selectedEvent.title);
-          AlertService.addAlert('success', 'Successfully updated event: ' + $scope.selectedEvent.title);
+          $scope.editParticipant = false;
+
+          console.log('Successfully updated subscription: ' + $scope.selectedEvent.title);
+          AlertService.addAlert('success', 'Successfully updated subscription: ' + $scope.selectedEvent.title);
         },
         function (error) {
           console.log(error);
           AlertService.addAlert('danger', error);
-        }).then(function () {
-          $location.path('/calendar');
         });
-
     } else {
-      AlertService.addAlert('danger', 'Something went wrong while modifying this event');
+      AlertService.addAlert('danger', 'Something went wrong while editing your subscription for this event');
     }
   };
 
-  $scope.deleteParticipant = function() {
-    EventService.participants.deleteParticipant($scope.participant);
-  };
+  //$scope.editSubscription = function (){
+  //  $scope.editParticipant = true;
+  //};
 
 
-  $scope.editSubscription = function (){
-    $scope.editParticipant = true;
+  $scope.removeSubscription = function (){
+    $scope.participant.$remove().then(
+      function () {
+        $scope.userSubscribed = false;
+
+        // save changes made to selectedEvent (number of participants - 1)
+        $scope.selectedEvent.numberParticipants = $scope.participants.length-1;
+        $scope.selectedEvent.$save();
+      }
+    );
+    // reset default values
+    $scope.participant = {
+      kiteRent: false,
+      busDriverVolunteer: false,
+      shareKite: false,
+      uid: $scope.user.uid,
+      username: $scope.user.profile.username,
+      picture: $scope.user.profile.profilePicture
+    };
   };
 
 

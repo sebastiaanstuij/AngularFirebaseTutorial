@@ -24,6 +24,8 @@ app.controller('AgendaController', function ($scope, $location, EventService) {
   $scope.allEvents = EventService.events.all;
   $scope.eventSources = [$scope.allEvents];
 
+  //TODO: add myEvents
+
   // call eventservice to modify selected event
   $scope.getEvent = function(event){
     $scope.event = EventService.events.get(event);
